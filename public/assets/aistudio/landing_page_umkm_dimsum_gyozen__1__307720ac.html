@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8e171c">
+
+  <!-- SEO Meta Tags (Data Resmi Banner Gyozen + Struktur Konversi) -->
+  <title>Dimsum Gyozen (@gyozen.sda) | Gurih, Lumer, Bikin Nagih Mulai 15 RB-an</title>
+  <meta name="description" content="Menu resmi Dimsum Gyozen: Gyoza Fresh & Juicy, Dimsum Original, Dimsum Goreng Keju, Mentai Lumer, Dimsum Platter, Party Box, Ready Frozen & Ebi Chili Oil 150ml. Mulai 15 RB-an! Hubungi WA 0898-1230-703.">
+  <link rel="canonical" href="https://gyozen.id/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dimsum Gyozen : Satu Gigitan, Bikin Hari Makin Zen (Mulai 15 RB-an)">
+  <meta property="og:description" content="Praktis, enak, dan selalu jadi favorit. Tersedia siap santap hangat dan kemasan Ready Frozen (tahan hingga 3 bulan). Halal Indonesia, tanpa pengawet dan pewarna buatan.">
+  <meta property="og:url" content="https://gyozen.id/">
+
+  <!-- Typography (no-ai-slop: Archivo 800-900 Display + Plus Jakarta Sans Body + Newsreader Italic Accent, NO Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: FoodEstablishment + FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "FoodEstablishment",
+        "name": "Dimsum Gyozen (@gyozen.sda)",
+        "description": "Dimsum viral yang gurih, lumer, dan bikin nagih. Menyediakan Gyoza, Dimsum, Dimsum Goreng Keju, Mentai Lumer, Dimsum Platter, Party Box, Ready Frozen, dan Ebi Chili Oil 150ml.",
+        "telephone": "+628981230703",
+        "servesCuisine": "Dimsum, Gyoza, Mentai, Frozen Food",
+        "priceRange": "Rp15.000 - Rp125.000",
+        "sameAs": [
+          "https://instagram.com/gyozen.sda"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Apakah semua menu Dimsum Gyozen sudah Halal dan tanpa pengawet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ya, seluruh produk Dimsum Gyozen telah bersertifikat Halal Indonesia serta dibuat tanpa pengawet dan pewarna buatan sehingga aman dinikmati setiap hari."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Berapa lama daya tahan kemasan Ready Frozen Gyozen di dalam freezer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Varian Frozen Food Gyozen (Dimsum Mix, Dimsum Goreng Keju, dan Gyoza) dikemas kedap udara dan tahan disimpan hingga 3 bulan di dalam freezer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bagaimana cara memesan menu Gyozen dan berapa harganya?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Harga menu Gyozen dimulai dari 15 RB-an. Anda dapat memilih menu langsung di halaman ini lalu menekan tombol Pesan via WhatsApp yang terhubung ke nomor resmi 0898-1230-703."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --red: #8e171c;
+      --red-deep: #671015;
+      --red-soft: #b62b2e;
+      --brown: #5c3317;
+      --cream: #fff7e9;
+      --cream-warm: #f6e7ca;
+      --paper: #fffdf8;
+      --yellow: #ffc34b;
+      --yellow-pale: #ffe6a5;
+      --ink: #221813;
+      --muted: #5e4f43;
+      --line: rgba(92, 51, 23, 0.18);
+      --shadow: 0 20px 50px rgba(73, 35, 20, 0.10);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --container: 1180px;
+      --font-display: 'Archivo', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-serif: 'Newsreader', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img, svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    /* ==========================================================================
+       HEADER & MOBILE MENU (no-ai-slop: working mobile menu + consistent buttons)
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      width: 100%;
+      padding: 14px 0;
+      background: rgba(255, 247, 233, 0.94);
+      border-bottom: 2px solid var(--brown);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--red);
+      border: 2px solid var(--brown);
+      box-shadow: 3px 3px 0 var(--brown);
+      transform: rotate(-3deg);
+      flex-shrink: 0;
+    }
+
+    .brand-caption {
+      display: block;
+      margin-top: -3px;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Unified Tactile Button Component (no-ai-slop: defined once, consistent states) */
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 2px solid var(--brown);
+      border-radius: var(--radius-md);
+      background: var(--yellow);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 4px 4px 0 var(--brown);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--brown);
+      background: #ffd16d;
+    }
+
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0 0 0 var(--brown);
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: var(--paper);
+      border-color: var(--brown);
+      box-shadow: 4px 4px 0 var(--brown);
+    }
+
+    .btn-red:hover {
+      background: #a42026;
+    }
+
+    .btn-paper {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .btn-paper:hover {
+      background: var(--yellow-pale);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .cart-pill-count {
+      display: inline-grid;
+      place-items: center;
+      min-width: 24px;
+      height: 24px;
+      padding: 0 6px;
+      border-radius: 99px;
+      background: var(--yellow);
+      color: var(--ink);
+      border: 1.5px solid var(--brown);
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+    }
+
+    .mobile-drawer {
+      display: none;
+      border-top: 2px solid var(--brown);
+      background: var(--paper);
+      padding: 16px 0;
+      margin-top: 14px;
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mobile-drawer-links a {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      border: 1.5px solid var(--line);
+      background: var(--cream);
+    }
+
+    /* ==========================================================================
+       HERO SECTION (Asymmetric 12-Col Style + Tactile Gyozen Crest & Price Tag)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 56px 0 76px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      right: -12vw;
+      top: -15%;
+      width: 64vw;
+      height: 112%;
+      border-radius: 48% 0 0 51%;
+      background: var(--cream-warm);
+      border-left: 2px solid var(--brown);
+      transform: rotate(-5deg);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: clamp(28px, 4.5vw, 64px);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--red);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 24px;
+      height: 3px;
+      border-radius: 4px;
+      background: var(--red);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(42px, 5.6vw, 74px);
+      line-height: 1.01;
+      letter-spacing: -0.035em;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    h1 .highlight {
+      position: relative;
+      display: inline-block;
+      color: var(--red);
+      white-space: nowrap;
+    }
+
+    h1 .highlight::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      right: -4px;
+      bottom: 3px;
+      height: 14px;
+      z-index: -1;
+      border-radius: 99px;
+      background: var(--yellow);
+      transform: rotate(-1.5deg);
+    }
+
+    .serif-accent {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .hero-subtitle {
+      margin: 22px 0 26px;
+      color: var(--muted);
+      font-size: clamp(16px, 1.5vw, 18px);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 10px 8px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--brown);
+    }
+
+    .text-link svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .text-link:hover svg {
+      transform: translateY(3px);
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      gap: 12px 20px;
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1.5px dashed var(--line);
+    }
+
+    .trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .trust-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* Hero Right Artwork */
+    .hero-art {
+      position: relative;
+      min-height: 490px;
+      display: grid;
+      place-items: center;
+      perspective: 1000px;
+    }
+
+    .hero-blob {
+      position: absolute;
+      width: min(100%, 460px);
+      aspect-ratio: 1;
+      border-radius: 48% 52% 44% 56% / 50% 45% 55% 50%;
+      background: var(--red);
+      border: 3px solid var(--brown);
+      transform: rotate(4deg);
+      box-shadow: 14px 16px 0 var(--brown), var(--shadow);
+      animation: floatA 8s ease-in-out infinite;
+    }
+
+    .hero-blob::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 2px dashed rgba(255, 247, 233, 0.42);
+      border-radius: inherit;
+    }
+
+    .logo-plate {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: min(88%, 390px);
+      padding: 8px;
+      filter: drop-shadow(0 16px 16px rgba(34, 15, 7, 0.2));
+      transform: rotate(-2deg);
+    }
+
+    .floating-tag {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 2px solid var(--brown);
+      border-radius: var(--radius-md);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 4px 5px 0 var(--brown);
+    }
+
+    .floating-tag-badge {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--yellow);
+      border: 1.5px solid var(--brown);
+      color: var(--red-deep);
+      flex-shrink: 0;
+    }
+
+    .tag-top {
+      top: 28px;
+      right: 0;
+      transform: rotate(4deg);
+      animation: floatB 5.5s ease-in-out infinite;
+    }
+
+    .tag-bottom {
+      left: -8px;
+      bottom: 34px;
+      transform: rotate(-4deg);
+      animation: floatA 7s ease-in-out infinite reverse;
+    }
+
+    .price-stamp {
+      position: absolute;
+      z-index: 3;
+      right: 8px;
+      bottom: 18px;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: var(--yellow);
+      border: 2.5px solid var(--brown);
+      box-shadow: 5px 5px 0 var(--brown);
+      transform: rotate(3deg);
+      text-align: left;
+    }
+
+    .price-stamp-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--red-deep);
+    }
+
+    .price-stamp-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ==========================================================================
+       BANNER HIGHLIGHTS STRIP (Replaces AI marquee with structured editorial bar)
+       ========================================================================== */
+    .highlights-band {
+      background: var(--red);
+      color: var(--cream);
+      border-block: 2px solid var(--brown);
+      padding: 18px 0;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+
+    .highlight-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 16px;
+      border-right: 1.5px dashed rgba(255, 247, 233, 0.3);
+    }
+
+    .highlight-cell:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+
+    .highlight-num {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--yellow);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .highlight-desc {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.35;
+    }
+
+    /* ==========================================================================
+       SECTIONS & HEADINGS
+       ========================================================================== */
+    section.section {
+      padding: 92px 0;
+    }
+
+    .section-header-split {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .section-header-copy {
+      max-width: 620px;
+    }
+
+    h2 {
+      margin: 6px 0 12px;
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .section-header-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* Category Filter Buttons */
+    .filter-tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 6px;
+      background: var(--cream-warm);
+      border: 2px solid var(--brown);
+      border-radius: 16px;
+      box-shadow: 3px 4px 0 var(--brown);
+    }
+
+    .filter-tab {
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1.5px solid transparent;
+      background: transparent;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .filter-tab.active {
+      background: var(--red);
+      color: var(--paper);
+      border-color: var(--brown);
+    }
+
+    .filter-tab:hover:not(.active) {
+      background: var(--paper);
+    }
+
+    /* ==========================================================================
+       MENU GRID & BESPOKE ILLUSTRATED FOOD CARDS (All 10 Banner Items)
+       ========================================================================== */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      perspective: 1000px;
+    }
+
+    .feature-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      padding: 18px 18px 20px;
+      border: 2px solid var(--brown);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      box-shadow: 5px 6px 0 var(--brown);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 7px 10px 0 var(--brown);
+      border-color: var(--red);
+    }
+
+    .food-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      aspect-ratio: 1.45;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      border: 1.5px solid var(--brown);
+      background: #f8e6c9;
+    }
+
+    .food-art::before {
+      content: "";
+      position: absolute;
+      width: 68%;
+      aspect-ratio: 1;
+      border: 2px solid rgba(92, 51, 23, 0.25);
+      border-radius: 50%;
+      background: #fff8ec;
+    }
+
+    .food-svg-wrap {
+      position: relative;
+      z-index: 1;
+      width: 62%;
+      max-width: 136px;
+      filter: drop-shadow(0 6px 0 rgba(92, 51, 23, 0.14));
+      transition: transform 0.25s ease;
+    }
+
+    .feature-card:hover .food-svg-wrap {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .food-tag-pill {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      left: 10px;
+      padding: 4px 10px;
+      border: 1.5px solid var(--brown);
+      border-radius: 8px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      box-shadow: 2px 2px 0 var(--brown);
+    }
+
+    .food-tag-pill.frozen {
+      background: #dbeafe;
+      color: #1e3a8a;
+    }
+
+    .food-tag-pill.spicy {
+      background: var(--red);
+      color: var(--paper);
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .card-index {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-Caption {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .feature-card h3 {
+      margin: 4px 0 8px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .feature-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1.5px dashed var(--line);
+    }
+
+    .price-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-strike {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .price-current {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-sm {
+      min-height: 40px;
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 10px;
+      box-shadow: 3px 3px 0 var(--brown);
+    }
+
+    /* ==========================================================================
+       ASYMMETRIC WHY SECTION & BUNDLE SHOWCASE (From Reference Code + Banner)
+       ========================================================================== */
+    .why {
+      position: relative;
+      background: var(--cream-warm);
+      border-block: 2px solid var(--brown);
+      overflow: hidden;
+    }
+
+    .why-layout {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      align-items: start;
+      gap: 56px;
+    }
+
+    .why-copy p {
+      margin: 16px 0 24px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .bundle-highlight-box {
+      padding: 20px;
+      border: 2px solid var(--brown);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      box-shadow: 5px 5px 0 var(--brown);
+      margin-bottom: 22px;
+    }
+
+    .bundle-highlight-box h3 {
+      margin: 4px 0 8px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .bundle-list {
+      margin: 12px 0 16px;
+      padding-left: 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .bundle-list li + li {
+      margin-top: 6px;
+    }
+
+    .benefit-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      border: 2px solid var(--brown);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--brown);
+    }
+
+    .benefit-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      flex: 0 0 auto;
+      border-radius: 12px;
+      border: 1.5px solid var(--brown);
+      background: var(--yellow);
+      color: var(--red-deep);
+    }
+
+    .benefit-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .benefit h3 {
+      margin: 0 0 6px;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .benefit p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       HOW IT WORKS STEPS SECTION
+       ========================================================================== */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      position: relative;
+      padding: 26px 24px 28px;
+      border: 2px solid var(--brown);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      box-shadow: 5px 6px 0 var(--brown);
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      border: 2px solid var(--brown);
+      background: var(--red);
+      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 3px 3px 0 var(--brown);
+      transform: rotate(-4deg);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       FAQ SECTION (Native Accessible <details> Split Layout)
+       ========================================================================== */
+    .faq {
+      padding-top: 20px !important;
+    }
+
+    .faq-wrap {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .faq-intro p {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 12px 0 22px;
+    }
+
+    .faq-list {
+      border-top: 2px solid var(--brown);
+    }
+
+    details {
+      border-bottom: 1.5px solid var(--line);
+    }
+
+    summary {
+      position: relative;
+      padding: 20px 42px 20px 0;
+      cursor: pointer;
+      list-style: none;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      top: 16px;
+      right: 2px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--brown);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--red);
+      font-size: 20px;
+      font-weight: 800;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    details[open] summary::after {
+      content: "−";
+      background: var(--yellow);
+      transform: rotate(180deg);
+    }
+
+    details p {
+      max-width: 650px;
+      margin: -2px 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* ==========================================================================
+       CLOSING CTA & FOOTER
+       ========================================================================== */
+    .closing-cta {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 0 !important;
+      background: var(--red);
+      color: var(--cream);
+      border-top: 2px solid var(--brown);
+      text-align: center;
+    }
+
+    .closing-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    .closing-cta .section-kicker {
+      color: var(--yellow);
+      justify-content: center;
+    }
+
+    .closing-cta .section-kicker::before {
+      background: var(--yellow);
+    }
+
+    .closing-cta h2 {
+      margin: 14px 0 18px;
+      color: var(--cream);
+      font-size: clamp(36px, 5.2vw, 62px);
+    }
+
+    .closing-cta p {
+      max-width: 560px;
+      margin: 0 auto 28px;
+      color: rgba(255, 247, 233, 0.88);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .contact-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--paper);
+      color: var(--ink);
+      border: 2px solid var(--brown);
+      box-shadow: 3px 3px 0 var(--brown);
+      font-size: 14px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    footer {
+      padding: 26px 0;
+      background: var(--red-deep);
+      color: rgba(255, 247, 233, 0.86);
+      border-top: 2px solid var(--brown);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .footer-brand {
+      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    /* ==========================================================================
+       CHECKOUT MODAL & TOAST (Tactile Paper & Brown Offset System)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(34, 24, 19, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(540px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--paper);
+      color: var(--ink);
+      border: 2.5px solid var(--brown);
+      border-radius: var(--radius-lg);
+      box-shadow: 8px 10px 0 var(--brown);
+      padding: 24px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--brown);
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .close-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 2px solid var(--brown);
+      background: var(--cream);
+      font-size: 20px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .cart-items-wrap {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .cart-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border: 1.5px solid var(--brown);
+      border-radius: 12px;
+      background: var(--cream);
+    }
+
+    .cart-row-title {
+      font-weight: 800;
+      font-size: 14px;
+      margin: 0 0 2px;
+    }
+
+    .cart-row-sub {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      margin: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .qty-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1.5px solid var(--brown);
+      background: var(--paper);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background: var(--yellow);
+    }
+
+    .cart-summary-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--cream-warm);
+      border: 2px solid var(--brown);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 2px solid var(--brown);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 100;
+      left: 50%;
+      bottom: 24px;
+      width: min(440px, calc(100% - 32px));
+      padding: 14px 18px;
+      border: 2px solid var(--brown);
+      border-radius: 14px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 5px 6px 0 var(--brown);
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 18px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .toast strong {
+      color: var(--red);
+    }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0) rotate(4deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0) rotate(4deg); }
+      50% { transform: translateY(7px) rotate(1.5deg); }
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--red);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (900px Tablet & 580px / 375px Mobile)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .header-nav {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hero-art {
+        min-height: 410px;
+      }
+      .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .highlight-cell:nth-child(2) {
+        border-right: 0;
+      }
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .why-layout,
+      .faq-wrap {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .container {
+        width: min(100% - 32px, var(--container));
+      }
+      .brand {
+        font-size: 17px;
+      }
+      .brand-caption {
+        font-size: 10px;
+      }
+      .hero {
+        padding: 34px 0 56px;
+      }
+      h1 {
+        font-size: clamp(36px, 10.5vw, 48px);
+      }
+      .hero-actions .btn {
+        width: 100%;
+      }
+      .trust-strip {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .hero-art {
+        min-height: 340px;
+      }
+      .floating-tag {
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+      .price-stamp-value {
+        font-size: 22px;
+      }
+      .highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .highlight-cell {
+        border-right: 0;
+        border-bottom: 1px dashed rgba(255, 247, 233, 0.25);
+        padding-bottom: 10px;
+      }
+      .highlight-cell:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+      section.section {
+        padding: 64px 0;
+      }
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       STICKY HEADER WITH WORKING MOBILE DRAWER & ACTIVE CART
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="Dimsum Gyozen, kembali ke atas">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M5 19c0-6 5-10 11-10s11 4 11 10" stroke="#fff7e9" stroke-width="2.8" stroke-linecap="round"/>
+              <path d="M6 20h20M10 23h12" stroke="#fff7e9" stroke-width="2.8" stroke-linecap="round"/>
+              <path d="M12 10l-1-3m9 3 1-3" stroke="#ffc34b" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span>
+            GYOZEN
+            <span class="brand-caption">@gyozen.sda • Mulai 15 RB-an</span>
+          </span>
+        </a>
+
+        <nav class="header-nav" aria-label="Navigasi Utama">
+          <a class="nav-link" href="#menu">Menu Gyozen</a>
+          <a class="nav-link" href="#paket">Platter & Frozen</a>
+          <a class="nav-link" href="#langkah">Cara Pesan</a>
+          <a class="nav-link" href="#faq">Tanya Jawab</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn btn-red" type="button" onclick="openCartModal()">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9.5" cy="19.5" r="1.5" fill="currentColor"/>
+              <circle cx="16.5" cy="19.5" r="1.5" fill="currentColor"/>
+            </svg>
+            <span>Pesan sekarang</span>
+            <span class="cart-pill-count" id="headerCartCount">3</span>
+          </button>
+
+          <button class="btn btn-paper mobile-menu-btn" type="button" id="mobileMenuBtn" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Buka menu navigasi">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer (Required by no-ai-slop when nav links hide on mobile) -->
+      <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-links">
+          <a href="#menu" onclick="closeMobileDrawer()">Lihat 10 Menu Resmi Gyozen</a>
+          <a href="#paket" onclick="closeMobileDrawer()">Paket Platter & Stok Frozen</a>
+          <a href="#langkah" onclick="closeMobileDrawer()">3 Langkah Cara Pesan</a>
+          <a href="#faq" onclick="closeMobileDrawer()">Pertanyaan Umum (FAQ)</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ======================================================================
+         HERO SECTION (Editorial Warmth + Banner Data + Reconstructed Gyozen Crest)
+         ====================================================================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="section-kicker">Dimsum viral • Gurih • Lumer • Bikin nagih</div>
+          <h1 id="hero-title">
+            Satu gigitan, bikin hari makin <span class="highlight">zen.</span>
+          </h1>
+          <p class="hero-subtitle">
+            <span class="serif-accent">Praktis, enak, dan selalu jadi favorit!</span> Nikmati hangatnya <strong>Gyoza, Dimsum Original, Dimsum Goreng Keju, Mentai Lumer, Platter, hingga Party Box</strong> lengkap dengan cocolan <strong>Ebi Chili Oil 150ml</strong>. Tersedia juga kemasan <strong>Ready Frozen</strong> untuk stok di rumah.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-red" type="button" onclick="openCartModal()">
+              <span>Pesan via WhatsApp</span>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <a class="text-link" href="#menu">
+              <span>Lihat 10 menu Gyozen</span>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Banner Trust Claims -->
+          <div class="trust-strip">
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s8-4.2 8-10.5V5l-8-3-8 3v5.5C4 16.8 12 21 12 21Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="m8.5 11.5 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>100% Halal Indonesia</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>Frozen tahan hingga 3 bulan</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Tanpa pengawet & pewarna buatan</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual: Organic Red Blob + High-Precision Gyozen Shield Crest + Floating Tags -->
+        <div class="hero-art" aria-label="Lambang Resmi Dimsum Gyozen">
+          <div class="hero-blob" aria-hidden="true"></div>
+
+          <div class="logo-plate">
+            <!-- Vector Shield Logo matching Gyozen_20250822_122849_0000.png -->
+            <svg viewBox="0 0 360 390" role="img" aria-label="Logo Dimsum Gyozen dengan ilustrasi gyoza dan sumpit">
+              <path d="M55,25 H305 A26,26 0 0,1 331,51 V198 A151,151 0 0,1 180,349 A151,151 0 0,1 29,198 V51 A26,26 0 0,1 55,25 Z" fill="#7C1315" stroke="#5C2415" stroke-width="14"/>
+              <g fill="#FFFFFF" transform="translate(0, 4)">
+                <path d="M72,72 H106 V82 H83 V104 H97 V94 H89 V86 H107 V116 H97 V113 H72 Z"/>
+                <path d="M116,72 H127 L133,88 L139,72 H150 L141,96 H145 V104 H138 V115 H128 V104 H121 V96 H125 Z"/>
+                <path d="M159,72 H193 V114 H159 Z M170,82 V104 H182 V82 Z"/>
+                <path d="M204,72 H238 V82 L219,104 H239 V114 H203 V104 L222,82 H204 Z"/>
+                <path d="M248,72 H280 V82 H259 V89 H275 V97 H259 V104 H281 V114 H248 Z"/>
+                <path d="M290,72 H301 L315,96 V72 H325 V114 H315 L300,89 V114 H290 Z"/>
+              </g>
+              <path d="M68,128 L73,141 L86,146 L73,151 L68,164 L63,151 L50,146 L63,141 Z" fill="#E8A838"/>
+              <path d="M96,158 L99,165 L106,168 L99,171 L96,178 L93,171 L86,168 L93,165 Z" fill="#E8A838"/>
+              <path d="M68,186 L72,196 L82,200 L72,204 L68,214 L64,204 L54,200 L64,196 Z" fill="#E8A838"/>
+              <path d="M275,134 L282,150 L298,157 L282,164 L275,180 L268,164 L252,157 L268,150 Z" fill="#E8A838"/>
+              <path d="M306,120 L309,128 L317,131 L309,134 L306,142 L303,134 L295,131 L303,128 Z" fill="#E8A838"/>
+              <path d="M294,174 L297,182 L305,185 L297,188 L294,196 L291,188 L283,185 L291,182 Z" fill="#E8A838"/>
+              <circle cx="180" cy="226" r="92" fill="#FFFFFF"/>
+              <path d="M88,284 L314,234 L318,246 L88,290 Z" fill="#5A3219"/>
+              <path d="M88,294 L318,266 L320,278 L88,299 Z" fill="#5A3219"/>
+              <path d="M77,255 C80,226 95,208 112,200 C123,186 140,180 154,183 C168,172 192,172 206,182 C224,180 242,190 250,206 C268,214 282,232 282,248 C275,264 252,272 238,278 C202,292 146,294 114,280 C96,274 82,266 77,255 Z" fill="#FCE5CD" stroke="#5A3219" stroke-width="8" stroke-linejoin="round"/>
+              <path d="M110,256 C132,222 216,222 238,262 C204,282 144,282 110,256 Z" fill="#F9D5B3"/>
+              <path d="M112,200 C114,218 119,232 125,244" fill="none" stroke="#5A3219" stroke-width="7.5" stroke-linecap="round"/>
+              <path d="M154,183 C150,204 152,220 156,235" fill="none" stroke="#5A3219" stroke-width="7.5" stroke-linecap="round"/>
+              <path d="M206,182 C198,202 198,220 201,235" fill="none" stroke="#5A3219" stroke-width="7.5" stroke-linecap="round"/>
+              <path d="M250,206 C243,222 238,236 234,248" fill="none" stroke="#5A3219" stroke-width="7.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="floating-tag tag-top">
+            <span class="floating-tag-badge" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17l-5.9 3 1.2-6.5L2.5 8.9 9.1 8 12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Best Seller: Mentai Lumer!</span>
+          </div>
+
+          <div class="floating-tag tag-bottom">
+            <span class="floating-tag-badge" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3c2.5 3.5 5 6.5 5 10.5A5 5 0 0 1 7 13.5C7 9.5 9.5 6.5 12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Ebi Chili Oil 150ml</span>
+          </div>
+
+          <div class="price-stamp">
+            <span class="price-stamp-label">Harga hemat mulai</span>
+            <span class="price-stamp-value">15 RB-an!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         STRUCTURED HIGHLIGHTS BAND (Tabular Nums + Real Metrics from Banner)
+         ====================================================================== -->
+    <div class="highlights-band" aria-label="Keunggulan Utama Dimsum Gyozen">
+      <div class="container highlights-grid">
+        <div class="highlight-cell">
+          <div class="highlight-num">Rp15.000</div>
+          <div class="highlight-desc">Harga mulai ramah kantong untuk porsi segar & mengenyangkan</div>
+        </div>
+        <div class="highlight-cell">
+          <div class="highlight-num">10 Varian</div>
+          <div class="highlight-desc">Gyoza, Dimsum, Goreng Keju, Mentai Lumer, Platter, Party Box & Frozen</div>
+        </div>
+        <div class="highlight-cell">
+          <div class="highlight-num">3 Bulan</div>
+          <div class="highlight-desc">Daya tahan kemasan Ready Frozen di freezer tanpa bahan pengawet</div>
+        </div>
+        <div class="highlight-cell">
+          <div class="highlight-num">150 ml</div>
+          <div class="highlight-desc">Kemasan jar Gyozen Ebi Chili Oil asli yang gurih & pedas nagih</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         MENU CATALOG SECTION (10 Confirmed Banner Items with Custom SVG Art)
+         ====================================================================== -->
+    <section class="section features" id="menu" aria-labelledby="menu-title">
+      <div class="container">
+        <div class="section-header-split">
+          <div class="section-header-copy">
+            <div class="section-kicker">Katalog menu resmi Gyozen</div>
+            <h2 id="menu-title">
+              Mood kamu hari ini, <span style="color:var(--red)">dimsum-nya Gyozen.</span>
+            </h2>
+            <p>
+              Pilih menu siap santap hangat atau stok <strong>Ready Frozen</strong> favoritmu. Klik <strong>+ Keranjang</strong> untuk menggabungkan pesanan atau <strong>Tanya cepat</strong> untuk chat langsung.
+            </p>
+          </div>
+
+          <div class="filter-tabs" role="tablist" aria-label="Filter Kategori Menu">
+            <button class="filter-tab active" type="button" onclick="filterMenu('all')" id="tab-all">Semua menu (10)</button>
+            <button class="filter-tab" type="button" onclick="filterMenu('hangat')" id="tab-hangat">Siap santap & Platter (6)</button>
+            <button class="filter-tab" type="button" onclick="filterMenu('frozen')" id="tab-frozen">Ready Frozen & Chili Oil (4)</button>
+          </div>
+        </div>
+
+        <!-- Menu Cards Container rendered by JS -->
+        <div class="menu-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         WHY GYOZEN & FEATURED BUNDLES (Asymmetric Split Layout from Reference)
+         ====================================================================== -->
+    <section class="section why" id="paket" aria-labelledby="why-title">
+      <div class="container why-layout">
+        <div class="why-copy">
+          <div class="section-kicker">Praktis, enak, & selalu jadi favorit</div>
+          <h2 id="why-title">
+            Bikin momen kumpul jadi lebih <span style="color:var(--red)">seru.</span>
+          </h2>
+          <p>
+            Ngemil sore sendiri, butuh teman lembur, atau mau traktir keluarga di rumah? Gyozen diracik dari daging ayam dan udang pilihan yang <em>fresh & juicy</em> dengan kulit lembut yang tidak keras meski sudah dingin.
+          </p>
+
+          <!-- Highlighted Bundle Box -->
+          <div class="bundle-highlight-box">
+            <span class="card-index">REKOMENDASI PAKET KOMPLIT</span>
+            <h3>Dimsum Platter (3-in-1) & Stok Kulkas</h3>
+            <ul class="bundle-list">
+              <li><strong>Dimsum Platter (Rp45.000):</strong> Kombinasi Mentai Lumer + Gyoza + Dimsum Goreng Keju + 2 cup saus.</li>
+              <li><strong>Party Box Rame-Rame (Rp65.000):</strong> Tray besar Mentai Lumer & Dimsum Original kukus untuk kumpul keluarga.</li>
+              <li><strong>Paket Stok Kulkas 3 Bulan (Rp125.000):</strong> 3 Pack Ready Frozen (Dimsum Mix, Goreng Keju, Gyoza) + 1 Jar Ebi Chili Oil 150ml.</li>
+            </ul>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <button class="btn btn-red btn-sm" type="button" onclick="addBundleToCart('Dimsum Platter Komplit (3-in-1)', 45000)">
+                + Ambil Dimsum Platter (Rp45.000)
+              </button>
+              <button class="btn btn-paper btn-sm" type="button" onclick="addBundleToCart('Paket Stok Kulkas (3 Pack Frozen + Ebi Chili Oil 150ml)', 125000)">
+                + Paket Stok Frozen (Rp125.000)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="benefit-list">
+          <div class="benefit">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L15 8l6.5 1-4.7 4.5 1.1 6.5L12 17l-5.9 3 1.1-6.5L2.5 9 9 8l3-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Isian padat daging yang fresh & juicy</h3>
+              <p>Bukan dimsum yang dominan tepung. Setiap gigitan Gyoza dan Dimsum Gyozen terasa padat daging, gurih, dan lembut.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3c2.5 3.5 5 6.5 5 10.5A5 5 0 0 1 7 13.5C7 9.5 9.5 6.5 12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Sensasi Mentai Lumer & Goreng Keju</h3>
+              <p>Saus mentai spesial yang di-torch harum di atas dimsum hangat, serta Dimsum Goreng Keju renyah dengan keju meleleh di dalam.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 3h8v4H8V3ZM6 7h12v14H6V7Zm3 5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Cocolan ikonik Gyozen Ebi Chili Oil 150ml</h3>
+              <p>Diracik dari udang ebi pilihan dan rempah asli. Tersedia juga dalam kemasan jar segel 150ml untuk stok pendamping makan di rumah.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s8-4.2 8-10.5V5l-8-3-8 3v5.5C4 16.8 12 21 12 21Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="m8.5 11.5 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Halal Indonesia & tahan 3 bulan di freezer</h3>
+              <p>Aman untuk seluruh keluarga karena dibuat tanpa bahan pengawet dan pewarna buatan. Kemasan Ready Frozen praktis tinggal kukus atau goreng.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3 SIMPLE STEPS SECTION
+         ====================================================================== -->
+    <section class="section" id="langkah" aria-labelledby="steps-title">
+      <div class="container">
+        <div class="section-header-split">
+          <div class="section-header-copy">
+            <div class="section-kicker">Cara pesan tanpa ribet</div>
+            <h2 id="steps-title">Dari kepingin sampai siap menikmati.</h2>
+            <p>Tidak perlu daftar akun. Pilih menu favoritmu dan kirim rincian pesanan langsung ke WhatsApp admin Gyozen.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">01</span>
+            <h3>Pilih menu favoritmu</h3>
+            <p>Masukkan varian Gyoza, Dimsum Goreng Keju, Mentai Lumer, Platter, atau paket Ready Frozen ke dalam keranjang pesanan.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">02</span>
+            <h3>Kirim chat ke WhatsApp Gyozen</h3>
+            <p>Isi nama dan area pengiriman. Sistem otomatis menyusun daftar menu beserta total estimasi harga ke nomor <strong>0898-1230-703</strong>.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">03</span>
+            <h3>Pesanan siap diantar</h3>
+            <p>Tim dapur Gyozen menyiapkan pesananmu dalam kondisi hangat siap santap maupun beku kedap udara sesuai permintaanmu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FAQ SECTION (Asymmetric Split + Native <details> Accordion)
+         ====================================================================== -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <div class="faq-intro">
+          <div class="section-kicker">Punya pertanyaan?</div>
+          <h2 id="faq-title">Biar makin yakin sebelum pesan.</h2>
+          <p>Mau tanya stok hari ini, ongkir ke lokasimu, atau pesanan jumlah banyak untuk acara? Langsung sapa tim kami.</p>
+          <button class="btn" type="button" onclick="quickAskWhatsApp('Pertanyaan seputar menu & ketersediaan stok Gyozen')">
+            <span>Tanya admin Gyozen</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="faq-list">
+          <details open>
+            <summary>Apakah semua produk Dimsum Gyozen sudah Halal dan tanpa pengawet?</summary>
+            <p>Ya! Seluruh varian menu Gyozen (termasuk Gyoza, Dimsum Mix, Dimsum Goreng Keju, Mentai Lumer, dan Ebi Chili Oil 150ml) telah bersertifikat <strong>Halal Indonesia</strong> serta diproduksi <strong>tanpa pengawet dan pewarna buatan</strong>.</p>
+          </details>
+          <details>
+            <summary>Berapa lama daya tahan kemasan Ready Frozen di dalam freezer?</summary>
+            <p>Kemasan <strong>Ready Frozen Gyozen</strong> (tersedia varian <em>Dimsum Mix, Dimsum Goreng Keju, dan Gyoza</em>) dikemas secara higienis dan kedap udara sehingga tahan disimpan hingga <strong>3 bulan di dalam freezer</strong>.</p>
+          </details>
+          <details>
+            <summary>Apa perbedaan Dimsum Platter dan Party Box Gyozen?</summary>
+            <p><strong>Dimsum Platter (Rp45.000)</strong> berisi kombinasi 3 menu populer sekaligus dalam satu boks: <em>Dimsum Mentai Lumer + Gyoza + Dimsum Goreng Keju</em> lengkap dengan saus cocolan. Sedangkan <strong>Party Box (Rp65.000)</strong> hadir dalam tray besar berisi porsi ramai-ramai <em>Dimsum Mentai Lumer & Dimsum Original kukus</em> untuk acara keluarga atau kantor.</p>
+          </details>
+          <details>
+            <summary>Apakah Gyozen Ebi Chili Oil bisa dibeli terpisah dalam kemasan botol?</summary>
+            <p>Bisa! Selain mendapat saus cocolan di setiap pembelian porsi dimsum/gyoza, kamu juga bisa membeli <strong>Gyozen Ebi Chili Oil kemasan jar 150ml (Rp28.000)</strong> untuk stok cocolan di rumah.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CLOSING CTA SECTION
+         ====================================================================== -->
+    <section class="section closing-cta" aria-labelledby="closing-title">
+      <div class="container closing-inner">
+        <div class="section-kicker">Praktis, enak, & selalu jadi favorit</div>
+        <h2 id="closing-title">
+          Yuk, bikin harimu lebih <span style="color:var(--yellow)">Gyozen!</span>
+        </h2>
+        <p>
+          Porsi hemat mulai <strong>15 RB-an</strong>. Pilih menu hangat atau stok Ready Frozen sekarang dan rasakan kelezatan dimsum yang gurih, lumer, dan bikin nagih.
+        </p>
+
+        <button class="btn" type="button" onclick="openCartModal()">
+          <span>Buka keranjang & pesan sekarang</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="contact-badges-row">
+          <a class="contact-pill" href="https://wa.me/628981230703" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 11.5a8.5 8.5 0 0 1-12.2 7.6L3 20.5l1.6-4.6A8.5 8.5 0 1 1 20 11.5Z" stroke="#8e171c" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            <span>WA: 0898-1230-703</span>
+          </a>
+          <a class="contact-pill" href="https://instagram.com/gyozen.sda" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#8e171c" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" stroke="#8e171c" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#8e171c"/>
+            </svg>
+            <span>IG: @gyozen.sda</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">GYOZEN (@gyozen.sda)</div>
+        <div>Dimsum viral • Gurih • Lumer • Bikin nagih • WA: 0898-1230-703</div>
+      </div>
+      <div>© <span id="year"></span> UMKM Dimsum Gyozen. Halal Indonesia • Tanpa Pengawet & Pewarna Buatan.</div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       INTERACTIVE WHATSAPP ORDER & CART MODAL
+       ======================================================================== -->
+  <div class="modal-backdrop" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="card-index">ORDER LANGSUNG KE WA 0898-1230-703</span>
+          <h3 id="modalTitle">Keranjang Pesanan Gyozen</h3>
+        </div>
+        <button class="close-btn" type="button" onclick="closeCartModal()" aria-label="Tutup jendela pesanan">&times;</button>
+      </div>
+
+      <div class="cart-items-wrap" id="modalCartList"></div>
+
+      <div class="cart-summary-box">
+        <span>Total estimasi pesanan</span>
+        <span class="price-current tabular-nums" id="modalTotalValue">Rp0</span>
+      </div>
+
+      <form onsubmit="submitWhatsAppOrder(event)" class="form-grid">
+        <div>
+          <label class="field-label" for="custName">Nama pemesan *</label>
+          <input class="field-input" id="custName" type="text" required placeholder="Contoh: Kak Rina / Mas Adi">
+        </div>
+
+        <div class="form-grid-2">
+          <div>
+            <label class="field-label" for="custType">Pilihan sajian</label>
+            <select class="field-input" id="custType">
+              <option value="Siap Santap (Hangat)">Siap santap (Hangat)</option>
+              <option value="Ready Frozen (Beku)">Ready Frozen (Tahan 3 bulan)</option>
+              <option value="Campur (Hangat & Frozen)">Campur (Hangat & Frozen)</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="custArea">Alamat / Kecamatan *</label>
+            <input class="field-input" id="custArea" type="text" required placeholder="Contoh: Sidoarjo Kota / Waru">
+          </div>
+        </div>
+
+        <button class="btn btn-red" type="submit" style="width:100%; margin-top:4px;">
+          <span>Kirim pesanan ke WhatsApp Gyozen</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--muted);">
+          <button type="button" onclick="copyOrderText()" style="background:none; border:0; padding:0; color:var(--red); font-weight:800; text-decoration:underline; cursor:pointer;">
+            Salin teks pesanan
+          </button>
+          <span>Terhubung ke WA resmi 0898-1230-703</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Nomor WhatsApp Resmi Dimsum Gyozen dari Banner (0898-1230-703)
+    const WHATSAPP_NUMBER = "628981230703";
+
+    // Bespoke SVG Food Art Illustrations (Replaces generic emojis per no-ai-slop skill)
+    const foodIllustrations = {
+      gyoza: `<svg viewBox="0 0 120 90" fill="none">
+        <path d="M16 62C20 34 42 22 60 22C78 22 100 34 104 62C86 76 34 76 16 62Z" fill="#FCE5CD" stroke="#5C3317" stroke-width="4.5" stroke-linejoin="round"/>
+        <path d="M32 60C46 42 74 42 88 60C72 70 48 70 32 60Z" fill="#F3C69F"/>
+        <path d="M38 28C36 38 38 46 42 52M60 22C58 34 59 44 61 50M82 28C83 38 81 46 78 52" stroke="#5C3317" stroke-width="4" stroke-linecap="round"/>
+      </svg>`,
+      dimsum: `<svg viewBox="0 0 120 90" fill="none">
+        <rect x="24" y="28" width="72" height="46" rx="14" fill="#FAD6A5" stroke="#5C3317" stroke-width="4.5"/>
+        <path d="M24 38C34 30 46 38 60 32C74 38 86 30 96 38" stroke="#5C3317" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="48" cy="28" r="6" fill="#E0402B"/>
+        <circle cx="62" cy="26" r="6" fill="#FF9F1C"/>
+        <circle cx="74" cy="29" r="5" fill="#2EC4B6"/>
+      </svg>`,
+      keju: `<svg viewBox="0 0 120 90" fill="none">
+        <rect x="22" y="24" width="76" height="48" rx="12" fill="#F4A236" stroke="#5C3317" stroke-width="4.5"/>
+        <path d="M38 46C48 36 72 36 82 46C74 62 46 62 38 46Z" fill="#FFF3B0" stroke="#5C3317" stroke-width="3.5"/>
+        <circle cx="52" cy="48" r="3" fill="#E09F3E"/>
+        <circle cx="68" cy="46" r="2.5" fill="#E09F3E"/>
+      </svg>`,
+      mentai: `<svg viewBox="0 0 120 90" fill="none">
+        <path d="M16 48H104L94 74H26L16 48Z" fill="#D8E2DC" stroke="#5C3317" stroke-width="4.5" stroke-linejoin="round"/>
+        <path d="M22 48C28 30 48 28 60 36C72 28 92 30 98 48" fill="#FF9F45" stroke="#5C3317" stroke-width="4.5"/>
+        <path d="M38 38L48 42M56 34L66 40M76 37L84 42" stroke="#221813" stroke-width="4" stroke-linecap="round"/>
+      </svg>`,
+      platter: `<svg viewBox="0 0 120 90" fill="none">
+        <rect x="14" y="18" width="92" height="56" rx="10" fill="#FFFDF8" stroke="#5C3317" stroke-width="4.5"/>
+        <line x1="60" y1="18" x2="60" y2="74" stroke="#5C3317" stroke-width="4"/>
+        <line x1="60" y1="46" x2="106" y2="46" stroke="#5C3317" stroke-width="4"/>
+        <circle cx="37" cy="36" r="9" fill="#FF9F45" stroke="#5C3317" stroke-width="3"/>
+        <circle cx="37" cy="56" r="9" fill="#FF9F45" stroke="#5C3317" stroke-width="3"/>
+        <rect x="70" y="25" width="24" height="14" rx="5" fill="#FCE5CD" stroke="#5C3317" stroke-width="3"/>
+        <rect x="70" y="53" width="24" height="14" rx="4" fill="#F4A236" stroke="#5C3317" stroke-width="3"/>
+      </svg>`,
+      frozen: `<svg viewBox="0 0 120 90" fill="none">
+        <rect x="26" y="14" width="68" height="64" rx="10" fill="#E0F2FE" stroke="#5C3317" stroke-width="4.5"/>
+        <rect x="36" y="26" width="48" height="38" rx="6" fill="#7C1315" stroke="#5C3317" stroke-width="3.5"/>
+        <circle cx="60" cy="48" r="11" fill="#FAD6A5"/>
+        <path d="M46 34H74" stroke="#FFC34B" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>`,
+      chili: `<svg viewBox="0 0 120 90" fill="none">
+        <rect x="38" y="14" width="44" height="12" rx="4" fill="#B91C1C" stroke="#5C3317" stroke-width="4"/>
+        <rect x="34" y="26" width="52" height="50" rx="8" fill="#991B1B" stroke="#5C3317" stroke-width="4.5"/>
+        <rect x="38" y="38" width="44" height="26" rx="4" fill="#FFF7E9" stroke="#5C3317" stroke-width="3"/>
+        <path d="M48 49H72M52 56H68" stroke="#7C1315" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>`
+    };
+
+    // Data 10 Menu Resmi dari Gambar Banner Gyozen
+    const gyozenProducts = [
+      {
+        id: 'gyoza-fresh',
+        index: '01 / fresh & juicy',
+        name: 'Gyoza Fresh & Juicy',
+        category: 'hangat',
+        tag: 'Mulai 15 RB-an',
+        tagStyle: '',
+        bg: '#f8e6c9',
+        art: 'gyoza',
+        price: 15000,
+        oldPrice: 19000,
+        info: 'Siap santap hangat',
+        desc: 'Gyoza lembut dengan lipatan khas Jepang dan isian daging ayam serta udang segar lengkap dengan saus cocolan.'
+      },
+      {
+        id: 'dimsum-ori',
+        index: '02 / classic steam',
+        name: 'Dimsum Original Mix',
+        category: 'hangat',
+        tag: 'Mulai 15 RB-an',
+        tagStyle: '',
+        bg: '#f6e2c3',
+        art: 'dimsum',
+        price: 15000,
+        oldPrice: 19000,
+        info: 'Tanpa pengawet',
+        desc: 'Dimsum kukus hangat yang gurih dan padat daging dengan topping wortel, jamur, nori, dan tobiko.'
+      },
+      {
+        id: 'dimsum-goreng-keju',
+        index: '03 / crispy melted',
+        name: 'Dimsum Goreng Keju',
+        category: 'hangat',
+        tag: 'Keju Lumer!',
+        tagStyle: '',
+        bg: '#f7ddb8',
+        art: 'keju',
+        price: 18000,
+        oldPrice: 23000,
+        info: 'Renyah di luar, lumer di dalam',
+        desc: 'Dimsum kulit renyah keemasan dengan isian daging gurih dan keju melimpah yang langsung meleleh saat digigit.'
+      },
+      {
+        id: 'mentai-lumer',
+        index: '04 / signature torch',
+        name: 'Dimsum Mentai Lumer',
+        category: 'hangat',
+        tag: 'Best Seller!',
+        tagStyle: 'spicy',
+        bg: '#f5d4b9',
+        art: 'mentai',
+        price: 25000,
+        oldPrice: 32000,
+        info: 'Kemasan aluminium tray',
+        desc: 'Dimsum padat daging berbalut saus mentai spesial yang creamy dan lumer, di-torch harum dengan taburan rumput laut.'
+      },
+      {
+        id: 'dimsum-platter',
+        index: '05 / 3-in-1 combo',
+        name: 'Dimsum Platter Komplit',
+        category: 'hangat',
+        tag: 'Favorit Sharing',
+        tagStyle: '',
+        bg: '#f6e7ad',
+        art: 'platter',
+        price: 45000,
+        oldPrice: 55000,
+        info: 'Mentai + Gyoza + Goreng Keju',
+        desc: 'Satu boks komplit berisi perpaduan Dimsum Mentai Lumer, Gyoza Juicy, dan Dimsum Goreng Keju lengkap dengan 2 cup saus.'
+      },
+      {
+        id: 'party-box',
+        index: '06 / family tray',
+        name: 'Party Box Gyozen',
+        category: 'hangat',
+        tag: 'Porsi Rame-Rame',
+        tagStyle: '',
+        bg: '#f5d9c5',
+        art: 'platter',
+        price: 65000,
+        oldPrice: 78000,
+        info: 'Cocok untuk acara & kumpul',
+        desc: 'Tray besar berisi kombinasi Dimsum Mentai Lumer dan Dimsum Original kukus untuk dinikmati bersama keluarga atau teman.'
+      },
+      {
+        id: 'frozen-dimsum-mix',
+        index: '07 / ready frozen',
+        name: 'Frozen Pack: Dimsum Mix',
+        category: 'frozen',
+        tag: 'Ready Frozen',
+        tagStyle: 'frozen',
+        bg: '#e2ecf5',
+        art: 'frozen',
+        price: 35000,
+        oldPrice: 42000,
+        info: 'Tahan 3 bulan di freezer',
+        desc: 'Kemasan beku kedap udara Dimsum Mix siap kukus kapan saja di rumah. Praktis, higienis, tanpa pengawet buatan.'
+      },
+      {
+        id: 'frozen-goreng-keju',
+        index: '08 / ready frozen',
+        name: 'Frozen Pack: Goreng Keju',
+        category: 'frozen',
+        tag: 'Ready Frozen',
+        tagStyle: 'frozen',
+        bg: '#e2ecf5',
+        art: 'frozen',
+        price: 38000,
+        oldPrice: 45000,
+        info: 'Tahan 3 bulan di freezer',
+        desc: 'Kemasan beku Dimsum Goreng Keju. Tinggal goreng sebentar hingga keemasan untuk camilan keju lumer hangat di rumah.'
+      },
+      {
+        id: 'frozen-gyoza',
+        index: '09 / ready frozen',
+        name: 'Frozen Pack: Gyoza Juicy',
+        category: 'frozen',
+        tag: 'Ready Frozen',
+        tagStyle: 'frozen',
+        bg: '#e2ecf5',
+        art: 'frozen',
+        price: 35000,
+        oldPrice: 42000,
+        info: 'Tahan 3 bulan di freezer',
+        desc: 'Kemasan beku Gyoza Fresh & Juicy. Mudah dikukus maupun dipanggang teflon dalam 5 menit.'
+      },
+      {
+        id: 'ebi-chili-oil',
+        index: '10 / condiment jar',
+        name: 'Gyozen Ebi Chili Oil 150ml',
+        category: 'frozen',
+        tag: 'Kemasan Jar 150ml',
+        tagStyle: 'spicy',
+        bg: '#f5d4b9',
+        art: 'chili',
+        price: 28000,
+        oldPrice: 35000,
+        info: 'Isi bersih 150ml • Halal',
+        desc: 'Chili oil khas Gyozen dengan udang ebi gurih dan rempah pilihan dalam kemasan jar segel 150ml untuk stok di rumah.'
+      }
+    ];
+
+    let cart = [
+      { id: 'mentai-lumer', name: 'Dimsum Mentai Lumer', price: 25000, qty: 1 },
+      { id: 'dimsum-goreng-keju', name: 'Dimsum Goreng Keju', price: 18000, qty: 1 },
+      { id: 'ebi-chili-oil', name: 'Gyozen Ebi Chili Oil 150ml', price: 28000, qty: 1 }
+    ];
+
+    let currentFilter = 'all';
+
+    function formatRupiah(value) {
+      return 'Rp' + Number(value || 0).toLocaleString('id-ID');
+    }
+
+    // Render Menu Grid
+    function renderMenuCatalog() {
+      const grid = document.getElementById('menuGrid');
+      if (!grid) return;
+
+      const list = currentFilter === 'all'
+        ? gyozenProducts
+        : gyozenProducts.filter(item => item.category === currentFilter);
+
+      grid.innerHTML = list.map(item => `
+        <article class="feature-card">
+          <div>
+            <div class="food-art" style="background:${item.bg}">
+              <span class="food-tag-pill ${item.tagStyle}">${item.tag}</span>
+              <div class="food-svg-wrap" aria-hidden="true">
+                ${foodIllustrations[item.art] || foodIllustrations.dimsum}
+              </div>
+            </div>
+            <div class="card-meta-row">
+              <span class="card-index">${item.index}</span>
+              <span class="card-Caption">${item.info}</span>
+            </div>
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+          </div>
+
+          <div class="card-footer-row">
+            <div class="price-group">
+              <span class="price-strike">${formatRupiah(item.oldPrice)}</span>
+              <span class="price-current">${formatRupiah(item.price)}</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-paper btn-sm" type="button" onclick="quickAskWhatsApp('${item.name} (${formatRupiah(item.price)})')" title="Tanya langsung menu ini via WhatsApp">
+                Tanya
+              </button>
+              <button class="btn btn-sm" type="button" onclick="addToCart('${item.id}')">
+                + Keranjang
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function filterMenu(category) {
+      currentFilter = category;
+      ['all', 'hangat', 'frozen'].forEach(key => {
+        const tab = document.getElementById('tab-' + key);
+        if (tab) {
+          tab.classList.toggle('active', key === category);
+        }
+      });
+      renderMenuCatalog();
+    }
+
+    // Cart Management
+    function updateCartUI() {
+      const countEl = document.getElementById('headerCartCount');
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      if (countEl) countEl.textContent = totalItems;
+
+      const listEl = document.getElementById('modalCartList');
+      const totalEl = document.getElementById('modalTotalValue');
+      if (!listEl || !totalEl) return;
+
+      if (cart.length === 0) {
+        listEl.innerHTML = `
+          <div class="cart-row" style="justify-content:center; text-align:center; padding:22px;">
+            <span style="color:var(--muted); font-weight:700;">Keranjang masih kosong. Yuk, pilih menu Gyozen terlebih dahulu!</span>
+          </div>
+        `;
+        totalEl.textContent = 'Rp0';
+        return;
+      }
+
+      listEl.innerHTML = cart.map((item, idx) => `
+        <div class="cart-row">
+          <div>
+            <p class="cart-row-title">${item.name}</p>
+            <p class="cart-row-sub">${formatRupiah(item.price)} &times; ${item.qty} = ${formatRupiah(item.price * item.qty)}</p>
+          </div>
+          <div class="qty-controls">
+            <button class="qty-btn" type="button" onclick="changeQty(${idx}, -1)" aria-label="Kurangi jumlah">-</button>
+            <span class="tabular-nums" style="min-width:20px; text-align:center; font-weight:800;">${item.qty}</span>
+            <button class="qty-btn" type="button" onclick="changeQty(${idx}, 1)" aria-label="Tambah jumlah">+</button>
+          </div>
+        </div>
+      `).join('');
+
+      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      totalEl.textContent = formatRupiah(totalAmount);
+    }
+
+    function addToCart(productId) {
+      const item = gyozenProducts.find(p => p.id === productId);
+      if (!item) return;
+
+      const existing = cart.find(c => c.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`<strong>${item.name}</strong> ditambahkan ke keranjang pesanan.`);
+    }
+
+    function addBundleToCart(bundleName, bundlePrice) {
+      const bundleId = 'bundle-' + bundleName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const existing = cart.find(c => c.id === bundleId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: bundleId, name: bundleName, price: bundlePrice, qty: 1 });
+      }
+      updateCartUI();
+      openCartModal();
+      showToast(`Paket <strong>${bundleName}</strong> siap dipesan!`);
+    }
+
+    function changeQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    // Modal & Mobile Drawer Controls
+    function openCartModal() {
+      updateCartUI();
+      document.getElementById('cartModal').classList.add('open');
+    }
+
+    function closeCartModal() {
+      document.getElementById('cartModal').classList.remove('open');
+    }
+
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = mobileDrawer.classList.toggle('open');
+        mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    function closeMobileDrawer() {
+      if (mobileDrawer) {
+        mobileDrawer.classList.remove('open');
+        if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // Direct WhatsApp Inquiry & Cart Checkout
+    function quickAskWhatsApp(topic) {
+      const message = `Halo Admin Dimsum Gyozen (@gyozen.sda)! Aku mau tanya tentang *${topic}*. Boleh info ketersediaan dan detail pemesanannya?`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function buildOrderMessage() {
+      const name = (document.getElementById('custName')?.value || '').trim() || 'Pelanggan Gyozen';
+      const type = document.getElementById('custType')?.value || 'Siap Santap (Hangat)';
+      const area = (document.getElementById('custArea')?.value || '').trim() || '-';
+      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const lines = cart.map((item, idx) => `${idx + 1}. ${item.name} (${item.qty}x) = ${formatRupiah(item.price * item.qty)}`).join('\n');
+
+      return `Halo Admin *Dimsum Gyozen (@gyozen.sda)*!\nSaya ingin memesan menu Gyozen:\n\n*Nama:* ${name}\n*Sajian:* ${type}\n*Area / Alamat:* ${area}\n\n*Rincian Pesanan:*\n${lines}\n\n*Total Estimasi:* *${formatRupiah(total)}*\n\nMohon info total ongkir dan pembayarannya ya. Terima kasih!`;
+    }
+
+    function submitWhatsAppOrder(event) {
+      event.preventDefault();
+      if (cart.length === 0) {
+        showToast('<strong>Keranjang kosong!</strong> Tambahkan minimal 1 menu Gyozen terlebih dahulu.');
+        return;
+      }
+      const text = buildOrderMessage();
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+      showToast('Membuka WhatsApp resmi <strong>Dimsum Gyozen (0898-1230-703)</strong>...');
+    }
+
+    function copyOrderText() {
+      if (cart.length === 0) {
+        showToast('Keranjang pesanan masih kosong.');
+        return;
+      }
+      const text = buildOrderMessage();
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.left = '-9999px';
+      document.body.appendChild(area);
+      area.select();
+      try {
+        document.execCommand('copy');
+        showToast('<strong>Berhasil!</strong> Rincian pesanan disalin ke clipboard.');
+      } catch (e) {
+        showToast('Gagal menyalin teks pesanan.');
+      }
+      document.body.removeChild(area);
+    }
+
+    // Toast Helper
+    const toastEl = document.getElementById('toast');
+    let toastTimer;
+    function showToast(html) {
+      if (!toastEl) return;
+      toastEl.innerHTML = html;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 4000);
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Initialize Catalog, Cart & Subtle Reduced-Motion-Aware GSAP Reveal
+    window.addEventListener('DOMContentLoaded', () => {
+      renderMenuCatalog();
+      updateCartUI();
+
+      if (window.gsap) {
+        if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!reduceMotion) {
+          gsap.set(['.hero .section-kicker', '.hero h1', '.hero .hero-subtitle', '.hero .hero-actions', '.hero .trust-strip', '.logo-plate'], { opacity: 0, y: 22 });
+          const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+          intro.to('.hero .section-kicker', { opacity: 1, y: 0, duration: 0.45 })
+            .to('.hero h1', { opacity: 1, y: 0, duration: 0.6 }, '-=0.25')
+            .to('.hero .hero-subtitle', { opacity: 1, y: 0, duration: 0.5 }, '-=0.35')
+            .to('.hero .hero-actions', { opacity: 1, y: 0, duration: 0.45 }, '-=0.3')
+            .to('.hero .trust-strip', { opacity: 1, y: 0, duration: 0.4 }, '-=0.25')
+            .to('.logo-plate', { opacity: 1, y: 0, duration: 0.65, rotate: -2 }, '-=0.55');
+
+          const hero = document.querySelector('.hero');
+          if (hero && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            hero.addEventListener('mousemove', (event) => {
+              const x = (event.clientX / window.innerWidth - 0.5) * 2;
+              const y = (event.clientY / window.innerHeight - 0.5) * 2;
+              gsap.to('.hero-blob', { x: x * 12, y: y * 8, duration: 0.8, overwrite: true });
+              gsap.to('.logo-plate', { x: x * 6, y: y * 4, duration: 0.8, overwrite: true });
+            });
+            hero.addEventListener('mouseleave', () => {
+              gsap.to(['.hero-blob', '.logo-plate'], { x: 0, y: 0, duration: 0.8, overwrite: true });
+            });
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

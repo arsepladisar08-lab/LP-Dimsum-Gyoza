@@ -1,0 +1,6 @@
+{
+  "name": "Dimsum Gyozen Landing Page",
+  "description": "Menu resmi Dimsum Gyozen (@gyozen.sda) - Gurih, lumer, bikin nagih mulai 15 RB-an. Pemesanan via WhatsApp, katalog varian hangat & Ready Frozen.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
