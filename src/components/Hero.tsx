@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { GyozenShieldLogo } from './GyozenShieldLogo';
+import { MessageCircle, ArrowDown, ShieldCheck, Snowflake, Heart, Sparkles, Star } from 'lucide-react';
+import { WHATSAPP_NUMBER } from '../data/products';
 
 interface HeroProps {
   onOpenCart: () => void;
@@ -7,14 +9,12 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
   const heroRef = useRef<HTMLElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
 
-    // Subtle parallax effect on desktop fine pointers
     const handleMouseMove = (event: MouseEvent) => {
       if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -22,17 +22,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
       const x = (event.clientX / window.innerWidth - 0.5) * 2;
       const y = (event.clientY / window.innerHeight - 0.5) * 2;
 
-      if (blobRef.current) {
-        blobRef.current.style.transform = `translate(${x * 12}px, ${y * 8}px) rotate(4deg)`;
-      }
       if (logoRef.current) {
-        logoRef.current.style.transform = `translate(${x * 6}px, ${y * 4}px) rotate(-2deg)`;
+        logoRef.current.style.transform = `translate(${x * 6}px, ${y * 4}px)`;
       }
     };
 
     const handleMouseLeave = () => {
-      if (blobRef.current) blobRef.current.style.transform = 'translate(0px, 0px) rotate(4deg)';
-      if (logoRef.current) logoRef.current.style.transform = 'translate(0px, 0px) rotate(-2deg)';
+      if (logoRef.current) logoRef.current.style.transform = 'translate(0px, 0px)';
     };
 
     hero.addEventListener('mousemove', handleMouseMove);
@@ -47,87 +43,98 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
   return (
     <section className="hero" id="top" ref={heroRef} aria-labelledby="hero-title">
       <div className="container-custom hero-grid">
+        {/* Left Column Copy */}
         <div className="hero-copy">
-          <div className="section-kicker">Dimsum viral • Gurih • Lumer • Bikin nagih</div>
+          {/* Shadcn Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-900/15 text-amber-950 text-xs font-bold mb-4">
+            <span className="w-2 h-2 rounded-full bg-[var(--red)] animate-ping" />
+            <span>Dimsum Viral Sidoarjo • Gurih, Lumer, Bikin Nagih</span>
+          </div>
+
           <h1 id="hero-title">
             Satu gigitan, bikin hari makin <span className="highlight">zen.</span>
           </h1>
+
           <p className="hero-subtitle">
             <span className="serif-accent">Praktis, enak, dan selalu jadi favorit!</span> Nikmati hangatnya{' '}
-            <strong>Gyoza, Dimsum Original, Dimsum Goreng Keju, Mentai Lumer, Platter, hingga Party Box</strong>{' '}
-            lengkap dengan cocolan <strong>Ebi Chili Oil 150ml</strong>. Tersedia juga kemasan{' '}
-            <strong>Ready Frozen</strong> untuk stok di rumah.
+            <strong className="text-[var(--ink)]">
+              Gyoza, Dimsum Original, Dimsum Goreng Keju, Mentai Lumer, Platter, hingga Party Box
+            </strong>{' '}
+            lengkap dengan cocolan <strong className="text-[var(--red)]">Ebi Chili Oil 150ml</strong>. Tersedia juga
+            kemasan <strong className="text-sky-800">Ready Frozen (tahan 3 bulan)</strong> untuk stok praktis di rumah.
           </p>
 
           <div className="hero-actions">
-            <button className="btn btn-red" type="button" onClick={onOpenCart}>
+            <button className="btn btn-primary text-base px-6 h-12" type="button" onClick={onOpenCart}>
+              <MessageCircle className="w-5 h-5 text-amber-200" />
               <span>Pesan via WhatsApp</span>
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-[18px] h-[18px]">
-                <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
             </button>
-            <a className="text-link" href="#menu">
-              <span>Lihat 10 menu Gyozen</span>
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-[18px] h-[18px]">
-                <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+
+            <a className="btn btn-secondary text-base px-5 h-12" href="#menu">
+              <span>Lihat 10 Menu Gyozen</span>
+              <ArrowDown className="w-4 h-4 text-[var(--red)]" />
             </a>
+          </div>
+
+          {/* Social Proof Pill */}
+          <div className="mt-6 flex items-center gap-3">
+            <div className="flex -space-x-1.5">
+              <span className="w-7 h-7 rounded-full bg-amber-300 border-2 border-white flex items-center justify-center text-xs font-bold">🥟</span>
+              <span className="w-7 h-7 rounded-full bg-rose-300 border-2 border-white flex items-center justify-center text-xs font-bold">🥢</span>
+              <span className="w-7 h-7 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-xs font-bold">🔥</span>
+            </div>
+            <div className="text-xs">
+              <div className="flex items-center gap-1 font-bold text-[var(--ink)]">
+                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                <span>4.9 / 5.0 Rating Pelanggan</span>
+              </div>
+              <span className="text-[var(--muted)] text-[11px]">Lebih dari 500+ porsi dinikmati setiap minggu</span>
+            </div>
           </div>
 
           {/* Banner Trust Claims */}
           <div className="trust-strip">
             <div className="trust-item">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 21s8-4.2 8-10.5V5l-8-3-8 3v5.5C4 16.8 12 21 12 21Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-                <path d="m8.5 11.5 2.2 2.2 4.8-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <ShieldCheck className="w-5 h-5 text-[var(--red)] flex-shrink-0" />
               <span>100% Halal Indonesia</span>
             </div>
             <div className="trust-item">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              <span>Frozen tahan hingga 3 bulan</span>
+              <Snowflake className="w-5 h-5 text-sky-700 flex-shrink-0" />
+              <span>Frozen Tahan 3 Bulan</span>
             </div>
             <div className="trust-item">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
-                <path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>Tanpa pengawet & pewarna buatan</span>
+              <Heart className="w-5 h-5 text-[var(--red)] flex-shrink-0" />
+              <span>Tanpa Pengawet & Pewarna</span>
             </div>
           </div>
         </div>
 
-        {/* Right Visual: Organic Red Blob + High-Precision Gyozen Shield Crest + Floating Tags */}
-        <div className="hero-art" aria-label="Lambang Resmi Dimsum Gyozen">
-          <div className="hero-blob" ref={blobRef} aria-hidden="true" />
+        {/* Right Column Visual Artwork */}
+        <div className="hero-art-container" aria-label="Lambang Resmi Dimsum Gyozen">
+          <div className="hero-art-card" ref={logoRef}>
+            {/* Top tags on card */}
+            <div className="w-full flex justify-between items-center mb-2 z-10">
+              <span className="badge badge-accent text-xs font-extrabold shadow-sm">
+                ⭐ Best Seller: Mentai Lumer
+              </span>
+              <span className="badge badge-primary text-xs font-bold">
+                Mulai 15 RB-an
+              </span>
+            </div>
 
-          <div className="logo-plate" ref={logoRef}>
-            <GyozenShieldLogo className="w-full max-w-[340px] drop-shadow-xl" />
-          </div>
+            {/* Shield Logo */}
+            <div className="py-2 w-full flex justify-center">
+              <GyozenShieldLogo className="w-full max-w-[280px] sm:max-w-[320px] drop-shadow-2xl" />
+            </div>
 
-          <div className="floating-tag tag-top">
-            <span className="floating-tag-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17l-5.9 3 1.2-6.5L2.5 8.9 9.1 8 12 2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <span>Best Seller: Mentai Lumer!</span>
-          </div>
-
-          <div className="floating-tag tag-bottom">
-            <span className="floating-tag-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3c2.5 3.5 5 6.5 5 10.5A5 5 0 0 1 7 13.5C7 9.5 9.5 6.5 12 3Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <span>Ebi Chili Oil 150ml</span>
-          </div>
-
-          <div className="price-stamp">
-            <span className="price-stamp-label">Harga hemat mulai</span>
-            <span className="price-stamp-value">15 RB-an!</span>
+            {/* Bottom Tag inside card */}
+            <div className="w-full mt-2 p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-between text-white text-xs font-semibold z-10">
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-amber-300" />
+                <span>Kemasan Jar Ebi Chili Oil 150ml</span>
+              </span>
+              <span className="font-mono text-amber-300 font-bold">Rp28.000</span>
+            </div>
           </div>
         </div>
       </div>

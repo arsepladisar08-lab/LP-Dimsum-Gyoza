@@ -45,7 +45,8 @@ test('filterProducts returns only matching category or all', () => {
       price: 15000,
       oldPrice: 18000,
       info: '',
-      desc: ''
+      desc: '',
+      imageUrl: 'https://example.com/p1.jpg'
     },
     {
       id: 'p2',
@@ -58,7 +59,8 @@ test('filterProducts returns only matching category or all', () => {
       price: 35000,
       oldPrice: 40000,
       info: '',
-      desc: ''
+      desc: '',
+      imageUrl: 'https://example.com/p2.jpg'
     }
   ];
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CartItem, OrderFormState } from '../types';
 import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage } from '../utils/order';
 import { WHATSAPP_NUMBER } from '../data/products';
+import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils } from 'lucide-react';
 
 interface CartModalProps {
   isOpen: boolean;
@@ -21,8 +22,10 @@ export const CartModal: React.FC<CartModalProps> = ({
   const [form, setForm] = useState<OrderFormState>({
     name: '',
     type: 'Siap Santap (Hangat)',
-    area: ''
+    area: '',
+    notes: ''
   });
+  const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
@@ -34,12 +37,19 @@ export const CartModal: React.FC<CartModalProps> = ({
       onShowToast('<strong>Keranjang kosong!</strong> Tambahkan minimal 1 menu Gyozen terlebih dahulu.');
       return;
     }
-    const message = buildWhatsAppOrderMessage({
-      cart,
-      customerName: form.name,
-      servingType: form.type,
-      deliveryArea: form.area
-    });
+
+    let extraNote = '';
+    if (form.notes && form.notes.trim()) {
+      extraNote = `\n*Catatan Khusus:* ${form.notes.trim()}`;
+    }
+
+    const message =
+      buildWhatsAppOrderMessage({
+        cart,
+        customerName: form.name,
+        servingType: form.type,
+        deliveryArea: form.area
+      }) + extraNote;
 
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
@@ -54,17 +64,26 @@ export const CartModal: React.FC<CartModalProps> = ({
       onShowToast('Keranjang pesanan masih kosong.');
       return;
     }
-    const text = buildWhatsAppOrderMessage({
-      cart,
-      customerName: form.name,
-      servingType: form.type,
-      deliveryArea: form.area
-    });
+
+    let extraNote = '';
+    if (form.notes && form.notes.trim()) {
+      extraNote = `\n*Catatan Khusus:* ${form.notes.trim()}`;
+    }
+
+    const text =
+      buildWhatsAppOrderMessage({
+        cart,
+        customerName: form.name,
+        servingType: form.type,
+        deliveryArea: form.area
+      }) + extraNote;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard
         .writeText(text)
         .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
           onShowToast('<strong>Berhasil!</strong> Rincian pesanan disalin ke clipboard.');
         })
         .catch(() => {
@@ -84,6 +103,8 @@ export const CartModal: React.FC<CartModalProps> = ({
     area.select();
     try {
       document.execCommand('copy');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
       onShowToast('<strong>Berhasil!</strong> Rincian pesanan disalin ke clipboard.');
     } catch {
       onShowToast('Gagal menyalin teks pesanan.');
@@ -101,58 +122,79 @@ export const CartModal: React.FC<CartModalProps> = ({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="modal-card">
-        <div className="modal-header">
+      <div className="modal-dialog">
+        {/* Header */}
+        <div className="flex items-start justify-between pb-4 border-b border-[var(--line)]">
           <div>
-            <span className="card-index">ORDER LANGSUNG KE WA 0898-1230-703</span>
-            <h3 id="modalTitle">Keranjang Pesanan Gyozen</h3>
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--red)] block">
+              ORDER LANGSUNG KE WA 0898-1230-703
+            </span>
+            <h3 id="modalTitle" className="text-xl sm:text-2xl font-black text-[var(--ink)] tracking-tight mt-0.5">
+              Keranjang Pesanan Gyozen
+            </h3>
           </div>
           <button
-            className="close-btn"
+            className="w-9 h-9 rounded-xl border border-[var(--line)] hover:bg-neutral-100 flex items-center justify-center text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
             type="button"
             onClick={onClose}
             aria-label="Tutup jendela pesanan"
           >
-            &times;
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Cart items list */}
-        <div className="cart-items-wrap">
+        <div className="my-4 max-h-[220px] overflow-y-auto pr-1 flex flex-col gap-2.5">
           {cart.length === 0 ? (
-            <div className="cart-row justify-center text-center py-6">
-              <span className="text-[var(--muted)] font-bold text-sm">
-                Keranjang masih kosong. Yuk, pilih menu Gyozen terlebih dahulu!
-              </span>
+            <div className="text-center py-8 px-4 rounded-xl bg-amber-50/60 border border-dashed border-amber-900/20">
+              <ShoppingBag className="w-8 h-8 text-amber-800/40 mx-auto mb-2" />
+              <p className="text-sm font-bold text-[var(--ink)]">Keranjang masih kosong</p>
+              <p className="text-xs text-[var(--muted)] mt-1">
+                Silakan pilih menu dimsum hangat atau stok Ready Frozen favoritmu.
+              </p>
             </div>
           ) : (
             cart.map((item, idx) => (
-              <div key={`${item.id}-${idx}`} className="cart-row">
-                <div>
-                  <p className="cart-row-title">{item.name}</p>
-                  <p className="cart-row-sub">
-                    {formatRupiah(item.price)} &times; {item.qty} = {formatRupiah(item.price * item.qty)}
-                  </p>
+              <div
+                key={`${item.id}-${idx}`}
+                className="flex items-center justify-between p-3 rounded-xl bg-white border border-[var(--line)] shadow-xs gap-3"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  {item.imageUrl && (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-amber-900/10"
+                    />
+                  )}
+                  <div className="min-w-0">
+                    <p className="font-bold text-sm text-[var(--ink)] truncate">{item.name}</p>
+                    <p className="text-xs font-semibold text-[var(--red)] tabular-nums">
+                      {formatRupiah(item.price)} × {item.qty} ={' '}
+                      <span className="font-bold">{formatRupiah(item.price * item.qty)}</span>
+                    </p>
+                  </div>
                 </div>
-                <div className="qty-controls">
+
+                <div className="inline-flex items-center gap-1.5 flex-shrink-0 bg-neutral-100 p-1 rounded-lg border border-neutral-200">
                   <button
-                    className="qty-btn"
+                    className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 flex items-center justify-center text-xs font-bold transition-colors"
                     type="button"
                     onClick={() => onUpdateQty(idx, -1)}
                     aria-label={`Kurangi jumlah ${item.name}`}
                   >
-                    -
+                    <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="tabular-nums min-w-[20px] text-center font-extrabold text-sm">
+                  <span className="tabular-nums min-w-[20px] text-center font-black text-xs">
                     {item.qty}
                   </span>
                   <button
-                    className="qty-btn"
+                    className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 flex items-center justify-center text-xs font-bold transition-colors"
                     type="button"
                     onClick={() => onUpdateQty(idx, 1)}
                     aria-label={`Tambah jumlah ${item.name}`}
                   >
-                    +
+                    <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
@@ -160,18 +202,23 @@ export const CartModal: React.FC<CartModalProps> = ({
           )}
         </div>
 
-        <div className="cart-summary-box">
-          <span>Total estimasi pesanan</span>
-          <span className="price-current tabular-nums">{formatRupiah(total)}</span>
+        {/* Summary Box */}
+        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-900/15 mb-4 flex items-center justify-between">
+          <span className="text-xs sm:text-sm font-bold text-amber-950">Total Estimasi Pesanan</span>
+          <span className="text-xl sm:text-2xl font-black text-[var(--red)] tabular-nums tracking-tight">
+            {formatRupiah(total)}
+          </span>
         </div>
 
-        <form onSubmit={handleSubmit} className="form-grid">
+        {/* Customer Details Form */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div>
-            <label className="field-label" htmlFor="custName">
-              Nama pemesan *
+            <label className="text-xs font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custName">
+              <User className="w-3.5 h-3.5 text-[var(--red)]" />
+              <span>Nama Pemesan *</span>
             </label>
             <input
-              className="field-input"
+              className="input-shadcn"
               id="custName"
               type="text"
               required
@@ -181,28 +228,31 @@ export const CartModal: React.FC<CartModalProps> = ({
             />
           </div>
 
-          <div className="form-grid-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="field-label" htmlFor="custType">
-                Pilihan sajian
+              <label className="text-xs font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custType">
+                <Utensils className="w-3.5 h-3.5 text-amber-700" />
+                <span>Pilihan Sajian</span>
               </label>
               <select
-                className="field-input"
+                className="input-shadcn cursor-pointer"
                 id="custType"
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value })}
               >
-                <option value="Siap Santap (Hangat)">Siap santap (Hangat)</option>
+                <option value="Siap Santap (Hangat)">Siap Santap (Hangat)</option>
                 <option value="Ready Frozen (Beku)">Ready Frozen (Tahan 3 bulan)</option>
                 <option value="Campur (Hangat & Frozen)">Campur (Hangat & Frozen)</option>
               </select>
             </div>
+
             <div>
-              <label className="field-label" htmlFor="custArea">
-                Alamat / Kecamatan *
+              <label className="text-xs font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custArea">
+                <MapPin className="w-3.5 h-3.5 text-rose-600" />
+                <span>Alamat / Kecamatan *</span>
               </label>
               <input
-                className="field-input"
+                className="input-shadcn"
                 id="custArea"
                 type="text"
                 required
@@ -213,22 +263,35 @@ export const CartModal: React.FC<CartModalProps> = ({
             </div>
           </div>
 
-          <button className="btn btn-red w-full mt-1" type="submit">
-            <span>Kirim pesanan ke WhatsApp Gyozen</span>
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-[18px] h-[18px]">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+          <div>
+            <label className="text-xs font-bold text-[var(--ink)] mb-1 block" htmlFor="custNotes">
+              Catatan Tambahan (Opsional)
+            </label>
+            <input
+              className="input-shadcn"
+              id="custNotes"
+              type="text"
+              placeholder="Contoh: Sambal dipisah / kirim jam 12 siang"
+              value={form.notes || ''}
+              onChange={(e) => setForm({ ...form, notes: e.target.value })}
+            />
+          </div>
+
+          <button className="btn btn-primary w-full h-12 text-base mt-2 shadow-md" type="submit">
+            <MessageCircle className="w-5 h-5 text-amber-200" />
+            <span>Kirim Pesanan ke WhatsApp Gyozen</span>
           </button>
 
           <div className="flex justify-between items-center text-xs text-[var(--muted)] pt-1">
             <button
               type="button"
               onClick={handleCopy}
-              className="bg-transparent border-none p-0 text-[var(--red)] font-extrabold underline cursor-pointer"
+              className="inline-flex items-center gap-1 text-[var(--red)] font-bold hover:underline cursor-pointer bg-transparent border-none p-0"
             >
-              Salin teks pesanan
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Tersalin ke Clipboard!' : 'Salin Teks Pesanan'}</span>
             </button>
-            <span>Terhubung ke WA resmi 0898-1230-703</span>
+            <span className="text-[11px]">Terhubung ke WA resmi 0898-1230-703</span>
           </div>
         </form>
       </div>

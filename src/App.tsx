@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { HighlightsBand } from './components/HighlightsBand';
 import { MenuCatalog } from './components/MenuCatalog';
 import { WhyGyozen } from './components/WhyGyozen';
+import { Testimonials } from './components/Testimonials';
 import { Steps } from './components/Steps';
 import { FAQ } from './components/FAQ';
 import { ClosingCTA } from './components/ClosingCTA';
@@ -12,7 +13,8 @@ import { CartModal } from './components/CartModal';
 import { Toast } from './components/Toast';
 import { GYOZEN_PRODUCTS, INITIAL_CART } from './data/products';
 import { CartItem, Product, MenuCategory } from './types';
-import { calculateTotalCount } from './utils/order';
+import { calculateTotalCount, calculateTotal, formatRupiah } from './utils/order';
+import { ShoppingBag } from 'lucide-react';
 
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>(INITIAL_CART);
@@ -44,11 +46,12 @@ export default function App() {
           id: product.id,
           name: product.name,
           price: product.price,
-          qty: 1
+          qty: 1,
+          imageUrl: product.imageUrl
         }
       ];
     });
-    showToast(`<strong>${product.name}</strong> ditambahkan ke keranjang pesanan.`);
+    showToast(`<strong>${product.name}</strong> ditambahkan ke keranjang.`);
   };
 
   const handleAddBundle = (bundleName: string, bundlePrice: number) => {
@@ -66,7 +69,8 @@ export default function App() {
           id: bundleId,
           name: bundleName,
           price: bundlePrice,
-          qty: 1
+          qty: 1,
+          imageUrl: 'https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=800&q=80'
         }
       ];
     });
@@ -89,9 +93,10 @@ export default function App() {
   };
 
   const totalCartCount = calculateTotalCount(cart);
+  const totalAmount = calculateTotal(cart);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--cream)] text-[var(--ink)]">
+    <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--ink)] antialiased">
       <Header cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
 
       <main>
@@ -104,12 +109,35 @@ export default function App() {
           onAddToCart={handleAddToCart}
         />
         <WhyGyozen onAddBundle={handleAddBundle} />
+        <Testimonials />
         <Steps />
         <FAQ />
         <ClosingCTA onOpenCart={() => setIsCartOpen(true)} />
       </main>
 
       <Footer />
+
+      {/* Sticky Mobile Floating Order Bar (Shown only on small screens when cart has items) */}
+      {cart.length > 0 && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3">
+          <div>
+            <span className="text-[11px] font-bold text-[var(--muted)] block">
+              {totalCartCount} Menu Dipilih
+            </span>
+            <span className="text-base font-black text-[var(--red)] tabular-nums">
+              {formatRupiah(totalAmount)}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
+            className="btn btn-primary btn-sm px-4 h-10 shadow-sm"
+          >
+            <ShoppingBag className="w-4 h-4" />
+            <span>Lihat Keranjang</span>
+          </button>
+        </div>
+      )}
 
       <CartModal
         isOpen={isCartOpen}

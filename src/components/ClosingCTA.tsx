@@ -1,4 +1,6 @@
 import React from 'react';
+import { MessageCircle, ShoppingBag, FileCode, Instagram, ShieldCheck, Sparkles } from 'lucide-react';
+import { WHATSAPP_NUMBER } from '../data/products';
 
 interface ClosingCTAProps {
   onOpenCart: () => void;
@@ -6,62 +8,73 @@ interface ClosingCTAProps {
 
 export const ClosingCTA: React.FC<ClosingCTAProps> = ({ onOpenCart }) => {
   return (
-    <section className="section closing-cta" aria-labelledby="closing-title">
-      <div className="container-custom closing-inner">
-        <div className="section-kicker">Praktis, enak, & selalu jadi favorit</div>
-        <h2 id="closing-title">
-          Yuk, bikin harimu lebih <span style={{ color: 'var(--yellow)' }}>Gyozen!</span>
+    <section className="section bg-gradient-to-br from-[#7c1315] via-[#610d10] to-[#45080b] text-white py-16 sm:py-24 relative overflow-hidden" aria-labelledby="closing-title">
+      {/* Decorative ambient backdrop */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-red-400/10 blur-3xl pointer-events-none" />
+
+      <div className="container-custom relative z-10 text-center max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold mb-4">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Praktis, Enak, & Selalu Jadi Favorit</span>
+        </div>
+
+        <h2 id="closing-title" className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-4">
+          Yuk, bikin harimu lebih <span className="text-[var(--yellow)]">Gyozen!</span>
         </h2>
-        <p>
-          Porsi hemat mulai <strong>15 RB-an</strong>. Pilih menu hangat atau stok Ready Frozen sekarang dan rasakan
-          kelezatan dimsum yang gurih, lumer, dan bikin nagih.
+
+        <p className="text-sm sm:text-base text-amber-100/90 leading-relaxed max-w-xl mx-auto mb-8">
+          Porsi hemat mulai <strong>15 RB-an</strong>. Pilih menu hangat siap santap atau stok Ready Frozen sekarang dan
+          rasakan kelezatan dimsum yang gurih, lumer, dan bikin nagih.
         </p>
 
-        <button className="btn" type="button" onClick={onOpenCart}>
-          <span>Buka keranjang & pesan sekarang</span>
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-[18px] h-[18px]">
-            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+        <div className="flex flex-wrap items-center justify-center gap-3.5 mb-10">
+          <button className="btn btn-accent text-base px-6 h-12 shadow-lg" type="button" onClick={onOpenCart}>
+            <ShoppingBag className="w-4 h-4" />
+            <span>Buka Keranjang & Pesan Sekarang</span>
+          </button>
 
-        <div className="contact-badges-row">
           <a
-            className="contact-pill"
-            href="https://wa.me/628981230703"
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Hubungi WhatsApp Dimsum Gyozen"
+            className="btn btn-secondary text-base px-5 h-12 bg-white/10 text-white border-white/20 hover:bg-white/20"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M20 11.5a8.5 8.5 0 0 1-12.2 7.6L3 20.5l1.6-4.6A8.5 8.5 0 1 1 20 11.5Z" stroke="#8e171c" strokeWidth="2" strokeLinejoin="round" />
-            </svg>
+            <MessageCircle className="w-4 h-4 text-emerald-300" />
+            <span>Chat Admin WhatsApp</span>
+          </a>
+        </div>
+
+        {/* Contact Badges Row */}
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
+          <a
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black/25 backdrop-blur-md border border-white/15 text-white/90 hover:text-white hover:bg-black/40 transition-colors"
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
             <span>WA: 0898-1230-703</span>
           </a>
+
           <a
-            className="contact-pill"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black/25 backdrop-blur-md border border-white/15 text-white/90 hover:text-white hover:bg-black/40 transition-colors"
             href="https://instagram.com/gyozen.sda"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Buka Instagram @gyozen.sda"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#8e171c" strokeWidth="2" />
-              <circle cx="12" cy="12" r="4" stroke="#8e171c" strokeWidth="2" />
-              <circle cx="17.5" cy="6.5" r="1" fill="#8e171c" />
-            </svg>
+            <Instagram className="w-3.5 h-3.5 text-rose-400" />
             <span>IG: @gyozen.sda</span>
           </a>
+
           <a
-            className="contact-pill"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black/25 backdrop-blur-md border border-white/15 text-white/90 hover:text-white hover:bg-black/40 transition-colors"
             href="/assets/aistudio/landing_page_umkm_dimsum_gyozen__1__307720ac.html"
             target="_blank"
             rel="noopener noreferrer"
-            title="Lihat file HTML landing page asli"
+            title="Lihat file HTML landing page asli yang diimport"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#8e171c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <polyline points="14 2 14 8 20 8" stroke="#8e171c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <FileCode className="w-3.5 h-3.5 text-amber-300" />
             <span>File Asli (.html)</span>
           </a>
         </div>
