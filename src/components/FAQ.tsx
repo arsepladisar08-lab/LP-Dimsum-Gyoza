@@ -1,7 +1,7 @@
 import React from 'react';
 import { buildWhatsAppInquiryUrl } from '../utils/order';
 import { WHATSAPP_NUMBER } from '../data/products';
-import { MessageCircle, HelpCircle, Plus } from 'lucide-react';
+import { MessageCircle, Plus } from 'lucide-react';
 
 const questions = [
   {q:'Apa saja pilihan menu yang tersedia?',a:'Gyozen menyediakan pilihan gyoza, dimsum original, dimsum goreng keju, mentai, platter, party box, ready frozen, dan Ebi Chili Oil. Pilihan serta detail porsi dapat dilihat pada katalog.'},
@@ -17,11 +17,11 @@ export const FAQ: React.FC = () => {
   return (
     <section className="section faq-section" id="faq" aria-labelledby="faq-title">
       <div className="container-custom faq-layout">
-        <div className="faq-intro"><p className="section-kicker"><HelpCircle size={14}/> GOOD TO KNOW</p><h2 id="faq-title">Ada yang ingin<br/><em>kamu tanyakan?</em></h2><p className="section-intro">Temukan jawaban singkat sebelum memilih menu. Untuk informasi stok dan pengiriman terbaru, admin siap membantu.</p><button className="btn btn-primary" type="button" onClick={askWhatsApp}><MessageCircle size={16}/> Tanya admin Gyozen</button></div>
+        <div className="faq-intro"><p className="section-kicker">PERTANYAAN UMUM</p><h2 id="faq-title">Ada yang ingin<br/><em>kamu tanyakan?</em></h2><p className="section-intro">Temukan jawaban singkat sebelum memilih menu. Untuk informasi stok dan pengiriman terbaru, admin siap membantu.</p><button className="btn btn-primary" type="button" onClick={askWhatsApp}><MessageCircle size={16}/> Tanya admin Gyozen</button></div>
         <div className="faq-list">
           {questions.map(({q,a},index)=>(
             <details className="faq-item" key={q} open={index===0}>
-              <summary><span className="faq-number">0{index+1}</span><strong>{q}</strong><Plus className="faq-plus" size={18}/></summary>
+              <summary><strong>{q}</strong><Plus className="faq-plus" size={18}/></summary>
               <p>{a}</p>
             </details>
           ))}
