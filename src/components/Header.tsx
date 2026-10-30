@@ -9,9 +9,9 @@ interface HeaderProps {
 
 const links = [
   ['Menu', '#menu'],
-  ['Cerita Gyozen', '#paket'],
-  ['Testimoni', '#testimoni'],
+  ['Pilihan Gyozen', '#paket'],
   ['Cara Pesan', '#langkah'],
+  ['Nota Pesanan', '#nota'],
   ['FAQ', '#faq']
 ];
 
@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
     <>
       <aside className="announcement-bar" aria-label="Informasi brand">
         <div className="container-custom announcement-inner">
-          <span><i className="announcement-dot" /> Satu gigitan, bikin hari makin zen.</span>
+          <span>Dimsum, gyoza, dan pilihan frozen dari Gyozen.</span>
           <a href="https://instagram.com/gyozen.sda" target="_blank" rel="noopener noreferrer">
             <Instagram size={14} /> @gyozen.sda
           </a>
