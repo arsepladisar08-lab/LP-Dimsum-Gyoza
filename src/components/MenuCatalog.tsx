@@ -12,7 +12,8 @@ interface MenuCatalogProps {
 
 export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, onAddToCart, onPreviewProduct }) => {
   const warmProducts = products.filter((product) => product.category === 'hangat');
-  const frozenProducts = products.filter((product) => product.category === 'frozen');
+  const frozenProducts = products.filter((product) => product.category === 'frozen' && product.id !== 'ebi-chili-oil');
+  const condiments = products.filter((product) => product.id === 'ebi-chili-oil');
   const featured = warmProducts[0];
   const otherWarm = warmProducts.slice(1);
 
@@ -100,6 +101,13 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, onAddToCart,
           </div>
         </div>
 
+        {condiments.map((product) => (
+          <div className="condiment-row" key={product.id}>
+            <div><p className="menu-eyebrow">PELENGKAP</p><h3>{product.name}</h3><p>{product.desc}</p></div>
+            <strong>{formatRupiah(product.price)}</strong>
+            <button className="menu-add-button" type="button" onClick={() => onAddToCart(product)} aria-label={`Tambah ${product.name} ke nota`}><Plus size={18}/></button>
+          </div>
+        ))}
         <p className="menu-note">Harga yang tercantum adalah harga menu pada katalog. Stok, ongkir, dan jadwal pengiriman dikonfirmasi admin sebelum pesanan diproses.</p>
       </div>
     </section>
