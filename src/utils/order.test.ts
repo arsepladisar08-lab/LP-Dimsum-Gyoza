@@ -95,8 +95,8 @@ test('buildWhatsAppInquiryUrl encodes url parameters properly', () => {
 
 test('calculateKnownPieces counts only products with an explicit piece count', () => {
   const products: Product[] = [
-    { id: 'pack-a', index: '', name: 'Pack A', category: 'frozen', tag: '', bg: '', art: 'frozen', price: 10000, info: '', desc: '', imageUrl: '', pcs: 12 },
-    { id: 'platter', index: '', name: 'Platter', category: 'hangat', tag: '', bg: '', art: 'platter', price: 45000, info: '', desc: '', imageUrl: '' }
+    { id: 'pack-a', name: 'Pack A', category: 'frozen', tag: '', bg: '', art: 'frozen', price: 10000, info: '', desc: '', imageUrl: '', pcs: 12 },
+    { id: 'platter', name: 'Platter', category: 'hangat', tag: '', bg: '', art: 'platter', price: 45000, info: '', desc: '', imageUrl: '' }
   ];
   const cart: CartItem[] = [
     { id: 'pack-a', name: 'Pack A', price: 10000, qty: 2 },
