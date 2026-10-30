@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CartItem, OrderFormState } from '../types';
-import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage } from '../utils/order';
-import { WHATSAPP_NUMBER } from '../data/products';
+import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage, calculateKnownPieces, calculatePiecesPerGuest } from '../utils/order';
+import { WHATSAPP_NUMBER, GYOZEN_PRODUCTS } from '../data/products';
 import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils, Trash2 } from 'lucide-react';
 import { ProductImage } from './ProductImage';
 
@@ -50,6 +50,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   });
 
   const [copied, setCopied] = useState(false);
+  const [guestCount, setGuestCount] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   // Simpan data form ke localStorage setiap kali diubah agar repeat order tidak perlu ketik ulang
@@ -66,6 +67,8 @@ export const CartModal: React.FC<CartModalProps> = ({
   if (!isOpen) return null;
 
   const total = calculateTotal(cart);
+  const knownPieces = calculateKnownPieces(cart, GYOZEN_PRODUCTS);
+  const piecesPerGuest = calculatePiecesPerGuest(knownPieces, Number(guestCount));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -297,6 +300,37 @@ export const CartModal: React.FC<CartModalProps> = ({
           </span>
         </div>
 
+        {/* Portion estimate: count only products with an explicit piece quantity */}
+        {knownPieces > 0 && (
+          <div className="mt-3 mb-4 p-3.5 rounded-xl bg-amber-50/70 border border-amber-900/10">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-[var(--ink)]">Estimasi porsi acara</p>
+                <p className="text-xs text-[var(--muted)] mt-1">Terhitung {knownPieces} pcs dari menu dengan jumlah isi yang tercantum jelas.</p>
+              </div>
+              <div className="w-28 shrink-0">
+                <label htmlFor="guestCount" className="block text-[11px] font-bold text-[var(--ink)] mb-1">Jumlah orang</label>
+                <input
+                  id="guestCount"
+                  className="input-shadcn"
+                  type="number"
+                  min="1"
+                  step="1"
+                  inputMode="numeric"
+                  placeholder="Contoh: 5"
+                  value={guestCount}
+                  onChange={(e) => setGuestCount(e.target.value)}
+                />
+              </div>
+            </div>
+            {piecesPerGuest !== null && (
+              <p className="text-sm font-bold text-[var(--red)] mt-2">
+                Rata-rata {piecesPerGuest.toFixed(1)} pcs per orang.
+              </p>
+            )}
+          </div>
+        )}
+
         {/* Customer Details Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div>
@@ -328,7 +362,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                 onChange={(e) => setForm({ ...form, type: e.target.value })}
               >
                 <option value="Siap Santap (Hangat)">Siap Santap (Hangat)</option>
-                <option value="Ready Frozen (Beku)">Ready Frozen (Tahan 3 bulan)</option>
+                <option value="Ready Frozen (Beku)">Ready Frozen (Beku)</option>
                 <option value="Campur (Hangat & Frozen)">Campur (Hangat & Frozen)</option>
               </select>
             </div>
