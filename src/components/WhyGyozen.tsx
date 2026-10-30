@@ -3,6 +3,7 @@ import { ArrowUpRight, Plus } from 'lucide-react';
 import { ProductImage } from './ProductImage';
 import { GYOZEN_PRODUCTS } from '../data/products';
 import { formatRupiah } from '../utils/order';
+import { Reveal } from './Reveal';
 
 interface WhyGyozenProps {
   onAddBundle: (name: string, price: number, imageUrl?: string) => void;
@@ -22,7 +23,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
           </div>
         </div>
 
-        <div className="package-feature">
+        <Reveal className="package-feature">
           <div className="package-feature-image">
             <ProductImage src="/images/menu/dimsum-platter-960.webp" alt="Dimsum Platter Komplit Gyozen" bgColor="#f6e7ad" width={960} height={760} sizes="(min-width: 900px) 56vw, 100vw" loading="lazy" className="w-full h-full object-cover"/>
           </div>
@@ -42,7 +43,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
               </button>
             )}
           </div>
-        </div>
+        </Reveal>
 
         <div className="frozen-callout">
           <div>
