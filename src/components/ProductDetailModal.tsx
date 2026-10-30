@@ -114,7 +114,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm text-[var(--muted)] mt-3 leading-relaxed">
+              <p className="product-detail-description mt-3 leading-relaxed">
                 {product.desc}
               </p>
 
