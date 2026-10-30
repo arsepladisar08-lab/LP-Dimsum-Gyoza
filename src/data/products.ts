@@ -134,9 +134,9 @@ export const GYOZEN_PRODUCTS: Product[] = [
     imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp',
     portion: 'Vacuum Pack Segel Isi 12 pcs + Saus',
     pcs: 12,
-    composition: 'Ayam segar, udang, kulit dimsum, wortel, jamur, bumbu racik Halal.',
+    composition: 'Ayam segar, udang, kulit dimsum, wortel, jamur, bumbu pilihan.',
     servingTip: 'Kukus selama 7-10 menit tanpa perlu di-thawing terlebih dahulu.',
-    storageTip: 'Simpan beku di freezer suhu -18°C. Tahan hingga 3 bulan.'
+    storageTip: 'Ikuti petunjuk penyimpanan pada kemasan. Konfirmasi masa simpan kepada admin.'
   },
   {
     id: 'frozen-goreng-keju',
@@ -148,14 +148,14 @@ export const GYOZEN_PRODUCTS: Product[] = [
     bg: '#e2ecf5',
     art: 'frozen',
     price: 38000,
-    info: 'Tahan 3 bulan di freezer',
+    info: 'Ready Frozen',
     desc: 'Kemasan beku Dimsum Goreng Keju. Tinggal goreng sebentar hingga keemasan untuk camilan keju lumer hangat di rumah.',
     imageUrl: '/images/menu/frozen-pack-goreng-keju-960.webp',
     portion: 'Vacuum Pack Segel Isi 6 pcs Jumbo + Saus',
     pcs: 6,
     composition: 'Daging ayam, keju leleh melimpah, kulit pangsit khusus penggorengan.',
     servingTip: 'Goreng dalam minyak panas sedang selama 3-5 menit sampai keemasan mekar.',
-    storageTip: 'Simpan beku di freezer. Tahan hingga 3 bulan.'
+    storageTip: 'Ikuti petunjuk penyimpanan pada kemasan. Konfirmasi masa simpan kepada admin.'
   },
   {
     id: 'frozen-gyoza',
@@ -167,12 +167,12 @@ export const GYOZEN_PRODUCTS: Product[] = [
     bg: '#e2ecf5',
     art: 'frozen',
     price: 35000,
-    info: 'Tahan 3 bulan di freezer',
+    info: 'Ready Frozen',
     desc: 'Kemasan beku Gyoza Fresh & Juicy. Praktis dikukus maupun dipanggang teflon (pan-fried) dalam 5 menit.',
     imageUrl: '/images/menu/frozen-pack-gyoza-juicy-960.webp',
     portion: 'Vacuum Pack Segel Isi 15 pcs + Saus',
     pcs: 15,
-    composition: 'Daging ayam, daun bawang, udang, bumbu Jepang Halal, kulit gyoza lembut.',
+    composition: 'Daging ayam, daun bawang, udang, bumbu Jepang, kulit gyoza lembut.',
     servingTip: 'Panaskan minyak tipis di teflon, tata gyoza, beri sedikit air lalu tutup hingga matang.',
     storageTip: 'Ikuti petunjuk penyimpanan pada kemasan. Konfirmasi masa simpan kepada admin.'
   },
