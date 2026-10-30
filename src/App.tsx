@@ -12,10 +12,10 @@ import { Footer } from './components/Footer';
 import { CartModal } from './components/CartModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { Toast } from './components/Toast';
+import { MobileBottomBar } from './components/MobileBottomBar';
 import { GYOZEN_PRODUCTS } from './data/products';
 import { CartItem, Product, MenuCategory } from './types';
-import { calculateTotalCount, calculateTotal, formatRupiah } from './utils/order';
-import { ShoppingBag } from 'lucide-react';
+import { calculateTotalCount, calculateTotal } from './utils/order';
 
 const CART_STORAGE_KEY = 'gyozen_cart_v1';
 
@@ -153,10 +153,10 @@ export default function App() {
   const totalAmount = calculateTotal(cart);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--ink)] antialiased">
+    <div className="min-h-[100svh] flex flex-col bg-[var(--background)] text-[var(--ink)] antialiased">
       <Header cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
 
-      <main>
+      <main className={cart.length > 0 ? 'pb-20 md:pb-0' : ''}>
         <Hero onOpenCart={() => setIsCartOpen(true)} />
         <HighlightsBand />
         <MenuCatalog
@@ -175,27 +175,11 @@ export default function App() {
 
       <Footer />
 
-      {/* Sticky Mobile Floating Order Bar */}
-      {cart.length > 0 && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3">
-          <div>
-            <span className="text-[11px] font-bold text-[var(--muted)] block">
-              {totalCartCount} Menu Dipilih
-            </span>
-            <span className="text-base font-black text-[var(--red)] tabular-nums">
-              {formatRupiah(totalAmount)}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setIsCartOpen(true)}
-            className="btn btn-primary btn-sm px-4 h-10 shadow-sm"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Lihat Keranjang</span>
-          </button>
-        </div>
-      )}
+      <MobileBottomBar
+        cartCount={totalCartCount}
+        totalPrice={totalAmount}
+        onOpenCart={() => setIsCartOpen(true)}
+      />
 
       {/* Menu Detail Preview Modal */}
       <ProductDetailModal
