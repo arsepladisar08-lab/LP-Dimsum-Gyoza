@@ -9,7 +9,6 @@ export const WHATSAPP_NUMBER = '628981230703';
 export const GYOZEN_PRODUCTS: Product[] = [
   {
     id: 'gyoza-fresh',
-    index: '01 / fresh & juicy',
     name: 'Gyoza Fresh & Juicy',
     category: 'hangat',
     tag: 'Mulai 15 RB-an',
@@ -28,7 +27,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'dimsum-ori',
-    index: '02 / classic steam',
     name: 'Dimsum Original Mix',
     category: 'hangat',
     tag: 'Favorit Kukus',
@@ -47,7 +45,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'dimsum-goreng-keju',
-    index: '03 / crispy melted',
     name: 'Dimsum Goreng Keju',
     category: 'hangat',
     tag: 'Keju Lumer!',
@@ -66,7 +63,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'mentai-lumer',
-    index: '04 / signature torch',
     name: 'Dimsum Mentai Lumer',
     category: 'hangat',
     tag: 'Mentai Bakar',
@@ -85,7 +81,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'dimsum-platter',
-    index: '05 / 3-in-1 combo',
     name: 'Dimsum Platter Komplit',
     category: 'hangat',
     tag: 'Favorit Sharing',
@@ -103,7 +98,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'party-box',
-    index: '06 / family tray',
     name: 'Party Box Gyozen',
     category: 'hangat',
     tag: 'Porsi Rame-Rame',
@@ -121,7 +115,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'frozen-dimsum-mix',
-    index: '07 / ready frozen',
     name: 'Frozen Pack: Dimsum Mix',
     category: 'frozen',
     tag: 'Ready Frozen',
@@ -140,7 +133,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'frozen-goreng-keju',
-    index: '08 / ready frozen',
     name: 'Frozen Pack: Goreng Keju',
     category: 'frozen',
     tag: 'Ready Frozen',
@@ -159,7 +151,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'frozen-gyoza',
-    index: '09 / ready frozen',
     name: 'Frozen Pack: Gyoza Juicy',
     category: 'frozen',
     tag: 'Ready Frozen',
@@ -178,7 +169,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'ebi-chili-oil',
-    index: '10 / condiment jar',
     name: 'Gyozen Ebi Chili Oil 150ml',
     category: 'frozen',
     tag: 'Kemasan Jar 150ml',
@@ -195,5 +185,3 @@ export const GYOZEN_PRODUCTS: Product[] = [
     storageTip: 'Gunakan sendok kering dan bersih. Simpan di tempat sejuk atau kulkas setelah dibuka.'
   }
 ];
-
-export const TESTIMONIALS = []; // Add only customer reviews with documented permission and source.
