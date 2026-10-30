@@ -241,7 +241,7 @@ export const CartModal: React.FC<CartModalProps> = ({
             cart.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between p-3 rounded-xl bg-white border border-[var(--line)] shadow-xs gap-3"
+                className="flex items-center justify-between p-3 rounded-xl bg-white border border-[var(--line)] gap-3"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   {item.imageUrl && (
@@ -364,7 +364,7 @@ export const CartModal: React.FC<CartModalProps> = ({
             />
           </div>
 
-          <button className="btn btn-primary w-full h-12 text-base mt-2 shadow-md" type="submit">
+          <button className="btn btn-primary w-full h-12 text-base mt-2" type="submit">
             <MessageCircle className="w-5 h-5 text-amber-200" />
             <span>Kirim Pesanan ke WhatsApp Gyozen</span>
           </button>
