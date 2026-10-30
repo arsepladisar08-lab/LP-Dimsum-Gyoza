@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#8e171c" />
+    <script>
+      /* Safeguard against browser extensions attempting to assign window.fetch when getter-only */
+      try {
+        let _activeFetch = window.fetch;
+        Object.defineProperty(window, 'fetch', {
+          get() {
+            return _activeFetch;
+          },
+          set(fn) {
+            _activeFetch = fn;
+          },
+          configurable: true,
+          enumerable: true
+        });
+      } catch (_err) {
+        // Ignore if restricted
+      }
+    </script>
     <title>Dimsum Gyozen (@gyozen.sda) | Gurih, Lumer, Bikin Nagih Mulai 15 RB-an</title>
     <meta name="description" content="Menu resmi Dimsum Gyozen: Gyoza Fresh & Juicy, Dimsum Original, Dimsum Goreng Keju, Mentai Lumer, Dimsum Platter, Party Box, Ready Frozen & Ebi Chili Oil 150ml. Mulai 15 RB-an! Hubungi WA 0898-1230-703." />
     <meta property="og:title" content="Dimsum Gyozen : Satu Gigitan, Bikin Hari Makin Zen (Mulai 15 RB-an)" />
