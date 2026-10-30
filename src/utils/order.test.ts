@@ -38,28 +38,24 @@ test('filterProducts returns only matching category or all', () => {
   const sampleProducts: Product[] = [
     {
       id: 'p1',
-      index: '01',
       name: 'Hangat 1',
       category: 'hangat',
       tag: '',
       bg: '',
       art: 'gyoza',
       price: 15000,
-      oldPrice: 18000,
       info: '',
       desc: '',
       imageUrl: '/images/menu/gyoza-fresh-960.webp'
     },
     {
       id: 'p2',
-      index: '02',
       name: 'Frozen 1',
       category: 'frozen',
       tag: '',
       bg: '',
       art: 'frozen',
       price: 35000,
-      oldPrice: 40000,
       info: '',
       desc: '',
       imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp'
