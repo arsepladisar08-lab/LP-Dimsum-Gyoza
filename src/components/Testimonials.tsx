@@ -1,8 +1,11 @@
 import React from 'react';
 import { Star, Heart, ArrowUpRight } from 'lucide-react';
-import { TESTIMONIALS } from '../data/products';
+import { VERIFIED_TESTIMONIALS } from '../data/products';
 
-export const Testimonials: React.FC = () => (
+export const Testimonials: React.FC = () => {
+  if (VERIFIED_TESTIMONIALS.length < 2) return null;
+
+  return (
   <section className="section testimonial-section" id="testimoni" aria-labelledby="testimoni-title">
     <div className="container-custom">
       <div className="section-heading">
@@ -14,7 +17,7 @@ export const Testimonials: React.FC = () => (
         <a className="social-link" href="https://instagram.com/gyozen.sda" target="_blank" rel="noopener noreferrer">Lihat Instagram <ArrowUpRight size={15}/></a>
       </div>
       <div className="testimonial-grid">
-        {TESTIMONIALS.map((item, index) => (
+        {VERIFIED_TESTIMONIALS.map((item, index) => (
           <article className="testimonial-card" key={item.name + '-' + index}>
             <div className="testimonial-top"><span className="testimonial-number">0{index+1}</span><span className="testimonial-stars" aria-label={'Rating ' + item.rating + ' dari 5'}>{Array.from({length:Math.min(5,Math.max(0,item.rating))}).map((_,i)=><Star key={i} size={13} fill="currentColor"/>)}</span></div>
             <p className="testimonial-quote">“{item.text}”</p>
@@ -22,7 +25,7 @@ export const Testimonials: React.FC = () => (
           </article>
         ))}
       </div>
-      <p className="testimonial-note">Pastikan izin publikasi dan keaslian setiap ulasan telah dikonfirmasi sebelum website dipublikasikan.</p>
     </div>
   </section>
-);
+  );
+};
