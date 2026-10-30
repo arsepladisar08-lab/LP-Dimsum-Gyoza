@@ -304,6 +304,7 @@ button { cursor: pointer; }
 .input-shadcn { width: 100%; min-height: 48px; padding: 11px 14px; color: var(--ink); background: #f0e5d8; border: 0; border-radius: 12px; font-size: 16px; }
 .input-shadcn:focus { outline: 3px solid var(--gold); }
 .product-photo-caption { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 10px 12px; color: white; background: rgba(39,24,19,.78); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+.product-detail-description { color: var(--muted); font-size: 16px; line-height: 1.7; }
 .product-detail-category { margin: 0 0 8px; color: var(--red); font-size: 13px; font-weight: 800; }
 .product-detail-price { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 15px; padding: 15px 0; background: var(--gold-pale); }
 .product-detail-price span { color: var(--brown); font-size: 14px; font-weight: 700; }
