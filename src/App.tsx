@@ -4,18 +4,18 @@ import { Hero } from './components/Hero';
 import { HighlightsBand } from './components/HighlightsBand';
 import { MenuCatalog } from './components/MenuCatalog';
 import { WhyGyozen } from './components/WhyGyozen';
-import { Testimonials } from './components/Testimonials';
 import { Steps } from './components/Steps';
 import { FAQ } from './components/FAQ';
 import { ClosingCTA } from './components/ClosingCTA';
 import { Footer } from './components/Footer';
 import { CartModal } from './components/CartModal';
+import { MobileBottomBar } from './components/MobileBottomBar';
+import { LivingOrderNote } from './components/LivingOrderNote';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { Toast } from './components/Toast';
 import { GYOZEN_PRODUCTS } from './data/products';
-import { CartItem, Product, MenuCategory } from './types';
-import { calculateTotalCount, calculateTotal, formatRupiah } from './utils/order';
-import { ShoppingBag } from 'lucide-react';
+import { CartItem, Product } from './types';
+import { calculateTotalCount, calculateTotal } from './utils/order';
 
 const CART_STORAGE_KEY = 'gyozen_cart_v1';
 
@@ -59,7 +59,6 @@ export default function App() {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [category, setCategory] = useState<MenuCategory>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastTimeout, setToastTimeout] = useState<NodeJS.Timeout | null>(null);
 
@@ -153,49 +152,31 @@ export default function App() {
   const totalAmount = calculateTotal(cart);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--ink)] antialiased">
+    <div className="min-h-[100svh] flex flex-col bg-[var(--background)] text-[var(--ink)] antialiased">
       <Header cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
 
       <main>
-        <Hero onOpenCart={() => setIsCartOpen(true)} />
+        <Hero />
         <HighlightsBand />
         <MenuCatalog
           products={GYOZEN_PRODUCTS}
-          currentCategory={category}
-          onSelectCategory={setCategory}
           onAddToCart={handleAddToCart}
           onPreviewProduct={setSelectedProduct}
         />
         <WhyGyozen onAddBundle={handleAddBundle} />
-        <Testimonials />
         <Steps />
+        <LivingOrderNote cart={cart} onOpenCart={() => setIsCartOpen(true)} />
         <FAQ />
         <ClosingCTA onOpenCart={() => setIsCartOpen(true)} />
       </main>
 
       <Footer />
 
-      {/* Sticky Mobile Floating Order Bar */}
-      {cart.length > 0 && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3">
-          <div>
-            <span className="text-[11px] font-bold text-[var(--muted)] block">
-              {totalCartCount} Menu Dipilih
-            </span>
-            <span className="text-base font-black text-[var(--red)] tabular-nums">
-              {formatRupiah(totalAmount)}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setIsCartOpen(true)}
-            className="btn btn-primary btn-sm px-4 h-10 shadow-sm"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Lihat Keranjang</span>
-          </button>
-        </div>
-      )}
+      <MobileBottomBar
+        cartCount={totalCartCount}
+        totalPrice={totalAmount}
+        onOpenCart={() => setIsCartOpen(true)}
+      />
 
       {/* Menu Detail Preview Modal */}
       <ProductDetailModal
