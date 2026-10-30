@@ -3,6 +3,7 @@ import { ArrowUpRight, MessageCircle, ShoppingBag } from 'lucide-react';
 import { CartItem } from '../types';
 import { calculateKnownPieces, calculatePiecesPerGuest, calculateTotal, formatRupiah } from '../utils/order';
 import { GYOZEN_PRODUCTS } from '../data/products';
+import { Reveal } from './Reveal';
 
 interface LivingOrderNoteProps {
   cart: CartItem[];
@@ -20,14 +21,14 @@ export const LivingOrderNote: React.FC<LivingOrderNoteProps> = ({ cart, onOpenCa
   return (
     <section className="section living-note-section" id="nota" aria-labelledby="note-title">
       <div className="container-custom living-note-layout">
-        <div className="living-note-copy">
+        <Reveal className="living-note-copy">
           <p className="section-kicker">PESANANMU, TERSUSUN RAPI</p>
           <h2 id="note-title">Nota kecil yang<br/><em>ikut bertumbuh.</em></h2>
           <p className="section-intro">Setiap menu yang kamu tambahkan akan muncul di sini. Periksa pilihanmu, lalu buka nota lengkap untuk mengisi detail pemesanan dan mengirimkannya ke WhatsApp.</p>
           <button className="btn btn-primary btn-large" type="button" onClick={onOpenCart}>
             <MessageCircle size={17}/> {cart.length ? 'Lanjutkan pesanan' : 'Buka nota pesanan'} <ArrowUpRight size={16}/>
           </button>
-        </div>
+        </Reveal>
         <div className="receipt-paper" aria-live="polite" aria-label="Pratinjau nota pesanan saat ini">
           <div className="receipt-head">
             <div><span className="receipt-brand">GYOZEN</span><span className="receipt-subtitle">ORDER NOTE</span></div>
