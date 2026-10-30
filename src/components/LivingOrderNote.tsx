@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowUpRight, MessageCircle, ShoppingBag } from 'lucide-react';
 import { CartItem } from '../types';
-import { calculateTotal, formatRupiah } from '../utils/order';
+import { calculateKnownPieces, calculatePiecesPerGuest, calculateTotal, formatRupiah } from '../utils/order';
+import { GYOZEN_PRODUCTS } from '../data/products';
 
 interface LivingOrderNoteProps {
   cart: CartItem[];
@@ -11,6 +12,10 @@ interface LivingOrderNoteProps {
 export const LivingOrderNote: React.FC<LivingOrderNoteProps> = ({ cart, onOpenCart }) => {
   const total = calculateTotal(cart);
   const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  const [guestInput, setGuestInput] = useState('');
+  const knownPieces = calculateKnownPieces(cart, GYOZEN_PRODUCTS);
+  const guestCount = Number(guestInput);
+  const averagePieces = calculatePiecesPerGuest(knownPieces, guestCount);
 
   return (
     <section className="section living-note-section" id="nota" aria-labelledby="note-title">
@@ -45,6 +50,19 @@ export const LivingOrderNote: React.FC<LivingOrderNoteProps> = ({ cart, onOpenCa
           <div className="receipt-rule"/>
           <div className="receipt-total"><span>SUBTOTAL MENU</span><strong>{formatRupiah(total)}</strong></div>
           <p className="receipt-footnote">Ongkir dan ketersediaan akan dikonfirmasi admin melalui WhatsApp.</p>
+          <div className="portion-planner">
+            <div>
+              <strong>Hitung jumlah untuk acara</strong>
+              <p>Jumlah pcs dihitung hanya dari produk yang mencantumkan isi kemasan atau porsi secara eksplisit.</p>
+            </div>
+            <label htmlFor="guest-count">Jumlah orang
+              <input id="guest-count" type="number" min="1" step="1" inputMode="numeric" placeholder="Contoh: 5" value={guestInput} onChange={(event) => setGuestInput(event.target.value)}/>
+            </label>
+            <div className="portion-result">
+              <strong>{knownPieces} pcs tercatat</strong>
+              {averagePieces !== null && <span>Rata-rata {averagePieces.toFixed(1)} pcs per orang</span>}
+            </div>
+          </div>
           <button className="receipt-action" type="button" onClick={onOpenCart}>
             <ShoppingBag size={16}/> Buka nota lengkap
           </button>
