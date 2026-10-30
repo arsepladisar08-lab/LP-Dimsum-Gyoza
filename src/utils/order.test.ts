@@ -4,6 +4,8 @@ import {
   formatRupiah,
   calculateTotal,
   calculateTotalCount,
+  calculateKnownPieces,
+  calculatePiecesPerGuest,
   filterProducts,
   buildWhatsAppOrderMessage,
   buildWhatsAppInquiryUrl
@@ -93,4 +95,22 @@ test('buildWhatsAppInquiryUrl encodes url parameters properly', () => {
   const url = buildWhatsAppInquiryUrl('628981230703', 'Gyoza Fresh & Juicy');
   assert.ok(url.startsWith('https://wa.me/628981230703?text='));
   assert.ok(url.includes('Gyoza%20Fresh%20%26%20Juicy') || url.includes('Gyoza'));
+});
+
+test('calculateKnownPieces counts only products with an explicit piece count', () => {
+  const products: Product[] = [
+    { id: 'pack-a', index: '', name: 'Pack A', category: 'frozen', tag: '', bg: '', art: 'frozen', price: 10000, info: '', desc: '', imageUrl: '', pcs: 12 },
+    { id: 'platter', index: '', name: 'Platter', category: 'hangat', tag: '', bg: '', art: 'platter', price: 45000, info: '', desc: '', imageUrl: '' }
+  ];
+  const cart: CartItem[] = [
+    { id: 'pack-a', name: 'Pack A', price: 10000, qty: 2 },
+    { id: 'platter', name: 'Platter', price: 45000, qty: 1 }
+  ];
+  assert.equal(calculateKnownPieces(cart, products), 24);
+});
+
+test('calculatePiecesPerGuest returns an average only for a positive guest count', () => {
+  assert.equal(calculatePiecesPerGuest(24, 4), 6);
+  assert.equal(calculatePiecesPerGuest(24, 0), null);
+  assert.equal(calculatePiecesPerGuest(24, -1), null);
 });
