@@ -3,6 +3,7 @@ import { Product } from '../types';
 import { formatRupiah } from '../utils/order';
 import { Plus, ArrowUpRight } from 'lucide-react';
 import { ProductImage } from './ProductImage';
+import { Reveal } from './Reveal';
 
 interface MenuCatalogProps {
   products: Product[];
@@ -33,7 +34,7 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, onAddToCart,
   return (
     <section className="section menu-section" id="menu" aria-labelledby="menu-title">
       <div className="container-custom">
-        <div className="section-heading menu-heading">
+        <Reveal className="section-heading menu-heading">
           <div>
             <p className="section-kicker">PILIHAN MENU</p>
             <h2 id="menu-title">Mulai dari yang<br/><em>paling kamu suka.</em></h2>
@@ -43,10 +44,10 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, onAddToCart,
             <a href="#menu-hangat">Siap santap</a>
             <a href="#menu-frozen">Ready frozen</a>
           </nav>
-        </div>
+        </Reveal>
 
         {featured && (
-          <div className="menu-warm-layout" id="menu-hangat">
+          <Reveal className="menu-warm-layout" id="menu-hangat">
             <article className="menu-featured">
               <button className="menu-featured-image" type="button" onClick={() => onPreviewProduct(featured)} aria-label={`Lihat detail ${featured.name}`}>
                 <ProductImage src={featured.imageUrl} alt={featured.name} bgColor={featured.bg} width={960} height={720}
@@ -74,10 +75,10 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, onAddToCart,
               </div>
               {otherWarm.map((product) => <ProductRow key={product.id} product={product}/>)}
             </div>
-          </div>
+          </Reveal>
         )}
 
-        <div className="frozen-menu-section" id="menu-frozen">
+        <Reveal className="frozen-menu-section" id="menu-frozen">
           <div className="frozen-menu-heading">
             <div>
               <p className="menu-eyebrow">UNTUK STOK DI RUMAH</p>
@@ -99,7 +100,7 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, onAddToCart,
               </article>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         {condiments.map((product) => (
           <div className="condiment-row" key={product.id}>
