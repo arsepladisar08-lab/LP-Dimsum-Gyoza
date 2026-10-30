@@ -50,7 +50,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       <div className="modal-dialog modal-dialog-lg overflow-hidden relative">
         {/* Floating Close Button */}
         <button
-          className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-md transition-colors"
+          className="product-detail-close absolute top-3.5 right-3.5 z-20"
           type="button"
           onClick={onClose}
           aria-label="Tutup pratinjau menu"
@@ -81,7 +81,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     : product.tagStyle === 'frozen'
                     ? 'badge-frozen'
                     : 'badge-accent'
-                } shadow-md text-xs`}
+                } text-xs`}
               >
                 {product.tag}
               </span>
@@ -185,7 +185,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="btn btn-primary flex-1 h-11 text-sm shadow-md"
+                  className="btn btn-primary flex-1 h-11 text-sm"
                   onClick={handleAdd}
                 >
                   <ShoppingBag className="w-4 h-4" />
