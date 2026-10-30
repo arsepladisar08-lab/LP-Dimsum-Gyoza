@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Instagram, MapPin, Clock, Phone, ShieldCheck, Heart, Sparkles, FileText } from 'lucide-react';
+import { MessageCircle, Instagram, MapPin, Clock, Phone, ShieldCheck } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '../data/products';
 
 export const Footer: React.FC = () => {
@@ -41,20 +41,6 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links Menu */}
-          <div>
-            <h3 className="footer-col-title">Katalog Menu</h3>
-            <ul className="footer-links-list">
-              <li><a href="#menu">Gyoza Fresh & Juicy</a></li>
-              <li><a href="#menu">Dimsum Original Mix</a></li>
-              <li><a href="#menu">Dimsum Mentai Lumer (Best Seller)</a></li>
-              <li><a href="#menu">Dimsum Goreng Keju</a></li>
-              <li><a href="#paket">Dimsum Platter 3-in-1</a></li>
-              <li><a href="#paket">Paket Stok Frozen 3 Bulan</a></li>
-              <li><a href="#menu">Gyozen Ebi Chili Oil 150ml</a></li>
-            </ul>
-          </div>
-
           {/* Column 3: Customer Care & Services */}
           <div>
             <h3 className="footer-col-title">Layanan & Info</h3>
@@ -78,11 +64,6 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                 >
                   Info Reseller / Frozen Food
-                </a>
-              </li>
-              <li>
-                <a href="/assets/aistudio/landing_page_umkm_dimsum_gyozen__1__307720ac.html" target="_blank" rel="noopener noreferrer">
-                  File Asset Asli (.html)
                 </a>
               </li>
             </ul>
@@ -142,11 +123,6 @@ export const Footer: React.FC = () => {
         <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
           <div>
             © {year} Dimsum Gyozen (@gyozen.sda). Halal Indonesia • Hak Cipta Dilindungi.
-          </div>
-          <div className="flex items-center gap-1 text-white/60">
-            <span>Dibuat dengan</span>
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" />
-            <span>untuk memajukan UMKM Kuliner Indonesia</span>
           </div>
         </div>
       </div>

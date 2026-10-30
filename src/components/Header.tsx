@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Menu, X, Phone, MessageCircle, MapPin, Sparkles, ChevronRight, Clock } from 'lucide-react';
+import { ShoppingBag, Menu, X, MessageCircle, ChevronRight } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '../data/products';
 
 interface HeaderProps {
@@ -20,25 +20,12 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Buka Setiap Hari
             </span>
-            <span className="hidden sm:inline text-white/80">•</span>
-            <span className="hidden sm:inline-flex items-center gap-1 text-white/90">
-              <Clock className="w-3.5 h-3.5 opacity-80" /> 10.00 - 21.00 WIB (Kukus Hangat & Frozen)
-            </span>
           </div>
 
           <div className="flex items-center gap-4 text-xs font-semibold">
             <span className="hidden md:inline text-amber-200/90 font-medium">
               ✨ Free Ongkir Area Sidoarjo Min. 50k
             </span>
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-white hover:text-amber-300 transition-colors"
-            >
-              <Phone className="w-3 h-3 text-amber-300" />
-              <span>0898-1230-703</span>
-            </a>
           </div>
         </div>
       </aside>
@@ -57,15 +44,9 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
                 </svg>
               </span>
               <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="tracking-tight text-[18px] sm:text-[20px] font-black text-[var(--ink)]">
-                    GYOZEN
-                  </span>
-                  <span className="badge badge-accent text-[10px] py-0 px-1.5 font-extrabold hidden xs:inline-block">
-                    Halal
-                  </span>
-                </div>
-                <span className="brand-caption">@gyozen.sda • Mulai 15 RB-an</span>
+                <span className="tracking-tight text-[18px] sm:text-[20px] font-black text-[var(--ink)]">
+                  GYOZEN
+                </span>
               </div>
             </a>
 

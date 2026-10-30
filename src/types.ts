@@ -13,10 +13,13 @@ export interface Product {
   oldPrice: number;
   info: string;
   desc: string;
-  imageUrl: string; // URL dummy foto menu siap diganti dengan foto asli
+  imageUrl: string;
   portion?: string;
   rating?: number;
   soldCount?: string;
+  servingTip?: string;
+  storageTip?: string;
+  composition?: string;
 }
 
 export interface CartItem {

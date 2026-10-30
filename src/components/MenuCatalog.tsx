@@ -1,33 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Product, MenuCategory } from '../types';
-import { FoodIllustration } from './FoodIllustration';
-import { formatRupiah, buildWhatsAppInquiryUrl } from '../utils/order';
-import { WHATSAPP_NUMBER } from '../data/products';
-import { Star, MessageCircle, Plus, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { formatRupiah } from '../utils/order';
+import { Star, Plus, Eye, Sparkles } from 'lucide-react';
 
 interface MenuCatalogProps {
   products: Product[];
   currentCategory: MenuCategory;
   onSelectCategory: (category: MenuCategory) => void;
   onAddToCart: (product: Product) => void;
+  onPreviewProduct: (product: Product) => void;
 }
 
 export const MenuCatalog: React.FC<MenuCatalogProps> = ({
   products,
   currentCategory,
   onSelectCategory,
-  onAddToCart
+  onAddToCart,
+  onPreviewProduct
 }) => {
-  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-
   const filtered =
     currentCategory === 'all'
       ? products
       : products.filter((p) => p.category === currentCategory);
-
-  const handleImageError = (id: string) => {
-    setImageErrors((prev) => ({ ...prev, [id]: true }));
-  };
 
   return (
     <section className="section" id="menu" aria-labelledby="menu-title">
@@ -36,15 +30,14 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--red)] mb-2">
-              <span className="w-2 h-2 rounded-full bg-[var(--red)]" />
-              Katalog Menu Resmi Dimsum Gyozen
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Katalog Menu Dimsum Gyozen</span>
             </div>
             <h2 id="menu-title" className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[var(--ink)]">
               Mood kamu hari ini, <span className="text-[var(--red)]">dimsum-nya Gyozen.</span>
             </h2>
             <p className="mt-2 text-[var(--muted)] text-sm sm:text-base leading-relaxed">
-              Pilihan menu siap santap hangat kukus, mentai torch, renyah goreng keju, dan kemasan beku{' '}
-              <strong>Ready Frozen (tahan 3 bulan)</strong>. Semua foto menu siap diganti dengan foto asli Anda.
+              Klik pada kartu menu untuk melihat foto resolusi penuh, rincian bahan, serta saran penyajian.
             </p>
           </div>
 
@@ -83,33 +76,26 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({
           </div>
         </div>
 
-        {/* Menu Cards Grid */}
+        {/* Minimalist Menu Cards Grid */}
         <div className="menu-grid">
           {filtered.map((item) => {
-            const hasError = imageErrors[item.id];
-
             return (
-              <article key={item.id} className="product-card group">
+              <article
+                key={item.id}
+                className="product-card group cursor-pointer hover:border-amber-900/30 transition-all"
+                onClick={() => onPreviewProduct(item)}
+              >
                 <div>
-                  {/* Food Image Container with Dummy Photography & Fallback */}
-                  <div className="food-img-container">
-                    {!hasError && item.imageUrl ? (
-                      <img
-                        src={item.imageUrl}
-                        alt={`Foto menu ${item.name}`}
-                        loading="lazy"
-                        onError={() => handleImageError(item.id)}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center p-6 bg-amber-50">
-                        <div className="w-24 h-20 opacity-90 drop-shadow-sm">
-                          <FoodIllustration art={item.art} />
-                        </div>
-                      </div>
-                    )}
+                  {/* Clean Food Image Container */}
+                  <div className="food-img-container relative bg-amber-50">
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
 
-                    {/* Badge Tag */}
+                    {/* Tag Badge */}
                     <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
                       <span
                         className={`badge ${
@@ -118,85 +104,80 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({
                             : item.tagStyle === 'frozen'
                             ? 'badge-frozen'
                             : 'badge-accent'
-                        } shadow-sm`}
+                        } shadow-xs text-[11px]`}
                       >
                         {item.tag}
                       </span>
                     </div>
 
-                    {/* Dummy image replace indicator for developers/owners */}
-                    <span
-                      className="replace-pill-badge flex items-center gap-1"
-                      title="Slot foto dummy siap direplace di data/products.ts"
-                    >
-                      <ImageIcon className="w-3 h-3 text-amber-300" />
-                      <span>Dummy Photo</span>
-                    </span>
+                    {/* Quick Preview Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 text-[var(--ink)] text-xs font-bold shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <Eye className="w-3.5 h-3.5 text-[var(--red)]" />
+                        <span>Lihat Detail</span>
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Card Content (shadcn Card style) */}
-                  <div className="p-4 sm:p-5">
-                    {/* Meta info & Rating */}
-                    <div className="flex items-center justify-between text-xs text-[var(--muted)] mb-1.5 font-medium">
-                      <span className="font-mono text-amber-800 font-bold uppercase tracking-wider text-[11px]">
+                  {/* Minimalist Card Body */}
+                  <div className="p-4 sm:p-5 pb-2">
+                    <div className="flex items-center justify-between text-xs text-[var(--muted)] mb-1">
+                      <span className="font-mono text-amber-800/90 font-bold uppercase tracking-wider text-[10.5px]">
                         {item.index}
                       </span>
                       {item.rating && (
-                        <div className="inline-flex items-center gap-1 text-amber-600 font-bold">
-                          <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                        <div className="inline-flex items-center gap-1 text-amber-600 font-bold text-xs">
+                          <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
                           <span>{item.rating.toFixed(1)}</span>
-                          <span className="text-[var(--muted)] text-[11px] font-normal">({item.soldCount})</span>
                         </div>
                       )}
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-extrabold text-[var(--ink)] tracking-tight group-hover:text-[var(--red)] transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold text-[var(--ink)] tracking-tight group-hover:text-[var(--red)] transition-colors line-clamp-1">
                       {item.name}
                     </h3>
 
                     {item.portion && (
-                      <p className="text-xs font-semibold text-amber-900/80 mt-0.5">
-                        📦 {item.portion}
+                      <p className="text-xs text-[var(--muted)] mt-1 font-medium truncate">
+                        {item.portion}
                       </p>
                     )}
-
-                    <p className="text-xs sm:text-sm text-[var(--muted)] mt-2 line-clamp-2 leading-relaxed">
-                      {item.desc}
-                    </p>
                   </div>
                 </div>
 
-                {/* Card Footer with Price and Actions */}
-                <div className="p-4 sm:p-5 pt-0 mt-auto">
+                {/* Minimalist Card Footer */}
+                <div className="p-4 sm:p-5 pt-2 mt-auto">
                   <div className="pt-3 border-t border-[var(--line)] flex items-center justify-between gap-3">
                     <div>
                       <span className="text-[11px] font-bold text-[var(--muted)] line-through block leading-none">
                         {formatRupiah(item.oldPrice)}
                       </span>
-                      <span className="text-xl sm:text-2xl font-black text-[var(--red)] tracking-tight tabular-nums">
+                      <span className="text-lg sm:text-xl font-black text-[var(--red)] tracking-tight tabular-nums">
                         {formatRupiah(item.price)}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <a
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onPreviewProduct(item);
+                        }}
                         className="btn btn-secondary btn-sm p-2 w-9 h-9"
-                        href={buildWhatsAppInquiryUrl(
-                          WHATSAPP_NUMBER,
-                          `${item.name} (${formatRupiah(item.price)})`
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={`Tanya ${item.name} via WhatsApp`}
-                        aria-label={`Tanya ${item.name} via WhatsApp`}
+                        title="Lihat detail menu"
+                        aria-label={`Lihat detail ${item.name}`}
                       >
-                        <MessageCircle className="w-4 h-4 text-emerald-600" />
-                      </a>
+                        <Eye className="w-4 h-4 text-[var(--muted)]" />
+                      </button>
 
                       <button
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-sm px-3.5"
                         type="button"
-                        onClick={() => onAddToCart(item)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onAddToCart(item);
+                        }}
                         aria-label={`Tambah ${item.name} ke keranjang`}
                       >
                         <Plus className="w-3.5 h-3.5" />

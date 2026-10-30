@@ -138,6 +138,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
           </div>
         </div>
       </div>
+      <a
+        className="scroll-down"
+        href="#menu"
+        aria-label="Gulir untuk melihat menu"
+      >
+        <span>Scroll a little</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-4 h-4 inline-block">
+          <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </a>
     </section>
   );
 };

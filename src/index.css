@@ -502,6 +502,93 @@ h1 .highlight::after {
 }
 
 /* ==========================================================================
+   TICKER & SCROLL DOWN
+   ========================================================================== */
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--red);
+  color: #fff7e9;
+  border-block: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px 0;
+  display: flex;
+  user-select: none;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 28s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 28px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.ticker-track span b {
+  color: var(--yellow);
+}
+
+@keyframes ticker-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-down {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(92, 51, 23, 0.08);
+  transition: all 0.2s ease;
+  animation: bounce-slow 2.4s ease-in-out infinite;
+  z-index: 10;
+}
+
+.scroll-down:hover {
+  color: var(--red);
+  background: #ffffff;
+  border-color: var(--red);
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
+/* ==========================================================================
    HIGHLIGHTS STRIP
    ========================================================================== */
 .highlights-band {
@@ -698,6 +785,11 @@ section.section {
   padding: 24px;
 }
 
+.modal-dialog.modal-dialog-lg {
+  width: min(820px, calc(100% - 32px));
+  padding: 0;
+}
+
 @media (min-width: 640px) {
   .modal-dialog {
     padding: 30px;
@@ -774,7 +866,7 @@ section.section {
 
 @media (min-width: 1024px) {
   .footer-grid {
-    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
     gap: 48px;
   }
 }

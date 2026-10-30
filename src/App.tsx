@@ -10,6 +10,7 @@ import { FAQ } from './components/FAQ';
 import { ClosingCTA } from './components/ClosingCTA';
 import { Footer } from './components/Footer';
 import { CartModal } from './components/CartModal';
+import { ProductDetailModal } from './components/ProductDetailModal';
 import { Toast } from './components/Toast';
 import { GYOZEN_PRODUCTS, INITIAL_CART } from './data/products';
 import { CartItem, Product, MenuCategory } from './types';
@@ -19,6 +20,7 @@ import { ShoppingBag } from 'lucide-react';
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>(INITIAL_CART);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [category, setCategory] = useState<MenuCategory>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastTimeout, setToastTimeout] = useState<NodeJS.Timeout | null>(null);
@@ -32,12 +34,12 @@ export default function App() {
     setToastTimeout(timeout);
   };
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product, quantity = 1) => {
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.id === product.id);
       if (idx >= 0) {
         const next = [...prev];
-        next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
+        next[idx] = { ...next[idx], qty: next[idx].qty + quantity };
         return next;
       }
       return [
@@ -46,15 +48,15 @@ export default function App() {
           id: product.id,
           name: product.name,
           price: product.price,
-          qty: 1,
+          qty: quantity,
           imageUrl: product.imageUrl
         }
       ];
     });
-    showToast(`<strong>${product.name}</strong> ditambahkan ke keranjang.`);
+    showToast(`<strong>${product.name}</strong> (${quantity}x) ditambahkan ke keranjang.`);
   };
 
-  const handleAddBundle = (bundleName: string, bundlePrice: number) => {
+  const handleAddBundle = (bundleName: string, bundlePrice: number, imageUrl?: string) => {
     const bundleId = 'bundle-' + bundleName.toLowerCase().replace(/[^a-z0-9]/g, '-');
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.id === bundleId);
@@ -70,7 +72,7 @@ export default function App() {
           name: bundleName,
           price: bundlePrice,
           qty: 1,
-          imageUrl: 'https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=800&q=80'
+          imageUrl: imageUrl || '/assets/aistudio/Dimsum_Platter_95fd8aee.png'
         }
       ];
     });
@@ -107,6 +109,7 @@ export default function App() {
           currentCategory={category}
           onSelectCategory={setCategory}
           onAddToCart={handleAddToCart}
+          onPreviewProduct={setSelectedProduct}
         />
         <WhyGyozen onAddBundle={handleAddBundle} />
         <Testimonials />
@@ -117,7 +120,7 @@ export default function App() {
 
       <Footer />
 
-      {/* Sticky Mobile Floating Order Bar (Shown only on small screens when cart has items) */}
+      {/* Sticky Mobile Floating Order Bar */}
       {cart.length > 0 && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3">
           <div>
@@ -139,6 +142,14 @@ export default function App() {
         </div>
       )}
 
+      {/* Menu Detail Preview Modal */}
+      <ProductDetailModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={handleAddToCart}
+      />
+
+      {/* Order & Cart Modal */}
       <CartModal
         isOpen={isCartOpen}
         cart={cart}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Sparkles, Flame, Snowflake, ShieldCheck, Plus, CheckCircle2 } from 'lucide-react';
 
 interface WhyGyozenProps {
-  onAddBundle: (name: string, price: number) => void;
+  onAddBundle: (name: string, price: number, imageUrl?: string) => void;
 }
 
 export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
@@ -29,23 +29,43 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
           {/* Left Column: Highlighted Bundles (5 cols) */}
           <div className="lg:col-span-5 flex flex-col gap-5">
             {/* Bundle 1 */}
-            <div className="p-6 rounded-2xl bg-white border border-[var(--line)] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[var(--line)] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
               <div className="absolute top-0 right-0 bg-[var(--red)] text-white text-[11px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
                 Paling Laris
               </div>
-              <span className="text-xs font-mono font-bold text-amber-800 uppercase tracking-wider">Combo 3-in-1</span>
-              <h3 className="text-xl font-black text-[var(--ink)] mt-1 mb-2">Dimsum Platter Komplit</h3>
-              <p className="text-xs sm:text-sm text-[var(--muted)] mb-4">
-                Kombinasi Dimsum Mentai Lumer + Gyoza Juicy + Dimsum Goreng Keju lengkap dengan 2 cup saus cocolan.
-              </p>
-              <div className="flex items-center justify-between pt-3 border-t border-[var(--line)]">
+              <div className="flex gap-4 items-start">
+                <img
+                  src="/assets/aistudio/Dimsum_Platter_95fd8aee.png"
+                  alt="Dimsum Platter Komplit"
+                  className="w-20 h-20 rounded-xl object-cover flex-shrink-0 border border-amber-900/10"
+                />
+                <div className="min-w-0 pr-12">
+                  <span className="text-[11px] font-mono font-bold text-amber-800 uppercase tracking-wider block">
+                    Combo 3-in-1
+                  </span>
+                  <h3 className="text-lg font-black text-[var(--ink)] mt-0.5 mb-1 truncate">
+                    Dimsum Platter Komplit
+                  </h3>
+                  <p className="text-xs text-[var(--muted)] line-clamp-2">
+                    Mentai Lumer + Gyoza Juicy + Dimsum Goreng Keju + 2 saus.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 mt-3 border-t border-[var(--line)]">
                 <div>
-                  <span className="text-xs text-[var(--muted)] line-through block">Rp55.000</span>
-                  <span className="text-2xl font-black text-[var(--red)]">Rp45.000</span>
+                  <span className="text-[11px] text-[var(--muted)] line-through block leading-none">Rp55.000</span>
+                  <span className="text-xl font-black text-[var(--red)]">Rp45.000</span>
                 </div>
                 <button
                   type="button"
-                  onClick={() => onAddBundle('Dimsum Platter Komplit (3-in-1)', 45000)}
+                  onClick={() =>
+                    onAddBundle(
+                      'Dimsum Platter Komplit (3-in-1)',
+                      45000,
+                      '/assets/aistudio/Dimsum_Platter_95fd8aee.png'
+                    )
+                  }
                   className="btn btn-primary btn-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -55,23 +75,38 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
             </div>
 
             {/* Bundle 2 */}
-            <div className="p-6 rounded-2xl bg-white border border-[var(--line)] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
-              <span className="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Stok Freezer 3 Bulan</span>
-              <h3 className="text-xl font-black text-[var(--ink)] mt-1 mb-2">Paket Stok Kulkas Komplit</h3>
-              <p className="text-xs sm:text-sm text-[var(--muted)] mb-4">
-                3 Pack Ready Frozen (Dimsum Mix, Goreng Keju, Gyoza) + 1 Jar Segel Ebi Chili Oil 150ml untuk persediaan keluarga.
-              </p>
-              <div className="flex items-center justify-between pt-3 border-t border-[var(--line)]">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[var(--line)] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+              <div className="flex gap-4 items-start">
+                <img
+                  src="/assets/aistudio/Frozen_Pack_Dimsum_Mix_e7c00e5c.png"
+                  alt="Paket Stok Kulkas Komplit"
+                  className="w-20 h-20 rounded-xl object-cover flex-shrink-0 border border-amber-900/10"
+                />
+                <div className="min-w-0">
+                  <span className="text-[11px] font-mono font-bold text-sky-800 uppercase tracking-wider block">
+                    Stok Freezer 3 Bulan
+                  </span>
+                  <h3 className="text-lg font-black text-[var(--ink)] mt-0.5 mb-1 truncate">
+                    Paket Stok Kulkas Komplit
+                  </h3>
+                  <p className="text-xs text-[var(--muted)] line-clamp-2">
+                    3 Pack Frozen (Mix, Goreng Keju, Gyoza) + 1 Jar Segel Chili Oil 150ml.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 mt-3 border-t border-[var(--line)]">
                 <div>
-                  <span className="text-xs text-[var(--muted)] line-through block">Rp145.000</span>
-                  <span className="text-2xl font-black text-[var(--red)]">Rp125.000</span>
+                  <span className="text-[11px] text-[var(--muted)] line-through block leading-none">Rp145.000</span>
+                  <span className="text-xl font-black text-[var(--red)]">Rp125.000</span>
                 </div>
                 <button
                   type="button"
                   onClick={() =>
                     onAddBundle(
                       'Paket Stok Kulkas (3 Pack Frozen + Ebi Chili Oil 150ml)',
-                      125000
+                      125000,
+                      '/assets/aistudio/Frozen_Pack_Dimsum_Mix_e7c00e5c.png'
                     )
                   }
                   className="btn btn-accent btn-sm"
