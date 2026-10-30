@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Menu, X, MessageCircle, ChevronRight, Instagram } from 'lucide-react';
-import { WHATSAPP_NUMBER } from '../data/products';
+import { WHATSAPP_NUMBER, VERIFIED_TESTIMONIALS } from '../data/products';
 
 interface HeaderProps {
   cartCount: number;
@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
           </a>
 
           <nav className="header-nav" aria-label="Navigasi utama">
-            {links.map(([label, href]) => <a key={href} className="nav-link" href={href}>{label}</a>)}
+            {links.filter(([, href]) => href !== '#testimoni' || VERIFIED_TESTIMONIALS.length >= 2).map(([label, href]) => <a key={href} className="nav-link" href={href}>{label}</a>)}
           </nav>
 
           <div className="header-actions">
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
 
         <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`} id="mobileDrawer">
           <div className="container-custom mobile-drawer-content">
-            {links.map(([label, href]) => <a key={href} href={href} onClick={closeMenu}>{label}<ChevronRight size={16}/></a>)}
+            {links.filter(([, href]) => href !== '#testimoni' || VERIFIED_TESTIMONIALS.length >= 2).map(([label, href]) => <a key={href} href={href} onClick={closeMenu}>{label}<ChevronRight size={16}/></a>)}
             <button className="btn btn-primary w-full" type="button" onClick={() => { closeMenu(); onOpenCart(); }}>
               <ShoppingBag size={17}/> Lihat keranjang ({cartCount})
             </button>
