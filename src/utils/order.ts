@@ -12,6 +12,27 @@ export function calculateTotalCount(cart: CartItem[]): number {
   return cart.reduce((sum, item) => sum + Math.max(0, item.qty), 0);
 }
 
+export function isActivePromo(product: Product, now = Date.now()): boolean {
+  if (typeof product.oldPrice !== 'number' || product.oldPrice <= product.price || !product.promoUntil) {
+    return false;
+  }
+  const expiresAt = Date.parse(product.promoUntil);
+  return Number.isFinite(expiresAt) && expiresAt >= now;
+}
+
+export function calculateKnownPieces(cart: CartItem[], products: Product[]): number {
+  return cart.reduce((sum, item) => {
+    const product = products.find((candidate) => candidate.id === item.id);
+    return sum + (product?.pcs ? product.pcs * Math.max(0, item.qty) : 0);
+  }, 0);
+}
+
+export function calculatePiecesPerGuest(totalPieces: number, guestCount: number): number | null {
+  if (!Number.isFinite(totalPieces) || totalPieces < 0) return null;
+  if (!Number.isInteger(guestCount) || guestCount <= 0) return null;
+  return totalPieces / guestCount;
+}
+
 export function filterProducts(products: Product[], category: MenuCategory): Product[] {
   if (category === 'all') return products;
   return products.filter((p) => p.category === category);

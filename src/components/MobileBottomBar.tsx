@@ -18,7 +18,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
   return (
     <aside
       aria-label="Keranjang belanja melayang"
-      className="mobile-bottom-bar animate-in slide-in-from-bottom duration-200"
+      className="mobile-bottom-bar cart-safe-area md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3"
     >
       <div className="flex items-center gap-2.5 min-w-0">
         <div className="relative grid place-items-center w-10 h-10 rounded-xl border-2 border-[var(--brown)] bg-[var(--yellow)] shadow-[2px_2px_0_var(--brown)] shrink-0">
@@ -40,7 +40,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
       <button
         type="button"
         onClick={onOpenCart}
-        className="btn btn-red h-10 px-4 text-xs font-black shrink-0"
+        className="btn btn-primary btn-sm h-10 px-4 text-xs font-black shrink-0"
         aria-label="Lanjut pesan ke WhatsApp"
       >
         <span>Lanjut Pesan</span>

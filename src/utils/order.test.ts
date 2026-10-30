@@ -4,6 +4,9 @@ import {
   formatRupiah,
   calculateTotal,
   calculateTotalCount,
+  isActivePromo,
+  calculateKnownPieces,
+  calculatePiecesPerGuest,
   filterProducts,
   buildWhatsAppOrderMessage,
   buildWhatsAppInquiryUrl
@@ -43,7 +46,6 @@ test('filterProducts returns only matching category or all', () => {
       bg: '',
       art: 'gyoza',
       price: 15000,
-      oldPrice: 18000,
       info: '',
       desc: '',
       imageUrl: '/images/menu/gyoza-fresh-960.webp'
@@ -57,7 +59,6 @@ test('filterProducts returns only matching category or all', () => {
       bg: '',
       art: 'frozen',
       price: 35000,
-      oldPrice: 40000,
       info: '',
       desc: '',
       imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp'
@@ -93,4 +94,33 @@ test('buildWhatsAppInquiryUrl encodes url parameters properly', () => {
   const url = buildWhatsAppInquiryUrl('628981230703', 'Gyoza Fresh & Juicy');
   assert.ok(url.startsWith('https://wa.me/628981230703?text='));
   assert.ok(url.includes('Gyoza%20Fresh%20%26%20Juicy') || url.includes('Gyoza'));
+});
+
+
+test('isActivePromo requires a future expiry date and a real higher old price', () => {
+  const now = Date.parse('2026-10-30T00:00:00.000Z');
+  const active: Product = {
+    id: 'promo', index: '01', name: 'Promo', category: 'hangat', tag: '', bg: '', art: 'gyoza',
+    price: 15000, oldPrice: 18000, promoUntil: '2026-11-01T00:00:00.000Z',
+    info: '', desc: '', imageUrl: ''
+  };
+  assert.equal(isActivePromo(active, now), true);
+  assert.equal(isActivePromo({ ...active, promoUntil: '2026-10-01T00:00:00.000Z' }, now), false);
+  assert.equal(isActivePromo({ ...active, promoUntil: undefined }, now), false);
+  assert.equal(isActivePromo({ ...active, oldPrice: 14000 }, now), false);
+});
+
+test('calculateKnownPieces excludes products without exact pcs data', () => {
+  const products: Product[] = [
+    { id: 'four', index: '01', name: 'Four', category: 'hangat', tag: '', bg: '', art: 'dimsum', price: 10000, info: '', desc: '', imageUrl: '', pcs: 4 },
+    { id: 'range', index: '02', name: 'Range', category: 'hangat', tag: '', bg: '', art: 'platter', price: 40000, info: '', desc: '', imageUrl: '' }
+  ];
+  const cart: CartItem[] = [
+    { id: 'four', name: 'Four', price: 10000, qty: 2 },
+    { id: 'range', name: 'Range', price: 40000, qty: 1 }
+  ];
+  assert.equal(calculateKnownPieces(cart, products), 8);
+  assert.equal(calculatePiecesPerGuest(8, 2), 4);
+  assert.equal(calculatePiecesPerGuest(8, 0), null);
+  assert.equal(calculatePiecesPerGuest(8, 1.5), null);
 });

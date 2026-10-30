@@ -36,7 +36,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => (
               <p className="bundle-overline">COMBO 3-IN-1</p>
               <h3>Dimsum Platter Komplit</h3>
               <p>Mentai Lumer + Gyoza Juicy + Dimsum Goreng Keju, lengkap dengan 2 saus.</p>
-              <div className="bundle-bottom"><div><del>Rp55.000</del><strong>Rp45.000</strong></div>
+              <div className="bundle-bottom"><div><strong>Rp45.000</strong></div>
                 <button className="btn btn-primary btn-sm" type="button" onClick={() => onAddBundle('Dimsum Platter Komplit (3-in-1)',45000,'/images/menu/dimsum-platter-960.webp')}><Plus size={15}/> Tambah paket</button>
               </div>
             </div>
@@ -48,7 +48,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => (
               <p className="bundle-overline">FREEZER STOCK</p>
               <h3>Paket Stok Kulkas Komplit</h3>
               <p>3 pack frozen + Ebi Chili Oil 150ml.</p>
-              <div className="bundle-bottom"><div><del>Rp145.000</del><strong>Rp125.000</strong></div>
+              <div className="bundle-bottom"><div><strong>Rp125.000</strong></div>
                 <button className="btn btn-accent btn-sm" type="button" onClick={() => onAddBundle('Paket Stok Kulkas (3 Pack Frozen + Ebi Chili Oil 150ml)',125000,'/images/menu/frozen-pack-dimsum-mix-960.webp')}><Plus size={15}/> Ambil paket</button>
               </div>
             </div>
