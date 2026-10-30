@@ -385,6 +385,12 @@ button { cursor: pointer; }
   .toast { bottom: calc(84px + env(safe-area-inset-bottom)); }
 }
 @media (max-width: 390px) {
+  .condiment-row { grid-template-columns: minmax(0,1fr) auto; gap: 10px; padding: 18px; }
+  .condiment-row > strong { grid-column: 1; }
+  .condiment-row .menu-add-button { grid-column: 2; grid-row: 1 / span 2; }
+  .portion-planner { grid-template-columns: 1fr; }
+  .portion-result { grid-column: 1; align-items: flex-start; flex-direction: column; gap: 4px; }
+  .portion-result span { text-align: left; }
   .container-custom { width: calc(100% - 28px); }
   .brand-wordmark { font-size: 15px; }
   .brand-wordmark small { font-size: 7px; }
