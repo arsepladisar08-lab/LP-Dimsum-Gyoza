@@ -3,78 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#8e171c" />
-    <script>
-      /* Safeguard against browser extensions attempting to assign window.fetch when getter-only */
-      try {
-        let _activeFetch = window.fetch;
-        Object.defineProperty(window, 'fetch', {
-          get() {
-            return _activeFetch;
-          },
-          set(fn) {
-            _activeFetch = fn;
-          },
-          configurable: true,
-          enumerable: true
-        });
-      } catch (_err) {
-        // Ignore if restricted
-      }
-    </script>
-    <title>Dimsum Gyozen (@gyozen.sda) | Gurih, Lumer, Bikin Nagih Mulai 15 RB-an</title>
-    <meta name="description" content="Menu resmi Dimsum Gyozen: Gyoza Fresh & Juicy, Dimsum Original, Dimsum Goreng Keju, Mentai Lumer, Dimsum Platter, Party Box, Ready Frozen & Ebi Chili Oil 150ml. Mulai 15 RB-an! Hubungi WA 0898-1230-703." />
-    <meta property="og:title" content="Dimsum Gyozen : Satu Gigitan, Bikin Hari Makin Zen (Mulai 15 RB-an)" />
-    <meta property="og:description" content="Praktis, enak, dan selalu jadi favorit. Tersedia siap santap hangat dan kemasan Ready Frozen (tahan hingga 3 bulan). Halal Indonesia, tanpa pengawet dan pewarna buatan." />
+    <meta name="theme-color" content="#84171a" />
+    <meta name="description" content="Temukan pilihan Dimsum Gyozen: gyoza, dimsum original, goreng keju, mentai, platter, party box, ready frozen, dan Ebi Chili Oil. Pilih menu dan pesan melalui WhatsApp." />
+    <meta property="og:title" content="Dimsum Gyozen — Satu Gigitan, Bikin Hari Makin Zen" />
+    <meta property="og:description" content="Pilihan dimsum, gyoza, paket sharing, dan ready frozen dari Gyozen Sidoarjo. Jelajahi menu dan pesan langsung melalui WhatsApp." />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:site_name" content="Dimsum Gyozen" />
+    <meta name="twitter:card" content="summary" />
+    <title>Dimsum Gyozen (@gyozen.sda) — Dimsum, Gyoza & Frozen Food Sidoarjo</title>
 
-    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Structured Data: FoodEstablishment + FAQPage Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "FoodEstablishment",
-          "name": "Dimsum Gyozen (@gyozen.sda)",
-          "description": "Dimsum viral yang gurih, lumer, dan bikin nagih. Menyediakan Gyoza, Dimsum, Dimsum Goreng Keju, Mentai Lumer, Dimsum Platter, Party Box, Ready Frozen, dan Ebi Chili Oil 150ml.",
+          "name": "Dimsum Gyozen",
+          "description": "Dimsum, gyoza, menu siap santap, paket sharing, ready frozen, dan Ebi Chili Oil.",
           "telephone": "+628981230703",
-          "servesCuisine": "Dimsum, Gyoza, Mentai, Frozen Food",
-          "priceRange": "Rp15.000 - Rp125.000",
-          "sameAs": [
-            "https://instagram.com/gyozen.sda"
-          ]
+          "servesCuisine": ["Dimsum", "Gyoza", "Frozen Food"],
+          "sameAs": ["https://instagram.com/gyozen.sda"]
         },
         {
           "@type": "FAQPage",
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Apakah semua menu Dimsum Gyozen sudah Halal dan tanpa pengawet?",
+              "name": "Apa saja pilihan menu Dimsum Gyozen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ya, seluruh produk Dimsum Gyozen telah bersertifikat Halal Indonesia serta dibuat tanpa pengawet dan pewarna buatan sehingga aman dinikmati setiap hari."
+                "text": "Gyozen menyediakan pilihan gyoza, dimsum original, dimsum goreng keju, mentai, platter, party box, ready frozen, dan Ebi Chili Oil."
               }
             },
             {
               "@type": "Question",
-              "name": "Berapa lama daya tahan kemasan Ready Frozen Gyozen di dalam freezer?",
+              "name": "Bagaimana cara memesan Dimsum Gyozen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Varian Frozen Food Gyozen (Dimsum Mix, Dimsum Goreng Keju, dan Gyoza) dikemas kedap udara dan tahan disimpan hingga 3 bulan di dalam freezer."
+                "text": "Pilih produk, tambahkan ke keranjang, isi nama dan area pengiriman, lalu kirim rangkuman pesanan melalui WhatsApp."
               }
             },
             {
               "@type": "Question",
-              "name": "Bagaimana cara memesan menu Gyozen dan berapa harganya?",
+              "name": "Apakah tersedia pilihan frozen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Harga menu Gyozen dimulai dari 15 RB-an. Anda dapat memilih menu langsung di halaman ini lalu menekan tombol Pesan via WhatsApp yang terhubung ke nomor resmi 0898-1230-703."
+                "text": "Ya, katalog memiliki kategori Ready Frozen. Konfirmasikan ketersediaan stok terbaru kepada admin."
               }
             }
           ]
@@ -88,4 +66,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
