@@ -2,7 +2,6 @@ export type MenuCategory = 'all' | 'hangat' | 'frozen';
 
 export interface Product {
   id: string;
-  index: string;
   name: string;
   category: 'hangat' | 'frozen';
   tag: string;
@@ -10,14 +9,11 @@ export interface Product {
   bg: string;
   art: 'gyoza' | 'dimsum' | 'keju' | 'mentai' | 'platter' | 'frozen' | 'chili';
   price: number;
-  oldPrice?: number;
   info: string;
   desc: string;
   imageUrl: string;
   portion?: string;
   pcs?: number;
-  rating?: number;
-  soldCount?: string;
   servingTip?: string;
   storageTip?: string;
   composition?: string;
