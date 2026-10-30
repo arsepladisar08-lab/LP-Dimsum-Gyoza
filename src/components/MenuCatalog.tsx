@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product, MenuCategory } from '../types';
-import { formatRupiah } from '../utils/order';
+import { formatRupiah, isActivePromo } from '../utils/order';
 import { Star, Plus, Eye, Sparkles, ArrowUpRight } from 'lucide-react';
 import { ProductImage } from './ProductImage';
 
@@ -50,12 +50,12 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, currentCateg
                 </div>
               </button>
               <div className="product-card-body">
-                <div className="product-meta"><span>{item.index}</span>{item.rating ? <span className="product-rating"><Star size={13} fill="currentColor"/> {item.rating.toFixed(1)}</span> : null}</div>
+                <div className="product-meta"><span>{item.index}</span>{item.rating && item.ratingSource ? <span className="product-rating"><Star size={13} fill="currentColor"/> {item.rating.toFixed(1)}</span> : null}</div>
                 <h3>{item.name}</h3>
                 {item.portion && <p className="product-portion">{item.portion}</p>}
                 <div className="product-card-footer">
                   <div className="product-price">
-                    {item.oldPrice ? <del>{formatRupiah(item.oldPrice)}</del> : null}
+                    {isActivePromo(item) ? <del>{formatRupiah(item.oldPrice as number)}</del> : null}
                     <strong>{formatRupiah(item.price)}</strong>
                   </div>
                   <button className="btn btn-primary btn-sm product-add" type="button" onClick={() => onAddToCart(item)} aria-label={`Tambah ${item.name} ke keranjang`}>
