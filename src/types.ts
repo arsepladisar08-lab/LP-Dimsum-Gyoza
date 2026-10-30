@@ -10,11 +10,12 @@ export interface Product {
   bg: string;
   art: 'gyoza' | 'dimsum' | 'keju' | 'mentai' | 'platter' | 'frozen' | 'chili';
   price: number;
-  oldPrice: number;
+  oldPrice?: number;
   info: string;
   desc: string;
   imageUrl: string;
   portion?: string;
+  pcs?: number;
   rating?: number;
   soldCount?: string;
   servingTip?: string;
