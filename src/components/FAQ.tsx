@@ -19,7 +19,7 @@ export const FAQ: React.FC = () => {
       <div className="container-custom faq-layout">
         <div className="faq-intro"><p className="section-kicker">PERTANYAAN UMUM</p><h2 id="faq-title">Ada yang ingin<br/><em>kamu tanyakan?</em></h2><p className="section-intro">Temukan jawaban singkat sebelum memilih menu. Untuk informasi stok dan pengiriman terbaru, admin siap membantu.</p><button className="btn btn-primary" type="button" onClick={askWhatsApp}><MessageCircle size={16}/> Tanya admin Gyozen</button></div>
         <div className="faq-list">
-          {questions.map(({q,a})=>(
+          {questions.map(({q,a},index)=>(
             <details className="faq-item" key={q} open={index===0}>
               <summary><strong>{q}</strong><Plus className="faq-plus" size={18}/></summary>
               <p>{a}</p>
