@@ -255,3 +255,7 @@ export const TESTIMONIALS = [
     permissionGranted: false
   }
 ];
+
+export const VERIFIED_TESTIMONIALS = TESTIMONIALS.filter(
+  (item) => item.verified === true && item.permissionGranted === true
+);
