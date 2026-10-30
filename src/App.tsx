@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { HighlightsBand } from './components/HighlightsBand';
@@ -12,18 +12,67 @@ import { Footer } from './components/Footer';
 import { CartModal } from './components/CartModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { Toast } from './components/Toast';
-import { GYOZEN_PRODUCTS, INITIAL_CART } from './data/products';
+import { GYOZEN_PRODUCTS } from './data/products';
 import { CartItem, Product, MenuCategory } from './types';
 import { calculateTotalCount, calculateTotal, formatRupiah } from './utils/order';
 import { ShoppingBag } from 'lucide-react';
 
+const CART_STORAGE_KEY = 'gyozen_cart_v1';
+
+/**
+ * Validasi runtime agar data keranjang dari localStorage aman dan tidak menyebabkan crash
+ */
+function isValidCartItem(item: unknown): item is CartItem {
+  if (!item || typeof item !== 'object') return false;
+  const candidate = item as Partial<CartItem>;
+  return (
+    typeof candidate.id === 'string' &&
+    candidate.id.length > 0 &&
+    typeof candidate.name === 'string' &&
+    typeof candidate.price === 'number' &&
+    !isNaN(candidate.price) &&
+    typeof candidate.qty === 'number' &&
+    !isNaN(candidate.qty) &&
+    candidate.qty > 0
+  );
+}
+
 export default function App() {
-  const [cart, setCart] = useState<CartItem[]>(INITIAL_CART);
+  // Keranjang awal kosong secara default, dimuat dari localStorage bila ada data valid
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem(CART_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            const validated = parsed.filter(isValidCartItem);
+            return validated;
+          }
+        }
+      }
+    } catch {
+      // jika data rusak, abaikan dan mulai dengan array kosong
+    }
+    return [];
+  });
+
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [category, setCategory] = useState<MenuCategory>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastTimeout, setToastTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  // Simpan keranjang ke localStorage setiap ada perubahan
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      }
+    } catch {
+      // ignore
+    }
+  }, [cart]);
 
   const showToast = (message: string) => {
     if (toastTimeout) clearTimeout(toastTimeout);
@@ -72,7 +121,7 @@ export default function App() {
           name: bundleName,
           price: bundlePrice,
           qty: 1,
-          imageUrl: imageUrl || '/assets/aistudio/Dimsum_Platter_95fd8aee.png'
+          imageUrl: imageUrl || '/images/menu/dimsum-platter-960.webp'
         }
       ];
     });
@@ -80,18 +129,24 @@ export default function App() {
     showToast(`Paket <strong>${bundleName}</strong> siap dipesan!`);
   };
 
-  const handleUpdateQty = (index: number, delta: number) => {
+  // Mengubah kuantitas item berdasarkan ID produk (bukan index array)
+  const handleUpdateQty = (productId: string, delta: number) => {
     setCart((prev) => {
-      if (!prev[index]) return prev;
+      const idx = prev.findIndex((item) => item.id === productId);
+      if (idx === -1) return prev;
       const next = [...prev];
-      const newQty = next[index].qty + delta;
+      const newQty = next[idx].qty + delta;
       if (newQty <= 0) {
-        next.splice(index, 1);
+        next.splice(idx, 1);
         return next;
       }
-      next[index] = { ...next[index], qty: newQty };
+      next[idx] = { ...next[idx], qty: newQty };
       return next;
     });
+  };
+
+  const handleClearCart = () => {
+    setCart([]);
   };
 
   const totalCartCount = calculateTotalCount(cart);
@@ -155,6 +210,7 @@ export default function App() {
         cart={cart}
         onClose={() => setIsCartOpen(false)}
         onUpdateQty={handleUpdateQty}
+        onClearCart={handleClearCart}
         onShowToast={showToast}
       />
 

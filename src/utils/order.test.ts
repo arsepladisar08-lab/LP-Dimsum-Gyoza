@@ -8,7 +8,7 @@ import {
   buildWhatsAppOrderMessage,
   buildWhatsAppInquiryUrl
 } from './order';
-import { Product } from '../types';
+import { Product, CartItem } from '../types';
 
 test('formatRupiah formats values with Indonesian localized Rupiah', () => {
   assert.equal(formatRupiah(15000), 'Rp15.000');
@@ -17,7 +17,7 @@ test('formatRupiah formats values with Indonesian localized Rupiah', () => {
 });
 
 test('calculateTotal sums item price * qty accurately', () => {
-  const cart = [
+  const cart: CartItem[] = [
     { id: '1', name: 'Item A', price: 15000, qty: 2 },
     { id: '2', name: 'Item B', price: 25000, qty: 1 }
   ];
@@ -25,7 +25,7 @@ test('calculateTotal sums item price * qty accurately', () => {
 });
 
 test('calculateTotalCount sums the quantity of items', () => {
-  const cart = [
+  const cart: CartItem[] = [
     { id: '1', name: 'Item A', price: 15000, qty: 2 },
     { id: '2', name: 'Item B', price: 25000, qty: 3 }
   ];
@@ -46,7 +46,7 @@ test('filterProducts returns only matching category or all', () => {
       oldPrice: 18000,
       info: '',
       desc: '',
-      imageUrl: 'https://example.com/p1.jpg'
+      imageUrl: '/images/menu/gyoza-fresh-960.webp'
     },
     {
       id: 'p2',
@@ -60,7 +60,7 @@ test('filterProducts returns only matching category or all', () => {
       oldPrice: 40000,
       info: '',
       desc: '',
-      imageUrl: 'https://example.com/p2.jpg'
+      imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp'
     }
   ];
 
@@ -72,7 +72,7 @@ test('filterProducts returns only matching category or all', () => {
 });
 
 test('buildWhatsAppOrderMessage formats order template correctly with customer information', () => {
-  const cart = [
+  const cart: CartItem[] = [
     { id: 'mentai', name: 'Dimsum Mentai Lumer', price: 25000, qty: 2 }
   ];
   const msg = buildWhatsAppOrderMessage({

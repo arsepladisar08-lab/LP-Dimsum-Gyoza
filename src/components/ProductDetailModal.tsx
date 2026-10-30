@@ -3,6 +3,7 @@ import { Product } from '../types';
 import { formatRupiah, buildWhatsAppInquiryUrl } from '../utils/order';
 import { WHATSAPP_NUMBER } from '../data/products';
 import { X, Star, Plus, Minus, ShoppingBag, MessageCircle, ShieldCheck, Flame, Utensils, Clock, Check } from 'lucide-react';
+import { ProductImage } from './ProductImage';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -60,9 +61,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left Column: Product Photo */}
           <div className="relative bg-[#1f140e] flex items-center justify-center overflow-hidden min-h-[260px] md:min-h-[440px]">
-            <img
+            <ProductImage
               src={product.imageUrl}
               alt={product.name}
+              bgColor={product.bg}
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
+              width={480}
+              height={440}
+              sizes="(min-width: 768px) 400px, 100vw"
               className="w-full h-full object-cover"
             />
             <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">

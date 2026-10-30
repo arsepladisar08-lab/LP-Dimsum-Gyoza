@@ -4,7 +4,7 @@ export const WHATSAPP_NUMBER = '628981230703';
 
 /**
  * Data 10 Menu Resmi Dimsum Gyozen
- * Menggunakan foto asli menu yang telah diunggah oleh owner.
+ * Menggunakan aset gambar WebP teroptimasi (480w & 960w).
  */
 export const GYOZEN_PRODUCTS: Product[] = [
   {
@@ -20,7 +20,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 19000,
     info: 'Siap santap hangat',
     desc: 'Gyoza lembut dengan lipatan khas Jepang dan isian daging ayam serta udang segar berpadu saus cocolan autentik.',
-    imageUrl: '/assets/aistudio/Gyoza_Fresh___Juicy_cc6b549c.png',
+    imageUrl: '/images/menu/gyoza-fresh-960.webp',
     portion: 'Porsi 4 pcs + Saus Cocolan',
     rating: 4.9,
     soldCount: '850+ terjual',
@@ -41,7 +41,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 19000,
     info: 'Tanpa pengawet',
     desc: 'Dimsum kukus hangat yang gurih dan padat daging dengan aneka topping wortel, jamur, nori, dan tobiko.',
-    imageUrl: '/assets/aistudio/Dimsum_Original_Mix_a9e7c595.png',
+    imageUrl: '/images/menu/dimsum-original-mix-960.webp',
     portion: 'Porsi 4 pcs Mix Topping',
     rating: 4.9,
     soldCount: '1.2k+ terjual',
@@ -62,7 +62,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 23000,
     info: 'Renyah di luar, lumer di dalam',
     desc: 'Dimsum kulit renyah keemasan dengan isian daging gurih dan keju melimpah yang meleleh saat digigit.',
-    imageUrl: '/assets/aistudio/Dimsum_Goreng_Keju_4f245f25.png',
+    imageUrl: '/images/menu/dimsum-goreng-keju-960.webp',
     portion: 'Porsi 4 pcs + Cocolan Saus & Mayones',
     rating: 4.8,
     soldCount: '720+ terjual',
@@ -83,7 +83,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 32000,
     info: 'Kemasan aluminium tray',
     desc: 'Dimsum padat daging berbalut saus mentai spesial yang creamy, di-torch harum dengan taburan nori & tobiko.',
-    imageUrl: '/assets/aistudio/Dimsum_Mentai_a900c466.png',
+    imageUrl: '/images/menu/dimsum-mentai-960.webp',
     portion: 'Tray Aluminium 4 pcs Saus Melimpah',
     rating: 5.0,
     soldCount: '2.4k+ terjual',
@@ -104,7 +104,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 55000,
     info: 'Mentai + Gyoza + Goreng Keju',
     desc: 'Satu boks komplit berisi perpaduan Dimsum Mentai Lumer, Gyoza Juicy, dan Dimsum Goreng Keju lengkap 2 cup saus.',
-    imageUrl: '/assets/aistudio/Dimsum_Platter_95fd8aee.png',
+    imageUrl: '/images/menu/dimsum-platter-960.webp',
     portion: 'Boks Komplit Porsi Sharing + 2 Cup Saus',
     rating: 4.9,
     soldCount: '950+ terjual',
@@ -125,7 +125,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 78000,
     info: 'Cocok untuk acara & kumpul',
     desc: 'Tray boks besar berisi kombinasi Dimsum Mentai Lumer bakar dan Dimsum Original kukus untuk santap bersama.',
-    imageUrl: '/assets/aistudio/Party_Box_Gyozen_65a37955.png',
+    imageUrl: '/images/menu/party-box-gyozen-960.webp',
     portion: 'Tray Pesta Jumbo 12-14 pcs Komplit',
     rating: 4.9,
     soldCount: '480+ terjual',
@@ -146,7 +146,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 42000,
     info: 'Tahan 3 bulan di freezer',
     desc: 'Kemasan beku kedap udara Dimsum Mix siap kukus kapan saja di rumah. Praktis, higienis, tanpa pengawet buatan.',
-    imageUrl: '/assets/aistudio/Frozen_Pack_Dimsum_Mix_e7c00e5c.png',
+    imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp',
     portion: 'Vacuum Pack Segel Isi 12 pcs + Saus',
     rating: 4.8,
     soldCount: '620+ terjual',
@@ -167,7 +167,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 45000,
     info: 'Tahan 3 bulan di freezer',
     desc: 'Kemasan beku Dimsum Goreng Keju. Tinggal goreng sebentar hingga keemasan untuk camilan keju lumer hangat di rumah.',
-    imageUrl: '/assets/aistudio/Frozen_Pack_Goreng_Keju_f690d595.png',
+    imageUrl: '/images/menu/frozen-pack-goreng-keju-960.webp',
     portion: 'Vacuum Pack Segel Isi 6 pcs Jumbo + Saus',
     rating: 4.8,
     soldCount: '510+ terjual',
@@ -188,7 +188,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 42000,
     info: 'Tahan 3 bulan di freezer',
     desc: 'Kemasan beku Gyoza Fresh & Juicy. Praktis dikukus maupun dipanggang teflon (pan-fried) dalam 5 menit.',
-    imageUrl: '/assets/aistudio/Frozen_Pack_Gyoza_Juicy_d1c222a2.png',
+    imageUrl: '/images/menu/frozen-pack-gyoza-juicy-960.webp',
     portion: 'Vacuum Pack Segel Isi 15 pcs + Saus',
     rating: 4.9,
     soldCount: '580+ terjual',
@@ -209,37 +209,13 @@ export const GYOZEN_PRODUCTS: Product[] = [
     oldPrice: 35000,
     info: 'Isi bersih 150ml • Halal',
     desc: 'Chili oil khas Gyozen dengan udang ebi gurih dan rempah pilihan dalam kemasan jar segel 150ml untuk stok di rumah.',
-    imageUrl: '/assets/aistudio/Gyozen_Ebi_Chili_Oil_66fde36f.png',
+    imageUrl: '/images/menu/gyozen-ebi-chili-oil-960.webp',
     portion: 'Jar Kaca Segel Rapat 150 ml',
     rating: 5.0,
     soldCount: '1.5k+ terjual',
     composition: 'Cabai kering pilihan, ebi udang kering gurih, bawang putih cincang, minyak kelapa, rempah rahasia.',
     servingTip: 'Cocok untuk cocolan dimsum, gyoza, mie instan, kuah bakso, atau nasi hangat.',
     storageTip: 'Gunakan sendok kering dan bersih. Simpan di tempat sejuk atau kulkas setelah dibuka.'
-  }
-];
-
-export const INITIAL_CART = [
-  {
-    id: 'mentai-lumer',
-    name: 'Dimsum Mentai Lumer',
-    price: 25000,
-    qty: 1,
-    imageUrl: '/assets/aistudio/Dimsum_Mentai_a900c466.png'
-  },
-  {
-    id: 'dimsum-goreng-keju',
-    name: 'Dimsum Goreng Keju',
-    price: 18000,
-    qty: 1,
-    imageUrl: '/assets/aistudio/Dimsum_Goreng_Keju_4f245f25.png'
-  },
-  {
-    id: 'ebi-chili-oil',
-    name: 'Gyozen Ebi Chili Oil 150ml',
-    price: 28000,
-    qty: 1,
-    imageUrl: '/assets/aistudio/Gyozen_Ebi_Chili_Oil_66fde36f.png'
   }
 ];
 

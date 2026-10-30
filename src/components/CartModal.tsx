@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartItem, OrderFormState } from '../types';
 import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage } from '../utils/order';
 import { WHATSAPP_NUMBER } from '../data/products';
-import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils } from 'lucide-react';
+import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils, Trash2 } from 'lucide-react';
+import { ProductImage } from './ProductImage';
+
+const FORM_STORAGE_KEY = 'gyozen_customer_form_v1';
 
 interface CartModalProps {
   isOpen: boolean;
   cart: CartItem[];
   onClose: () => void;
-  onUpdateQty: (index: number, delta: number) => void;
+  onUpdateQty: (id: string, delta: number) => void;
+  onClearCart: () => void;
   onShowToast: (msg: string) => void;
 }
 
@@ -17,15 +21,47 @@ export const CartModal: React.FC<CartModalProps> = ({
   cart,
   onClose,
   onUpdateQty,
+  onClearCart,
   onShowToast
 }) => {
-  const [form, setForm] = useState<OrderFormState>({
-    name: '',
-    type: 'Siap Santap (Hangat)',
-    area: '',
-    notes: ''
+  const [form, setForm] = useState<OrderFormState>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem(FORM_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            name: typeof parsed.name === 'string' ? parsed.name : '',
+            type: typeof parsed.type === 'string' ? parsed.type : 'Siap Santap (Hangat)',
+            area: typeof parsed.area === 'string' ? parsed.area : '',
+            notes: typeof parsed.notes === 'string' ? parsed.notes : ''
+          };
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return {
+      name: '',
+      type: 'Siap Santap (Hangat)',
+      area: '',
+      notes: ''
+    };
   });
+
   const [copied, setCopied] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+
+  // Simpan data form ke localStorage setiap kali diubah agar repeat order tidak perlu ketik ulang
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
+      }
+    } catch {
+      // ignore
+    }
+  }, [form]);
 
   if (!isOpen) return null;
 
@@ -112,6 +148,12 @@ export const CartModal: React.FC<CartModalProps> = ({
     document.body.removeChild(area);
   };
 
+  const handleConfirmClear = () => {
+    onClearCart();
+    setShowClearConfirm(false);
+    onShowToast('Keranjang pesanan telah dikosongkan.');
+  };
+
   return (
     <div
       className="modal-backdrop open"
@@ -129,9 +171,11 @@ export const CartModal: React.FC<CartModalProps> = ({
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--red)] block">
               ORDER LANGSUNG KE WA 0898-1230-703
             </span>
-            <h3 id="modalTitle" className="text-xl sm:text-2xl font-black text-[var(--ink)] tracking-tight mt-0.5">
-              Keranjang Pesanan Gyozen
-            </h3>
+            <div className="flex items-center gap-3 mt-0.5">
+              <h3 id="modalTitle" className="text-xl sm:text-2xl font-black text-[var(--ink)] tracking-tight">
+                Keranjang Pesanan Gyozen
+              </h3>
+            </div>
           </div>
           <button
             className="w-9 h-9 rounded-xl border border-[var(--line)] hover:bg-neutral-100 flex items-center justify-center text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
@@ -143,8 +187,48 @@ export const CartModal: React.FC<CartModalProps> = ({
           </button>
         </div>
 
+        {/* Action strip: Cart count & Kosongkan Keranjang */}
+        {cart.length > 0 && (
+          <div className="flex items-center justify-between pt-2 pb-1 text-xs">
+            <span className="text-[var(--muted)] font-medium">
+              {cart.reduce((sum, item) => sum + item.qty, 0)} item dalam keranjang
+            </span>
+
+            {/* Inline Confirmation for Clear Cart */}
+            {!showClearConfirm ? (
+              <button
+                type="button"
+                onClick={() => setShowClearConfirm(true)}
+                className="inline-flex items-center gap-1 text-[var(--muted)] hover:text-[var(--red)] transition-colors font-semibold"
+                aria-label="Kosongkan seluruh keranjang"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Kosongkan keranjang</span>
+              </button>
+            ) : (
+              <div className="inline-flex items-center gap-2 bg-rose-50 border border-rose-200 px-2.5 py-1 rounded-lg">
+                <span className="text-rose-900 font-bold text-[11px]">Yakin kosongkan?</span>
+                <button
+                  type="button"
+                  onClick={handleConfirmClear}
+                  className="px-2 py-0.5 rounded bg-[var(--red)] text-white text-[11px] font-bold hover:bg-rose-800 transition-colors"
+                >
+                  Ya
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowClearConfirm(false)}
+                  className="px-2 py-0.5 rounded bg-neutral-200 text-neutral-800 text-[11px] font-semibold hover:bg-neutral-300 transition-colors"
+                >
+                  Batal
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Cart items list */}
-        <div className="my-4 max-h-[220px] overflow-y-auto pr-1 flex flex-col gap-2.5">
+        <div className="my-3 max-h-[220px] overflow-y-auto pr-1 flex flex-col gap-2.5">
           {cart.length === 0 ? (
             <div className="text-center py-8 px-4 rounded-xl bg-amber-50/60 border border-dashed border-amber-900/20">
               <ShoppingBag className="w-8 h-8 text-amber-800/40 mx-auto mb-2" />
@@ -154,16 +238,19 @@ export const CartModal: React.FC<CartModalProps> = ({
               </p>
             </div>
           ) : (
-            cart.map((item, idx) => (
+            cart.map((item) => (
               <div
-                key={`${item.id}-${idx}`}
+                key={item.id}
                 className="flex items-center justify-between p-3 rounded-xl bg-white border border-[var(--line)] shadow-xs gap-3"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   {item.imageUrl && (
-                    <img
+                    <ProductImage
                       src={item.imageUrl}
                       alt={item.name}
+                      thumbnailOnly={true}
+                      width={48}
+                      height={48}
                       className="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-amber-900/10"
                     />
                   )}
@@ -180,7 +267,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                   <button
                     className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 flex items-center justify-center text-xs font-bold transition-colors"
                     type="button"
-                    onClick={() => onUpdateQty(idx, -1)}
+                    onClick={() => onUpdateQty(item.id, -1)}
                     aria-label={`Kurangi jumlah ${item.name}`}
                   >
                     <Minus className="w-3.5 h-3.5" />
@@ -191,7 +278,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                   <button
                     className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 flex items-center justify-center text-xs font-bold transition-colors"
                     type="button"
-                    onClick={() => onUpdateQty(idx, 1)}
+                    onClick={() => onUpdateQty(item.id, 1)}
                     aria-label={`Tambah jumlah ${item.name}`}
                   >
                     <Plus className="w-3.5 h-3.5" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, Flame, Snowflake, ShieldCheck, Plus, CheckCircle2 } from 'lucide-react';
+import { ProductImage } from './ProductImage';
 
 interface WhyGyozenProps {
   onAddBundle: (name: string, price: number, imageUrl?: string) => void;
@@ -34,9 +35,13 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                 Paling Laris
               </div>
               <div className="flex gap-4 items-start">
-                <img
-                  src="/assets/aistudio/Dimsum_Platter_95fd8aee.png"
+                <ProductImage
+                  src="/images/menu/dimsum-platter-960.webp"
                   alt="Dimsum Platter Komplit"
+                  bgColor="#f6e7ad"
+                  width={80}
+                  height={80}
+                  sizes="80px"
                   className="w-20 h-20 rounded-xl object-cover flex-shrink-0 border border-amber-900/10"
                 />
                 <div className="min-w-0 pr-12">
@@ -63,7 +68,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                     onAddBundle(
                       'Dimsum Platter Komplit (3-in-1)',
                       45000,
-                      '/assets/aistudio/Dimsum_Platter_95fd8aee.png'
+                      '/images/menu/dimsum-platter-960.webp'
                     )
                   }
                   className="btn btn-primary btn-sm"
@@ -77,9 +82,13 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
             {/* Bundle 2 */}
             <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[var(--line)] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
               <div className="flex gap-4 items-start">
-                <img
-                  src="/assets/aistudio/Frozen_Pack_Dimsum_Mix_e7c00e5c.png"
+                <ProductImage
+                  src="/images/menu/frozen-pack-dimsum-mix-960.webp"
                   alt="Paket Stok Kulkas Komplit"
+                  bgColor="#e2ecf5"
+                  width={80}
+                  height={80}
+                  sizes="80px"
                   className="w-20 h-20 rounded-xl object-cover flex-shrink-0 border border-amber-900/10"
                 />
                 <div className="min-w-0">
@@ -106,7 +115,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                     onAddBundle(
                       'Paket Stok Kulkas (3 Pack Frozen + Ebi Chili Oil 150ml)',
                       125000,
-                      '/assets/aistudio/Frozen_Pack_Dimsum_Mix_e7c00e5c.png'
+                      '/images/menu/frozen-pack-dimsum-mix-960.webp'
                     )
                   }
                   className="btn btn-accent btn-sm"

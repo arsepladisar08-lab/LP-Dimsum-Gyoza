@@ -2,6 +2,7 @@ import React from 'react';
 import { Product, MenuCategory } from '../types';
 import { formatRupiah } from '../utils/order';
 import { Star, Plus, Eye, Sparkles } from 'lucide-react';
+import { ProductImage } from './ProductImage';
 
 interface MenuCatalogProps {
   products: Product[];
@@ -87,10 +88,14 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({
               >
                 <div>
                   {/* Clean Food Image Container */}
-                  <div className="food-img-container relative bg-amber-50">
-                    <img
+                  <div className="food-img-container relative" style={{ backgroundColor: item.bg }}>
+                    <ProductImage
                       src={item.imageUrl}
                       alt={item.name}
+                      bgColor={item.bg}
+                      width={480}
+                      height={300}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
