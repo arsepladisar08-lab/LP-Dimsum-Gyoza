@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
-import { formatRupiah, buildWhatsAppInquiryUrl } from '../utils/order';
+import { formatRupiah, buildWhatsAppInquiryUrl, isActivePromo } from '../utils/order';
 import { WHATSAPP_NUMBER } from '../data/products';
-import { X, Star, Plus, Minus, ShoppingBag, MessageCircle, ShieldCheck, Flame, Utensils, Clock, Check } from 'lucide-react';
+import { X, Star, Plus, Minus, ShoppingBag, MessageCircle, Flame, Utensils, Clock } from 'lucide-react';
 import { ProductImage } from './ProductImage';
 
 interface ProductDetailModalProps {
@@ -86,14 +86,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {product.tag}
               </span>
             </div>
-            <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 font-bold">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                100% Halal Indonesia
-              </span>
-              <span className="text-amber-300 font-mono text-[11px] font-bold">
-                {product.index}
-              </span>
+            <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-xl bg-black/60 border border-white/10 text-white flex items-center justify-between text-xs">
+              <span className="font-bold">Dimsum & Gyoza · Gyozen</span>
+              <span className="text-amber-300 font-mono text-[11px] font-bold">{product.index}</span>
             </div>
           </div>
 
@@ -105,7 +100,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <span className="font-mono text-amber-800 font-bold uppercase tracking-wider text-[11px]">
                   {product.category === 'hangat' ? 'Siap Santap Hangat' : 'Ready Frozen'}
                 </span>
-                {product.rating && (
+                {product.rating && product.ratingSource && (
                   <div className="inline-flex items-center gap-1 text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-900/10">
                     <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                     <span>{product.rating.toFixed(1)}</span>
@@ -130,12 +125,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <span className="text-2xl font-black text-[var(--red)] tabular-nums tracking-tight">
                   {formatRupiah(product.price)}
                 </span>
-                <span className="text-xs text-[var(--muted)] line-through font-bold">
-                  {formatRupiah(product.oldPrice)}
-                </span>
-                <span className="text-[11px] text-emerald-700 font-bold ml-auto bg-emerald-100 px-2 py-0.5 rounded-full">
-                  Hemat {formatRupiah(product.oldPrice - product.price)}
-                </span>
+                {isActivePromo(product) && (
+                  <>
+                    <span className="text-xs text-[var(--muted)] line-through font-bold">
+                      {formatRupiah(product.oldPrice as number)}
+                    </span>
+                    <span className="text-[11px] text-emerald-700 font-bold ml-auto bg-emerald-100 px-2 py-0.5 rounded-full">
+                      Hemat {formatRupiah((product.oldPrice as number) - product.price)}
+                    </span>
+                  </>
+                )}
               </div>
 
               {/* Description */}
