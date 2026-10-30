@@ -46,7 +46,6 @@ test('filterProducts returns only matching category or all', () => {
       bg: '',
       art: 'gyoza',
       price: 15000,
-      oldPrice: 18000,
       info: '',
       desc: '',
       imageUrl: '/images/menu/gyoza-fresh-960.webp'
@@ -60,7 +59,6 @@ test('filterProducts returns only matching category or all', () => {
       bg: '',
       art: 'frozen',
       price: 35000,
-      oldPrice: 40000,
       info: '',
       desc: '',
       imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp'
