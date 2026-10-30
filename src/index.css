@@ -303,6 +303,7 @@ button { cursor: pointer; }
 .modal-dialog.modal-dialog-lg { width: min(850px, 100%); padding: 0; }
 .input-shadcn { width: 100%; min-height: 48px; padding: 11px 14px; color: var(--ink); background: #f0e5d8; border: 0; border-radius: 12px; font-size: 16px; }
 .input-shadcn:focus { outline: 3px solid var(--gold); }
+.product-detail-close { display: grid; width: 40px; height: 40px; place-items: center; color: white; background: var(--red); border: 0; border-radius: 50%; }
 .product-photo-caption { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 10px 12px; color: white; background: rgba(39,24,19,.78); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
 .product-detail-description { color: var(--muted); font-size: 16px; line-height: 1.7; }
 .product-detail-category { margin: 0 0 8px; color: var(--red); font-size: 13px; font-weight: 800; }
