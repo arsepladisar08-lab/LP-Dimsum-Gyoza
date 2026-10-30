@@ -167,7 +167,7 @@ export default function App() {
         <Steps />
         <LivingOrderNote cart={cart} onOpenCart={() => setIsCartOpen(true)} />
         <FAQ />
-        <ClosingCTA onOpenCart={() => setIsCartOpen(true)} />
+        <ClosingCTA />
       </main>
 
       <Footer />
