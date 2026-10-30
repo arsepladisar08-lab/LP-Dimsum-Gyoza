@@ -328,7 +328,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                 onChange={(e) => setForm({ ...form, type: e.target.value })}
               >
                 <option value="Siap Santap (Hangat)">Siap Santap (Hangat)</option>
-                <option value="Ready Frozen (Beku)">Ready Frozen (Tahan 3 bulan)</option>
+                <option value="Ready Frozen (Beku)">Ready Frozen (Beku)</option>
                 <option value="Campur (Hangat & Frozen)">Campur (Hangat & Frozen)</option>
               </select>
             </div>
