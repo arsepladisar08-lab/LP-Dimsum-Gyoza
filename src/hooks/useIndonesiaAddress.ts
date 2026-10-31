@@ -41,6 +41,7 @@ export function useIndonesiaRegionOptions(endpoint: string | null, enabled: bool
 
     const controller = new AbortController();
     let active = true;
+    setData([]);
     setIsLoading(true);
     setError(null);
 
