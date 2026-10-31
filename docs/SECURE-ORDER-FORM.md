@@ -33,3 +33,22 @@ This application is a frontend-only WhatsApp order flow. Client-side checks impr
 - Persisted cart IDs are rehydrated against the current official products and bundle catalogue. Stored names, prices, and image paths are ignored; unknown IDs are dropped and quantities are bounded.
 - Cart and WhatsApp summaries label the displayed amount as a menu estimate/subtotal and explicitly state that delivery fees are not included and will be confirmed by the admin.
 - The footer only links to a testimonial section when at least two verified, permission-granted reviews exist.
+
+
+## Hero entrance animation
+The hero uses a short staggered entrance:
+- Location line appears first.
+- The existing heading keeps its word-level stagger.
+- Supporting copy, action links, and footnote follow in sequence.
+- The food collage reveals as a single outer figure, preserving each card's existing float and hover transforms.
+- All entrance animations are disabled when the visitor requests reduced motion.
+
+## Demo trust content (preview only)
+To review placeholder layouts for rating, testimonials, and operational details, open the preview deployment with `?demoContent=1`.
+
+Example:
+`https://<your-vercel-preview-domain>/?demoContent=1`
+
+The section carries a visible **SIMULASI / BUKAN INFORMASI RESMI** warning. Its sample rating, review count, names, review quotes, operating hours, delivery area, and payment methods are fictional seed data. They must not be presented as real customer evidence or business policy. Normal visits without the exact query parameter do not render the section. The examples are not included in structured data or the verified testimonial collection.
+
+Before enabling any real trust content on the public site, replace each sample with details confirmed by the business; publish customer quotes only with permission.
