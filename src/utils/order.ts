@@ -53,7 +53,7 @@ export function isValidCustomerName(value: string): boolean {
 
 export function isValidAddressDetail(value: string): boolean {
   const detail = normalizeSingleLine(value);
-  return detail.length >= 5 && detail.length <= 250;
+  return detail.length >= 6 && detail.length <= 250;
 }
 
 export interface DeliveryAddressParts {
