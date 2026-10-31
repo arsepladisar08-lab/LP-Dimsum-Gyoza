@@ -1,9 +1,12 @@
 /**
- * Fictional seed content for layout review only.
- * Never merge these examples into verified business data or public rating schema.
+ * TEMPAT EDIT DATA CONTOH TRUST GYOZEN
+ * Ganti nilai di file ini secara manual setelah data asli terkumpul dan divalidasi.
+ * Semua nilai saat ini fiktif; jangan dianggap sebagai rating, testimoni, atau kebijakan resmi.
+ * Ubah DEMO_TRUST_CONTENT_ENABLED menjadi false setelah konten asli siap ditampilkan.
  */
+export const DEMO_TRUST_CONTENT_ENABLED = true;
 export const DEMO_CONTENT_NOTICE =
-  'SIMULASI — seluruh angka, nama, ulasan, jam, area, dan metode di bawah adalah data fiktif untuk preview UI. Bukan ulasan pelanggan atau informasi operasional Gyozen.';
+  'DATA CONTOH — rating, jumlah ulasan, nama, kutipan, jam, area layanan, metode pengiriman, ongkir, dan pembayaran di bawah adalah placeholder fiktif. Belum diverifikasi dan bukan klaim resmi Gyozen.';
 
 export const DEMO_RATING = {
   average: 4.8,
@@ -54,16 +57,31 @@ export const DEMO_OPERATIONAL_CLAIMS: DemoOperationalClaim[] = [
   {
     title: 'Jam operasional',
     value: 'Senin–Sabtu · 09.00–17.00 WIB',
-    note: 'Contoh jam — wajib diganti dengan jadwal resmi.'
+    note: 'Contoh jadwal saja. Ganti dengan hari dan jam operasional resmi.'
   },
   {
-    title: 'Area layanan',
+    title: 'Area pengiriman',
     value: 'Sidoarjo & Surabaya',
-    note: 'Contoh area — bukan konfirmasi jangkauan pengiriman.'
+    note: 'Area contoh, bukan konfirmasi jangkauan pengiriman Gyozen.'
+  },
+  {
+    title: 'Metode pengiriman',
+    value: 'Kurir instan / same-day',
+    note: 'Contoh layanan. Sesuaikan dengan kurir dan ketersediaan sebenarnya.'
+  },
+  {
+    title: 'Biaya pengiriman',
+    value: 'Menyesuaikan jarak dan layanan',
+    note: 'Placeholder aturan ongkir. Ganti dengan skema dan batas biaya yang berlaku.'
   },
   {
     title: 'Metode pembayaran',
-    value: 'Transfer bank & QRIS',
-    note: 'Contoh metode — konfirmasi metode yang benar ke admin.'
+    value: 'Transfer bank, QRIS, atau tunai',
+    note: 'Contoh metode. Hapus opsi yang tidak diterima oleh admin.'
+  },
+  {
+    title: 'Pesanan jumlah besar',
+    value: 'Contoh: konfirmasi minimal H-1',
+    note: 'Placeholder kebijakan pre-order. Ganti dengan batas jumlah dan waktu pemesanan resmi.'
   }
 ];
