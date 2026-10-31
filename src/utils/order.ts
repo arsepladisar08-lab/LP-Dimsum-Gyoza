@@ -36,6 +36,44 @@ export function filterProducts(products: Product[], category: MenuCategory): Pro
   return products.filter((product) => product.category === category);
 }
 
+export interface CartCatalogEntry {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl?: string;
+}
+
+/**
+ * Rebuild persisted cart items against the current product/bundle catalogue.
+ * Stored names and prices are never trusted; unknown IDs are discarded.
+ */
+export function reconcileCartItems(raw: unknown, catalog: CartCatalogEntry[]): CartItem[] {
+  if (!Array.isArray(raw)) return [];
+  const catalogById = new Map(catalog.map((item) => [item.id, item]));
+  const reconciled = new Map<string, CartItem>();
+
+  for (const value of raw) {
+    if (!value || typeof value !== 'object') continue;
+    const candidate = value as Partial<CartItem>;
+    if (typeof candidate.id !== 'string' || !Number.isInteger(candidate.qty) || (candidate.qty as number) <= 0) continue;
+    const canonical = catalogById.get(candidate.id);
+    if (!canonical) continue;
+
+    const safeQuantity = Math.min(99, candidate.qty as number);
+    const existing = reconciled.get(canonical.id);
+    reconciled.set(canonical.id, {
+      id: canonical.id,
+      name: canonical.name,
+      price: canonical.price,
+      qty: Math.min(99, (existing?.qty || 0) + safeQuantity),
+      ...(canonical.imageUrl ? { imageUrl: canonical.imageUrl } : {})
+    });
+    if (reconciled.size >= 100) break;
+  }
+
+  return [...reconciled.values()];
+}
+
 /** Normalize user-entered values to one printable line without control characters. */
 export function normalizeSingleLine(value: unknown): string {
   if (typeof value !== 'string') return '';
