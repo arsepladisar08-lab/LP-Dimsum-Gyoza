@@ -1,15 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  formatRupiah,
-  calculateTotal,
-  calculateTotalCount,
-  isActivePromo,
-  calculateKnownPieces,
-  calculatePiecesPerGuest,
-  filterProducts,
-  buildWhatsAppOrderMessage,
-  buildWhatsAppInquiryUrl
+  formatRupiah, calculateTotal, calculateTotalCount, isActivePromo,
+  calculateKnownPieces, calculatePiecesPerGuest, filterProducts,
+  buildWhatsAppOrderMessage, buildWhatsAppInquiryUrl, buildDeliveryAddressLine,
+  normalizeSingleLine, isValidCustomerName, isValidAddressDetail
 } from './order';
 import { Product, CartItem } from '../types';
 
@@ -37,57 +32,52 @@ test('calculateTotalCount sums the quantity of items', () => {
 
 test('filterProducts returns only matching category or all', () => {
   const sampleProducts: Product[] = [
-    {
-      id: 'p1',
-      index: '01',
-      name: 'Hangat 1',
-      category: 'hangat',
-      tag: '',
-      bg: '',
-      art: 'gyoza',
-      price: 15000,
-      info: '',
-      desc: '',
-      imageUrl: '/images/menu/gyoza-fresh-960.webp'
-    },
-    {
-      id: 'p2',
-      index: '02',
-      name: 'Frozen 1',
-      category: 'frozen',
-      tag: '',
-      bg: '',
-      art: 'frozen',
-      price: 35000,
-      info: '',
-      desc: '',
-      imageUrl: '/images/menu/frozen-pack-dimsum-mix-960.webp'
-    }
+    { id: 'p1', index: '01', name: 'Hangat 1', category: 'hangat', tag: '', bg: '', art: 'gyoza', price: 15000, info: '', desc: '', imageUrl: '' },
+    { id: 'p2', index: '02', name: 'Frozen 1', category: 'frozen', tag: '', bg: '', art: 'frozen', price: 35000, info: '', desc: '', imageUrl: '' },
+    { id: 'p3', index: '03', name: 'Pelengkap 1', category: 'pelengkap', tag: '', bg: '', art: 'chili', price: 28000, info: '', desc: '', imageUrl: '' }
   ];
-
-  assert.equal(filterProducts(sampleProducts, 'all').length, 2);
+  assert.equal(filterProducts(sampleProducts, 'all').length, 3);
   assert.equal(filterProducts(sampleProducts, 'hangat').length, 1);
-  assert.equal(filterProducts(sampleProducts, 'hangat')[0].id, 'p1');
   assert.equal(filterProducts(sampleProducts, 'frozen').length, 1);
-  assert.equal(filterProducts(sampleProducts, 'frozen')[0].id, 'p2');
+  assert.equal(filterProducts(sampleProducts, 'pelengkap').length, 1);
+  assert.equal(filterProducts(sampleProducts, 'pelengkap')[0].id, 'p3');
 });
 
-test('buildWhatsAppOrderMessage formats order template correctly with customer information', () => {
-  const cart: CartItem[] = [
-    { id: 'mentai', name: 'Dimsum Mentai Lumer', price: 25000, qty: 2 }
-  ];
-  const msg = buildWhatsAppOrderMessage({
-    cart,
-    customerName: 'Kak Rina',
-    servingType: 'Siap Santap (Hangat)',
-    deliveryArea: 'Sidoarjo Kota'
+test('buildWhatsAppOrderMessage keeps the complete address on one line', () => {
+  const cart: CartItem[] = [{ id: 'mentai', name: 'Dimsum Mentai Lumer', price: 25000, qty: 2 }];
+  const address = buildDeliveryAddressLine({
+    province: 'Jawa Timur', regency: 'Kabupaten Sidoarjo', district: 'Kecamatan Waru',
+    village: 'Desa Tambak Oso', postalCode: '61256', detail: 'Jl. Raya Tambak Oso No. 10, RT 02/RW 03'
   });
-
+  const msg = buildWhatsAppOrderMessage({
+    cart, customerName: 'Kak Rina', servingType: 'Siap Santap (Hangat)', deliveryAddress: address
+  });
   assert.ok(msg.includes('*Nama:* Kak Rina'));
   assert.ok(msg.includes('*Sajian:* Siap Santap (Hangat)'));
-  assert.ok(msg.includes('*Area / Alamat:* Sidoarjo Kota'));
+  assert.ok(msg.includes('*Alamat:* Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa Tambak Oso, 61256 — Jl. Raya Tambak Oso No. 10, RT 02/RW 03'));
   assert.ok(msg.includes('1. Dimsum Mentai Lumer (2x) = Rp50.000'));
   assert.ok(msg.includes('*Total Estimasi:* *Rp50.000*'));
+});
+
+test('address formatting allows unknown postcodes without inventing values', () => {
+  assert.equal(
+    buildDeliveryAddressLine({ province: 'Papua', regency: 'Kabupaten Contoh', district: 'Distrik Contoh', village: 'Kampung Contoh', detail: 'Jalan Contoh No. 1' }),
+    'Papua, Kabupaten Contoh, Distrik Contoh, Kampung Contoh — Jalan Contoh No. 1'
+  );
+});
+
+test('normalizes line breaks and control characters without destroying common address punctuation', () => {
+  assert.equal(normalizeSingleLine('Jl. Raya\nTambak Oso, RT 02/RW 03'), 'Jl. Raya Tambak Oso, RT 02/RW 03');
+});
+
+test('customer name and address validation are length-aware and Unicode friendly', () => {
+  assert.equal(isValidCustomerName('Siti Nur Aisyah'), true);
+  assert.equal(isValidCustomerName('M. Fadli'), true);
+  assert.equal(isValidCustomerName('A'), false);
+  assert.equal(isValidCustomerName('Rina / Adi'), false);
+  assert.equal(isValidAddressDetail('Jl. Raya Tambak Oso No. 10'), true);
+  assert.equal(isValidAddressDetail('RT 02'), false);
+  assert.equal(isValidAddressDetail('x'.repeat(251)), false);
 });
 
 test('buildWhatsAppInquiryUrl encodes url parameters properly', () => {
@@ -96,13 +86,11 @@ test('buildWhatsAppInquiryUrl encodes url parameters properly', () => {
   assert.ok(url.includes('Gyoza%20Fresh%20%26%20Juicy') || url.includes('Gyoza'));
 });
 
-
 test('isActivePromo requires a future expiry date and a real higher old price', () => {
   const now = Date.parse('2026-10-30T00:00:00.000Z');
   const active: Product = {
     id: 'promo', index: '01', name: 'Promo', category: 'hangat', tag: '', bg: '', art: 'gyoza',
-    price: 15000, oldPrice: 18000, promoUntil: '2026-11-01T00:00:00.000Z',
-    info: '', desc: '', imageUrl: ''
+    price: 15000, oldPrice: 18000, promoUntil: '2026-11-01T00:00:00.000Z', info: '', desc: '', imageUrl: ''
   };
   assert.equal(isActivePromo(active, now), true);
   assert.equal(isActivePromo({ ...active, promoUntil: '2026-10-01T00:00:00.000Z' }, now), false);
