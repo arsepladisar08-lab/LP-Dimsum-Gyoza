@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { GYOZEN_PRODUCTS } from '../data/products';
 import { Product } from '../types';
@@ -16,6 +16,14 @@ const featuredProducts = [
 ] as const;
 
 export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreviewProduct }) => {
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const lastTapRef = useRef<{ id: string; time: number } | null>(null);
+
+  const handleCardClick = (product: Product) => {
+    onPreviewProduct(product);
+    lastTapRef.current = null;
+  };
+
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="container-custom hero-grid">
@@ -45,20 +53,28 @@ export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreview
         </div>
 
         <figure className="hero-visual">
-          <div className="hero-gallery" aria-label="Menu favorit Gyozen">
+          <div
+            className="hero-gallery"
+            aria-label="Menu favorit Gyozen"
+            onMouseLeave={() => setActiveCardId(null)}
+          >
             {featuredProducts.map(({ id, className }) => {
               const product = GYOZEN_PRODUCTS.find((item) => item.id === id);
               if (!product) return null;
 
               const image480 = product.imageUrl.replace('-960.webp', '-480.webp');
+              const isFront = activeCardId === id;
+
               return (
                 <button
                   key={id}
-                  className={`hero-product-card ${className}`}
+                  className={`hero-product-card ${className} ${isFront ? 'is-front' : ''}`}
                   type="button"
-                  onClick={() => onPreviewProduct(product)}
-                  aria-label={`Lihat detail ${product.name}`}
-                  title={`Lihat detail ${product.name}`}
+                  onClick={() => handleCardClick(product)}
+                  onMouseEnter={() => setActiveCardId(id)}
+                  onTouchStart={() => setActiveCardId(id)}
+                  aria-label={`Menu ${product.name}. Sentuh untuk ke depan, klik dua kali untuk preview detail.`}
+                  title={`${product.name} — sentuh untuk bawa ke layer depan, klik 2x untuk lihat detail`}
                 >
                   <img
                     src={product.imageUrl}
@@ -71,7 +87,10 @@ export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreview
                     fetchPriority={id === 'mentai-lumer' ? 'high' : 'auto'}
                     decoding="async"
                   />
-                  <span className="hero-product-label">{product.name}</span>
+                  <span className="hero-product-label">
+                    <span>{product.name}</span>
+                    {isFront && <span className="hero-product-action-hint">• Klik 2x detail</span>}
+                  </span>
                 </button>
               );
             })}

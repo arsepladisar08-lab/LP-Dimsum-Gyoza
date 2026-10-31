@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
-import { Sparkles, Flame, Snowflake, Plus, CheckCircle2, Check } from 'lucide-react';
+import { Plus, Check, MessageCircle, PartyPopper, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { ProductImage } from './ProductImage';
-import { GYOZEN_PRODUCTS } from '../data/products';
+import { GYOZEN_PRODUCTS, WHATSAPP_NUMBER } from '../data/products';
 import { GYOZEN_BUNDLES } from '../data/bundles';
 import { formatRupiah } from '../utils/order';
 
 interface WhyGyozenProps {
   onAddBundle: (name: string, price: number, imageUrl?: string) => void;
 }
-
-const benefits = [
-  { icon: Sparkles, title: 'Isian ayam & udang', copy: 'Tekstur juicy dan rasa gurih yang jadi karakter menu Gyozen.', tone: 'benefit-gold' },
-  { icon: Flame, title: 'Mentai & keju', copy: 'Pilihan rasa creamy, gurih, dan renyah untuk suasana ngemil yang berbeda.', tone: 'benefit-red' },
-  { icon: CheckCircle2, title: 'Ebi Chili Oil', copy: 'Pelengkap bercita rasa ebi yang dapat dinikmati bersama menu favorit.', tone: 'benefit-gold' },
-  { icon: Snowflake, title: 'Pilihan ready frozen', copy: 'Simpan stok favorit di freezer dan siapkan saat ingin menikmati.', tone: 'benefit-blue' }
-];
 
 export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
   const [addedBundle, setAddedBundle] = useState<string | null>(null);
@@ -48,7 +41,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                 <em>sampai berbagi ramai-ramai.</em>
               </span>
             </h2>
-            <p className="section-intro">Ada pilihan untuk setiap suasana: menu hangat, paket sharing, sampai stok frozen yang praktis disiapkan di rumah.</p>
+            <p className="section-intro">Ada pilihan untuk setiap suasana: menu hangat, paket sharing hemat, hingga pesanan jumlah banyak untuk acaramu.</p>
           </div>
         </div>
 
@@ -114,17 +107,70 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
             </article>
           </div>
 
-        <div className="benefit-grid">
-          {benefits.map(({icon: Icon,title,copy,tone}, index) => (
-            <article className={'benefit-card ' + tone} key={title}>
-              <span className="benefit-icon"><Icon size={21}/></span>
-              <span className="benefit-index">0{index+1} / GYOZEN</span>
-              <h3>{title}</h3><p>{copy}</p>
-            </article>
-          ))}
+          {/* Space Pemesanan Jumlah Banyak / Bulk Order */}
+          <article className="bulk-order-card" aria-labelledby="bulk-order-title">
+            <div className="bulk-order-header">
+              <div className="bulk-order-badge">
+                <PartyPopper size={14} />
+                <span>BULK ORDER &amp; EVENT CATERING</span>
+              </div>
+              <h3 id="bulk-order-title">
+                Pemesanan Jumlah Banyak untuk Acara Spesial
+              </h3>
+              <p className="bulk-order-intro">
+                Rayakan momen pernikahan, ulang tahun, gathering kantor, atau arisan keluarga dengan sajian dimsum &amp; gyoza premium yang disukai semua tamu.
+              </p>
+            </div>
+
+            <div className="bulk-event-tags" aria-label="Kategori Acara">
+              <span className="bulk-event-tag">💍 Wedding &amp; Sangjit</span>
+              <span className="bulk-event-tag">🎂 Birthday Party</span>
+              <span className="bulk-event-tag">🏢 Office Gathering</span>
+              <span className="bulk-event-tag">👨‍👩‍👧‍👦 Arisan &amp; Syukuran</span>
+            </div>
+
+            <div className="bulk-features-list">
+              <div className="bulk-feature-item">
+                <span className="bulk-feature-icon"><CheckCircle2 size={16} /></span>
+                <div>
+                  <strong>Menu Fleksibel &amp; Variatif</strong>
+                  <p>Bebas mix Dimsum Kukus, Mentai Lumer, Goreng Keju, hingga Party Box siap saji.</p>
+                </div>
+              </div>
+              <div className="bulk-feature-item">
+                <span className="bulk-feature-icon"><CheckCircle2 size={16} /></span>
+                <div>
+                  <strong>Pilihan Hangat atau Frozen Pack</strong>
+                  <p>Disajikan hangat siap santap lengkap dengan saus, atau kemasan beku untuk hampers/souvenir.</p>
+                </div>
+              </div>
+              <div className="bulk-feature-item">
+                <span className="bulk-feature-icon"><CheckCircle2 size={16} /></span>
+                <div>
+                  <strong>Harga Spesial &amp; Pengiriman Terjadwal</strong>
+                  <p>Penawaran khusus untuk pemesanan volume besar dengan pengiriman tepat waktu ke lokasi acaramu.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bulk-order-footer">
+              <a
+                className="btn btn-primary btn-large w-full justify-center shadow-md active:scale-95 transition-all"
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Halo Admin Gyozen, saya ingin konsultasi pemesanan jumlah banyak / bulk order untuk acara (Wedding/Birthday/Gathering/Event).')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle size={18} />
+                Konsultasi Pesanan Acara via WhatsApp
+                <ArrowUpRight size={16} />
+              </a>
+              <p className="bulk-order-hint">
+                💡 Disarankan reservasi pesanan minimal H-3 atau H-1 sebelum acara agar persiapan lebih maksimal.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 };

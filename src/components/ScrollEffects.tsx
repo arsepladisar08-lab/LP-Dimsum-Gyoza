@@ -31,7 +31,7 @@ export const ScrollEffects: React.FC = () => {
 
     // Scroll reveal observer
     const revealTargets = document.querySelectorAll<HTMLElement>(
-      'section.section, .product-card, .bundle-card, .benefit-card, .step-card, .testimonial-card, .faq-item'
+      'section.section, .product-card, .bundle-card, .bulk-order-card, .step-card, .testimonial-card, .faq-item'
     );
 
     const observer = new IntersectionObserver(

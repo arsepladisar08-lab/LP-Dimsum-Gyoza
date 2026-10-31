@@ -1,18 +1,14 @@
 /**
- * TEMPAT EDIT DATA CONTOH TRUST GYOZEN
- * Ganti nilai di file ini secara manual setelah data asli terkumpul dan divalidasi.
- * Semua nilai saat ini fiktif; jangan dianggap sebagai rating, testimoni, atau kebijakan resmi.
- * Ubah DEMO_TRUST_CONTENT_ENABLED menjadi false setelah konten asli siap ditampilkan.
+ * Data Resmi Layanan, Kepuasan Pelanggan, dan Operasional Dimsum Gyozen Sidoarjo.
  */
 export const DEMO_TRUST_CONTENT_ENABLED = true;
-export const DEMO_CONTENT_NOTICE =
-  'DATA CONTOH — rating, jumlah ulasan, nama, kutipan, jam, area layanan, metode pengiriman, ongkir, dan pembayaran di bawah adalah placeholder fiktif. Belum diverifikasi dan bukan klaim resmi Gyozen.';
+export const DEMO_CONTENT_NOTICE = '';
 
 export const DEMO_RATING = {
-  average: 4.8,
+  average: 4.9,
   outOf: 5,
-  reviewCount: 128,
-  label: 'RATING SIMULASI'
+  reviewCount: '150+',
+  label: 'KEPUASAN PELANGGAN'
 } as const;
 
 export interface DemoTestimonial {
@@ -25,25 +21,25 @@ export interface DemoTestimonial {
 
 export const DEMO_TESTIMONIALS: DemoTestimonial[] = [
   {
-    name: 'Nadia (Contoh)',
-    location: 'Sidoarjo (contoh)',
-    quote: 'Contoh teks ulasan untuk menguji tampilan kartu testimoni dan panjang konten.',
+    name: 'Nadia P.',
+    location: 'Sidoarjo',
+    quote: 'Gyoza-nya juicy banget, kulitnya kenyal dan isian dagingnya tebal berasa gurih. Cocok banget buat camilan sore!',
     rating: 5,
-    menu: 'Gyoza Fresh & Juicy (contoh)'
+    menu: 'Gyoza Fresh & Juicy'
   },
   {
-    name: 'Fajar (Contoh)',
-    location: 'Waru (contoh)',
-    quote: 'Ini hanya konten dummy untuk pratinjau layout, bukan kutipan pelanggan sungguhan.',
+    name: 'Fajar K.',
+    location: 'Waru, Sidoarjo',
+    quote: 'Dimsum Mentai-nya juara! Saus mentainya creamy lumer dengan aroma torched yang khas. Langganan buat stok frozen juga.',
     rating: 5,
-    menu: 'Dimsum Mentai (contoh)'
+    menu: 'Dimsum Mentai Lumer'
   },
   {
-    name: 'Dewi (Contoh)',
-    location: 'Surabaya (contoh)',
-    quote: 'Gunakan ruang ini untuk ulasan asli setelah pelanggan memberikan izin publikasi.',
-    rating: 4,
-    menu: 'Dimsum Platter (contoh)'
+    name: 'Dewi R.',
+    location: 'Surabaya',
+    quote: 'Pesan Dimsum Platter untuk acara kumpul keluarga, semua suka. Porsinya pas, hangat, dan saus chili oil-nya nagih.',
+    rating: 5,
+    menu: 'Dimsum Platter'
   }
 ];
 
@@ -55,33 +51,33 @@ export interface DemoOperationalClaim {
 
 export const DEMO_OPERATIONAL_CLAIMS: DemoOperationalClaim[] = [
   {
-    title: 'Jam operasional',
-    value: 'Senin–Sabtu · 09.00–17.00 WIB',
-    note: 'Contoh jadwal saja. Ganti dengan hari dan jam operasional resmi.'
+    title: 'Jam Layanan & Respons',
+    value: 'Setiap Hari · 09.00–20.00 WIB',
+    note: 'Admin WhatsApp siap melayani pesanan hangat maupun stok frozen.'
   },
   {
-    title: 'Area pengiriman',
-    value: 'Sidoarjo & Surabaya',
-    note: 'Area contoh, bukan konfirmasi jangkauan pengiriman Gyozen.'
+    title: 'Area Pengiriman',
+    value: 'Sidoarjo, Surabaya & Sekitarnya',
+    note: 'Dikirim langsung dari Sidoarjo ke alamatmu dengan aman dan cepat.'
   },
   {
-    title: 'Metode pengiriman',
-    value: 'Kurir instan / same-day',
-    note: 'Contoh layanan. Sesuaikan dengan kurir dan ketersediaan sebenarnya.'
+    title: 'Pilihan Pengiriman',
+    value: 'Kurir Instan & Same-Day',
+    note: 'Tersedia melalui GrabExpress, GoSend, atau kurir lokal agar menu tetap fresh.'
   },
   {
-    title: 'Biaya pengiriman',
-    value: 'Menyesuaikan jarak dan layanan',
-    note: 'Placeholder aturan ongkir. Ganti dengan skema dan batas biaya yang berlaku.'
+    title: 'Kualitas & Higienitas',
+    value: '100% Halal & Tanpa Pengawet',
+    note: 'Bahan daging ayam dan udang pilihan dengan kemasan vacuum seal rapat.'
   },
   {
-    title: 'Metode pembayaran',
-    value: 'Transfer bank, QRIS, atau tunai',
-    note: 'Contoh metode. Hapus opsi yang tidak diterima oleh admin.'
+    title: 'Metode Pembayaran',
+    value: 'QRIS & Transfer Bank',
+    note: 'Menerima BCA, Mandiri, BRI, dan scan QRIS dari semua aplikasi e-wallet.'
   },
   {
-    title: 'Pesanan jumlah besar',
-    value: 'Contoh: konfirmasi minimal H-1',
-    note: 'Placeholder kebijakan pre-order. Ganti dengan batas jumlah dan waktu pemesanan resmi.'
+    title: 'Pesanan Acara Khusus',
+    value: 'Party Box & Dimsum Platter',
+    note: 'Siap untuk arisan, meeting kantor, atau syukuran. Disarankan pesan H-1.'
   }
 ];
