@@ -60,13 +60,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [guestCount, setGuestCount] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
-  const [rememberCustomerDetails, setRememberCustomerDetails] = useState(() => {
-    try {
-      return typeof window !== 'undefined' && Boolean(window.localStorage.getItem(FORM_STORAGE_KEY));
-    } catch {
-      return false;
-    }
-  });
+  const [rememberCustomerDetails, setRememberCustomerDetails] = useState(false);
 
   const provinces = useIndonesiaRegionOptions('/provinces.json', isOpen);
   const regencies = useIndonesiaRegionOptions(form.provinceId ? `/regencies/${form.provinceId}.json` : null, isOpen);
