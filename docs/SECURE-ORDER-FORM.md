@@ -26,3 +26,10 @@ This application is a frontend-only WhatsApp order flow. Client-side checks impr
 - FAQ and the moving highlight strip explain order confirmation and delivery-fee confirmation without inventing hours, payment methods, customer ratings, or coverage.
 - Verified testimonials remain hidden until real customer feedback has permission to be published.
 - Existing pricing, product imagery, layout, and WhatsApp order flow are preserved.
+
+
+## Conversion & Trust — follow-up
+- Customer name/address retention is now opt-in through an unchecked-by-default preference. When off, the browser-local record is removed; existing values can still be edited for the current visit but are not saved again.
+- Persisted cart IDs are rehydrated against the current official products and bundle catalogue. Stored names, prices, and image paths are ignored; unknown IDs are dropped and quantities are bounded.
+- Cart and WhatsApp summaries label the displayed amount as a menu estimate/subtotal and explicitly state that delivery fees are not included and will be confirmed by the admin.
+- The footer only links to a testimonial section when at least two verified, permission-granted reviews exist.
