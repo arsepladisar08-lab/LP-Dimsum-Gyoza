@@ -133,7 +133,7 @@ export const CartModal: React.FC<CartModalProps> = ({
       return;
     }
     if (!isValidAddressDetail(detail)) {
-      onShowToast('Detail alamat harus 5–250 karakter. Tambahkan nama jalan, nomor rumah, RT/RW, atau patokan.');
+      onShowToast('Detail alamat harus 6–250 karakter. Tambahkan nama jalan, nomor rumah, RT/RW, atau patokan.');
       return;
     }
 
@@ -419,7 +419,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                 <label className="address-field" htmlFor="custManualRegion">
                   Provinsi, kabupaten/kota, kecamatan, desa/kelurahan *
                   <textarea className="input-shadcn address-fallback-input" id="custManualRegion" required
-                    minLength={5} maxLength={250} rows={2}
+                    minLength={6} maxLength={250} rows={2}
                     placeholder="Contoh: Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa Tambak Oso"
                     value={form.manualRegion} onChange={(e) => setForm({ ...form, manualRegion: e.target.value })} />
                 </label>
@@ -439,10 +439,10 @@ export const CartModal: React.FC<CartModalProps> = ({
               <div className="address-field address-detail-field">
                 <label htmlFor="custAddressDetail">Alamat Detail *</label>
                 <textarea className="input-shadcn address-detail-input" id="custAddressDetail" name="street-address"
-                  autoComplete="street-address" required minLength={5} maxLength={250} rows={2}
+                  autoComplete="street-address" required minLength={6} maxLength={250} rows={2}
                   placeholder="Nama jalan, nomor rumah, RT/RW, blok, atau patokan" value={form.addressDetail}
                   onChange={(e) => setForm({ ...form, addressDetail: e.target.value })} aria-describedby="address-detail-help" />
-                <p className="field-help" id="address-detail-help">5–250 karakter. Contoh: Jl. Raya Tambak Oso No. 10, RT 02/RW 03.</p>
+                <p className="field-help" id="address-detail-help">6–250 karakter. Contoh: Jl. Raya Tambak Oso No. 10, RT 02/RW 03.</p>
               </div>
             </div>
             <p className="address-source-note">Referensi wilayah dan kode pos EMSIFA (pembaruan data 3 September 2026). Jangkauan pengantaran tetap dikonfirmasi admin.</p>
