@@ -4,7 +4,7 @@ import {
   formatRupiah, calculateTotal, calculateTotalCount, isActivePromo,
   calculateKnownPieces, calculatePiecesPerGuest, filterProducts,
   buildWhatsAppOrderMessage, buildWhatsAppInquiryUrl, buildDeliveryAddressLine,
-  normalizeSingleLine, isValidCustomerName, isValidAddressDetail
+  normalizeSingleLine, isValidCustomerName, isValidAddressDetail, formatVillageRegionLabel
 } from './order';
 import { Product, CartItem } from '../types';
 
@@ -64,6 +64,12 @@ test('address formatting allows unknown postcodes without inventing values', () 
     buildDeliveryAddressLine({ province: 'Papua', regency: 'Kabupaten Contoh', district: 'Distrik Contoh', village: 'Kampung Contoh', detail: 'Jalan Contoh No. 1' }),
     'Papua, Kabupaten Contoh, Distrik Contoh, Kampung Contoh — Jalan Contoh No. 1'
   );
+});
+
+test('village code distinguishes village and urban village labels', () => {
+  assert.equal(formatVillageRegionLabel('32.73.01.1001', 'Sukarasa'), 'Kelurahan Sukarasa');
+  assert.equal(formatVillageRegionLabel('11.01.01.2001', 'Contoh'), 'Desa Contoh');
+  assert.equal(formatVillageRegionLabel('unknown', 'Contoh'), 'Desa/Kelurahan Contoh');
 });
 
 test('normalizes line breaks and control characters without destroying common address punctuation', () => {
