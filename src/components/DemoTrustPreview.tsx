@@ -12,8 +12,9 @@ interface DemoTrustPreviewProps {
 }
 
 /**
- * Preview-only trust layout. All copy and metrics in this component are fictional seed data.
- * It is rendered only when the explicit ?demoContent=1 preview flag is present.
+ * Trust layout shown while sample content is enabled.
+ * All displayed examples are fictional and must be replaced with validated business data.
+ * Toggle DEMO_TRUST_CONTENT_ENABLED in src/data/demoContent.ts to hide this section.
  */
 export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) => {
   if (!enabled) return null;
@@ -24,17 +25,17 @@ export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) =
     <section className="demo-trust-section" aria-labelledby="demo-trust-title">
       <div className="container-custom">
         <div className="demo-trust-warning" role="note">
-          <strong>DATA SIMULASI / BUKAN INFORMASI RESMI</strong>
+          <strong>DATA CONTOH — BELUM TERVERIFIKASI</strong>
           <p>{DEMO_CONTENT_NOTICE}</p>
         </div>
 
         <div className="demo-trust-heading">
           <div>
-            <p className="section-kicker">PREVIEW KOMPONEN TRUST</p>
-            <h2 id="demo-trust-title">Contoh rating, cerita, dan info usaha</h2>
-            <p>Area ini hanya untuk mengevaluasi layout. Ganti seluruh data dengan sumber asli sebelum mengaktifkannya di halaman publik.</p>
+            <p className="section-kicker">TRUST & INFO GYOZEN · DATA SEMENTARA</p>
+            <h2 id="demo-trust-title">Cerita rasa & info Gyozen</h2>
+            <p>Bagian ini sedang disiapkan. Rating, testimoni, dan detail operasional yang tampil masih berupa data contoh untuk kamu validasi dan edit manual.</p>
           </div>
-          <span className="demo-only-chip">DEMO ONLY</span>
+          <span className="demo-only-chip">DATA DUMMY AKTIF</span>
         </div>
 
         <div className="demo-rating-panel">
@@ -48,7 +49,7 @@ export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) =
               <small>{DEMO_RATING.reviewCount} ulasan contoh · bukan data pelanggan</small>
             </div>
           </div>
-          <p>Angka dan jumlah ulasan di atas hanyalah placeholder untuk preview kartu rating.</p>
+          <p>Nilai rating dan jumlah ulasan ini hanya placeholder. Ganti dengan angka dan tautan sumber yang benar setelah diverifikasi.</p>
         </div>
 
         <div className="demo-testimonial-grid">
