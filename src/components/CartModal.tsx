@@ -336,12 +336,17 @@ export const CartModal: React.FC<CartModalProps> = ({
           )}
         </div>
 
-        {/* Summary Box */}
-        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-900/15 mb-4 flex items-center justify-between">
-          <span className="text-xs sm:text-sm font-bold text-amber-950">Total Estimasi Pesanan</span>
-          <span className="text-xl sm:text-2xl font-black text-[var(--red)] tabular-nums tracking-tight">
-            {formatRupiah(total)}
-          </span>
+        {/* Summary: menu subtotal only; delivery is confirmed separately by the admin. */}
+        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-900/15 mb-4">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs sm:text-sm font-bold text-amber-950">Total Estimasi Menu</span>
+            <span className="text-xl sm:text-2xl font-black text-[var(--red)] tabular-nums tracking-tight">
+              {formatRupiah(total)}
+            </span>
+          </div>
+          <p className="mt-1.5 text-[10px] sm:text-xs text-amber-900/75 leading-relaxed">
+            Belum termasuk ongkos kirim. Admin akan mengonfirmasi ongkir dan total akhir sebelum pesanan diproses.
+          </p>
         </div>
 
         {/* Secure customer and delivery form */}
