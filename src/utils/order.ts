@@ -56,6 +56,16 @@ export function isValidAddressDetail(value: string): boolean {
   return detail.length >= 6 && detail.length <= 250;
 }
 
+/** Interpret the village-code suffix used by Indonesia's administrative hierarchy. */
+export function formatVillageRegionLabel(id: string, name: string): string {
+  const localCode = normalizeSingleLine(id).split('.').pop() || '';
+  const type = localCode.startsWith('1') ? 'Kelurahan'
+    : localCode.startsWith('2') ? 'Desa'
+    : 'Desa/Kelurahan';
+  const normalizedName = normalizeSingleLine(name);
+  return normalizedName ? `${type} ${normalizedName}` : '';
+}
+
 export interface DeliveryAddressParts {
   province?: string;
   regency?: string;
