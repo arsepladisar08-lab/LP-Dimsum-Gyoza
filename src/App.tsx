@@ -5,6 +5,7 @@ import { HighlightsBand } from './components/HighlightsBand';
 import { MenuCatalog } from './components/MenuCatalog';
 import { WhyGyozen } from './components/WhyGyozen';
 import { Testimonials } from './components/Testimonials';
+import { DemoTrustPreview } from './components/DemoTrustPreview';
 import { Steps } from './components/Steps';
 import { FAQ } from './components/FAQ';
 import { ClosingCTA } from './components/ClosingCTA';
@@ -33,6 +34,10 @@ const BUNDLE_CART_CATALOG: CartCatalogEntry[] = Object.values(GYOZEN_BUNDLES).ma
 const CART_CATALOG: CartCatalogEntry[] = [...GYOZEN_PRODUCTS, ...BUNDLE_CART_CATALOG];
 
 export default function App() {
+  // Demo trust content is opt-in for preview only; never visible on normal/public visits.
+  const demoTrustPreviewEnabled = typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('demoContent') === '1';
+
   // Keranjang awal kosong secara default, dimuat dari localStorage bila ada data valid
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
@@ -177,6 +182,7 @@ export default function App() {
           onPreviewProduct={setSelectedProduct}
         />
         <WhyGyozen onAddBundle={handleAddBundle} />
+        <DemoTrustPreview enabled={demoTrustPreviewEnabled} />
         <Testimonials />
         <Steps />
         <FAQ />
