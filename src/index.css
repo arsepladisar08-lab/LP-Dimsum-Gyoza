@@ -246,7 +246,7 @@ button { cursor: pointer; }
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: .88fr 1.12fr;
+  grid-template-columns: .95fr 1.05fr;
   align-items: center;
   gap: clamp(34px, 5.5vw, 84px);
 }
@@ -263,7 +263,7 @@ button { cursor: pointer; }
   margin: 0;
   color: var(--brown);
   font-family: var(--font-display);
-  font-size: clamp(50px, 5.7vw, 82px);
+  font-size: clamp(48px, 4.7vw, 64px);
   font-weight: 900;
   line-height: .98;
   letter-spacing: -.065em;
@@ -339,12 +339,18 @@ button { cursor: pointer; }
   white-space: nowrap;
 }
 @media (max-width: 1023px) {
-  .hero-grid { grid-template-columns: .92fr 1.08fr; gap: 28px; }
-  .hero h1 { font-size: clamp(46px, 5.2vw, 62px); }
+  .hero-grid { grid-template-columns: .95fr 1.05fr; gap: 28px; }
+  .hero h1 { font-size: clamp(44px, 4.9vw, 52px); }
   .hero-subtitle { font-size: 16px; }
   .hero-actions { gap: 18px; }
   .hero-actions .btn-large { padding-inline: 19px; }
   .hero-food-picture { border-radius: 25px 25px 82px 25px; }
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-copy { max-width: 700px; }
+  .hero h1 { font-size: clamp(54px, 7vw, 64px); }
+  .hero-visual { max-width: 700px; margin-inline: auto; }
 }
 @media (max-width: 767px) {
   .hero { padding: 38px 0 58px; }
