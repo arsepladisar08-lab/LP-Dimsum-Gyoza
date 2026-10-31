@@ -3,7 +3,7 @@ import { ShoppingCart, MessageCircle, Truck, ArrowUpRight } from 'lucide-react';
 
 const steps = [
   { number:'01', icon:ShoppingCart, title:'Pilih menu', copy:'Jelajahi katalog, buka detail produk, lalu tambahkan pilihanmu ke keranjang.' },
-  { number:'02', icon:MessageCircle, title:'Kirim pesanan', copy:'Isi nama dan area pengiriman. Rincian pesanan akan disiapkan otomatis untuk WhatsApp.' },
+  { number:'02', icon:MessageCircle, title:'Kirim pesanan', copy:'Isi nama, pilih wilayah berjenjang, lengkapi alamat detail, lalu kirim rangkuman pesanan melalui WhatsApp.' },
   { number:'03', icon:Truck, title:'Konfirmasi & nikmati', copy:'Admin membantu konfirmasi ketersediaan, ongkir, pembayaran, dan jadwal pengiriman.' }
 ];
 
@@ -19,7 +19,7 @@ export const Steps: React.FC = () => (
               <em>sampai siap dinikmati.</em>
             </span>
           </h2>
-          <p className="section-intro">Pesan tanpa perlu membuat akun. Semua detail pilihanmu dirangkum agar admin lebih mudah memproses pesanan.</p>
+          <p className="section-intro">Pesan tanpa perlu membuat akun. Data alamat disusun rapi untuk WhatsApp; stok, ongkir, dan pembayaran tetap dikonfirmasi admin.</p>
         </div>
       </div>
       <div className="steps-grid">
