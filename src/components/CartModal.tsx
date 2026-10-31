@@ -60,6 +60,13 @@ export const CartModal: React.FC<CartModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [guestCount, setGuestCount] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [rememberCustomerDetails, setRememberCustomerDetails] = useState(() => {
+    try {
+      return typeof window !== 'undefined' && Boolean(window.localStorage.getItem(FORM_STORAGE_KEY));
+    } catch {
+      return false;
+    }
+  });
 
   const provinces = useIndonesiaRegionOptions('/provinces.json', isOpen);
   const regencies = useIndonesiaRegionOptions(form.provinceId ? `/regencies/${form.provinceId}.json` : null, isOpen);
@@ -71,7 +78,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   const selectedDistrict = districts.data.find((item) => item.id === form.districtId);
   const selectedVillage = villages.data.find((item) => item.id === form.villageId);
 
-  // Simpan data form ke localStorage setiap kali diubah agar repeat order tidak perlu ketik ulang
+  // Simpan hanya ketika pelanggan secara eksplisit memilih opsi ingat data.
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
@@ -79,16 +86,16 @@ export const CartModal: React.FC<CartModalProps> = ({
           form.name, form.provinceId, form.regencyId, form.districtId, form.villageId,
           form.postalCode, form.addressDetail, form.manualRegion, form.legacyArea, form.notes
         ].some((value) => value.trim().length > 0);
-        if (hasPrivateDetails) {
-          localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
+        if (rememberCustomerDetails && hasPrivateDetails) {
+          window.localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
         } else {
-          localStorage.removeItem(FORM_STORAGE_KEY);
+          window.localStorage.removeItem(FORM_STORAGE_KEY);
         }
       }
     } catch {
-      // ignore
+      // Storage may be blocked by the browser; checkout remains usable.
     }
-  }, [form]);
+  }, [form, rememberCustomerDetails]);
 
   if (!isOpen) return null;
 
@@ -174,8 +181,9 @@ export const CartModal: React.FC<CartModalProps> = ({
       manualRegion: '', legacyArea: '', notes: ''
     };
     setForm(emptyForm);
+    setRememberCustomerDetails(false);
     try { window.localStorage.removeItem(FORM_STORAGE_KEY); } catch { /* storage unavailable */ }
-    onShowToast('Data nama dan alamat lama telah dikosongkan dari formulir.');
+    onShowToast('Data nama dan alamat tersimpan telah dihapus dari browser ini.');
   };
 
   const fallbackCopy = (text: string) => {
@@ -479,9 +487,18 @@ export const CartModal: React.FC<CartModalProps> = ({
             </button>
             <span className="text-[11px]">WhatsApp resmi Gyozen</span>
           </div>
-          <div className="saved-data-row">
-            <span>Data nama dan alamat tersimpan lokal di browser ini. Hindari menyimpannya pada perangkat umum.</span>
-            <button type="button" onClick={handleClearSavedDetails}>Hapus data tersimpan</button>
+          <div className="customer-data-preference">
+            <label className="customer-data-toggle" htmlFor="rememberCustomerDetails">
+              <input
+                id="rememberCustomerDetails"
+                type="checkbox"
+                checked={rememberCustomerDetails}
+                onChange={(e) => setRememberCustomerDetails(e.target.checked)}
+              />
+              <span>Simpan nama dan alamat di browser ini untuk pesanan berikutnya</span>
+            </label>
+            <p>Opsional. Data hanya disimpan di browser perangkat ini, bukan ke database Gyozen. Jangan aktifkan pada perangkat umum. Kamu bisa mematikannya atau menghapus data kapan saja.</p>
+            <button type="button" onClick={handleClearSavedDetails}>Hapus data pelanggan tersimpan</button>
           </div>
         </form>
       </div>
