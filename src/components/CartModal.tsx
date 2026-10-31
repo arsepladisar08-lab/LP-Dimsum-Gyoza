@@ -92,8 +92,8 @@ export const CartModal: React.FC<CartModalProps> = ({
     const deliveryAddress = buildDeliveryAddressLine({
       province: regionLookupUnavailable ? '' : selectedProvince?.name,
       regency: regionLookupUnavailable ? '' : selectedRegency?.name,
-      district: regionLookupUnavailable ? '' : selectedDistrict?.name,
-      village: regionLookupUnavailable ? '' : selectedVillage?.name,
+      district: regionLookupUnavailable ? '' : selectedDistrict ? `Kecamatan ${selectedDistrict.name}` : '',
+      village: regionLookupUnavailable ? '' : selectedVillage ? `Desa/Kelurahan ${selectedVillage.name}` : '',
       administrativeArea: regionLookupUnavailable ? form.manualRegion : '',
       postalCode: form.postalCode,
       detail: form.addressDetail
