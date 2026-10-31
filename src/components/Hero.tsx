@@ -1,46 +1,83 @@
 import React from 'react';
-import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
-import { GyozenShieldLogo } from './GyozenShieldLogo';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { GYOZEN_PRODUCTS } from '../data/products';
+import { Product } from '../types';
 
 interface HeroProps {
   onOpenCart: () => void;
+  onPreviewProduct: (product: Product) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
+const featuredProducts = [
+  { id: 'gyoza-fresh', className: 'hero-product-card--gyoza' },
+  { id: 'mentai-lumer', className: 'hero-product-card--mentai' },
+  { id: 'dimsum-goreng-keju', className: 'hero-product-card--keju' }
+] as const;
+
+export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
-      <div className="hero-grain" aria-hidden="true"/>
       <div className="container-custom hero-grid">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-mark"><Sparkles size={13}/></span> Dimsum & Gyoza • Sidoarjo</div>
+          <p className="hero-location">Dimsum &amp; Gyoza · Sidoarjo</p>
           <p className="hero-kicker">GOOD FOOD. GOOD MOOD.</p>
-          <h1 id="hero-title">Satu gigitan,<br/>bikin hari makin <em>zen.</em></h1>
+          <h1 id="hero-title">
+            Satu gigitan, bikin hari makin <em>zen.</em>
+          </h1>
           <p className="hero-subtitle">
-            Camilan hangat, gurih, dan penuh rasa untuk nemenin setiap momen. Temukan
-            dimsum favorit, gyoza juicy, mentai lumer, hingga pilihan frozen untuk stok di rumah.
+            Camilan hangat, gurih, dan penuh rasa untuk nemenin setiap momen.
+            Temukan dimsum favorit, gyoza juicy, mentai lumer, hingga pilihan frozen untuk stok di rumah.
           </p>
+
           <div className="hero-actions">
             <button className="btn btn-primary btn-large" type="button" onClick={onOpenCart}>
               Pesan sekarang <ArrowUpRight size={18}/>
             </button>
-            <a className="btn btn-secondary btn-large" href="#menu">Jelajahi menu <ArrowDown size={17}/></a>
+            <a className="hero-menu-link" href="#menu">
+              Jelajahi menu <ArrowDown size={17}/>
+            </a>
           </div>
-          <div className="hero-footnote"><span className="hero-footnote-line"/> Dibuat untuk momen kecil yang terasa spesial.</div>
+          <p className="hero-footnote">Dibuat untuk momen kecil yang terasa spesial.</p>
         </div>
 
-        <div className="hero-visual" aria-label="Identitas visual Dimsum Gyozen">
-          <div className="hero-orbit orbit-one" aria-hidden="true"/>
-          <div className="hero-orbit orbit-two" aria-hidden="true"/>
-          <div className="hero-poster">
-            <div className="poster-top"><span>THE GYOZEN MOOD</span><span>01 — 2026</span></div>
-            <div className="poster-logo"><GyozenShieldLogo className="w-full max-w-[330px] drop-shadow-xl"/></div>
-            <div className="poster-caption"><span>GYOZA · DIMSUM · GOOD MOOD</span><b>MADE TO SHARE</b></div>
+        <figure className="hero-visual">
+          <div className="hero-gallery" aria-label="Menu favorit Gyozen">
+            {featuredProducts.map(({ id, className }) => {
+              const product = GYOZEN_PRODUCTS.find((item) => item.id === id);
+              if (!product) return null;
+
+              const image480 = product.imageUrl.replace('-960.webp', '-480.webp');
+              return (
+                <button
+                  key={id}
+                  className={`hero-product-card ${className}`}
+                  type="button"
+                  onClick={() => onPreviewProduct(product)}
+                  aria-label={`Lihat detail ${product.name}`}
+                  title={`Lihat detail ${product.name}`}
+                >
+                  <img
+                    src={product.imageUrl}
+                    srcSet={`${image480} 480w, ${product.imageUrl} 960w`}
+                    sizes="(max-width: 767px) 44vw, 320px"
+                    alt=""
+                    width="960"
+                    height="960"
+                    loading={id === 'mentai-lumer' ? 'eager' : 'lazy'}
+                    fetchPriority={id === 'mentai-lumer' ? 'high' : 'auto'}
+                    decoding="async"
+                  />
+                  <span className="hero-product-label">{product.name}</span>
+                </button>
+              );
+            })}
           </div>
-          <span className="hero-sticker sticker-top">Gurih<br/>& juicy</span>
-          <span className="hero-sticker sticker-bottom">A little<br/>treat ✳</span>
-        </div>
+          <figcaption className="hero-image-caption">
+            <span>Jelajahi menu favorit Gyozen</span>
+            <strong>Mulai Rp15.000</strong>
+          </figcaption>
+        </figure>
       </div>
-      <a className="scroll-down" href="#menu"><span>Kenali menu kami</span><ArrowDown size={15}/></a>
     </section>
   );
 };

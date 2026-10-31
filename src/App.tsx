@@ -157,7 +157,7 @@ export default function App() {
       <Header cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
 
       <main className={cart.length > 0 ? 'pb-20 md:pb-0' : ''}>
-        <Hero onOpenCart={() => setIsCartOpen(true)} />
+        <Hero onOpenCart={() => setIsCartOpen(true)} onPreviewProduct={setSelectedProduct} />
         <HighlightsBand />
         <MenuCatalog
           products={GYOZEN_PRODUCTS}
