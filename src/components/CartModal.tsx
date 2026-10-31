@@ -75,7 +75,15 @@ export const CartModal: React.FC<CartModalProps> = ({
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
-        localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
+        const hasPrivateDetails = [
+          form.name, form.provinceId, form.regencyId, form.districtId, form.villageId,
+          form.postalCode, form.addressDetail, form.manualRegion, form.legacyArea, form.notes
+        ].some((value) => value.trim().length > 0);
+        if (hasPrivateDetails) {
+          localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
+        } else {
+          localStorage.removeItem(FORM_STORAGE_KEY);
+        }
       }
     } catch {
       // ignore
@@ -472,7 +480,7 @@ export const CartModal: React.FC<CartModalProps> = ({
             <span className="text-[11px]">WhatsApp resmi Gyozen</span>
           </div>
           <div className="saved-data-row">
-            <span>Data nama dan alamat tersimpan di browser ini untuk repeat order.</span>
+            <span>Data nama dan alamat tersimpan lokal di browser ini. Hindari menyimpannya pada perangkat umum.</span>
             <button type="button" onClick={handleClearSavedDetails}>Hapus data tersimpan</button>
           </div>
         </form>
