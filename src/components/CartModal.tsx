@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { CartItem, OrderFormState } from '../types';
-import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage, calculateKnownPieces, calculatePiecesPerGuest } from '../utils/order';
+import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage, calculateKnownPieces, calculatePiecesPerGuest, buildDeliveryAddressLine, normalizeSingleLine, isValidCustomerName, isValidAddressDetail } from '../utils/order';
+import { useIndonesiaRegionOptions } from '../hooks/useIndonesiaAddress';
 import { WHATSAPP_NUMBER, GYOZEN_PRODUCTS } from '../data/products';
-import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils, Trash2 } from 'lucide-react';
+import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils, Trash2, ShieldCheck, RefreshCw } from 'lucide-react';
 import { ProductImage } from './ProductImage';
 
 const FORM_STORAGE_KEY = 'gyozen_customer_form_v1';
@@ -25,33 +26,50 @@ export const CartModal: React.FC<CartModalProps> = ({
   onShowToast
 }) => {
   const [form, setForm] = useState<OrderFormState>(() => {
+    const emptyForm: OrderFormState = {
+      name: '', type: 'Siap Santap (Hangat)', provinceId: '', regencyId: '',
+      districtId: '', villageId: '', postalCode: '', addressDetail: '',
+      manualRegion: '', legacyArea: '', notes: ''
+    };
     try {
       if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem(FORM_STORAGE_KEY);
+        const saved = window.localStorage.getItem(FORM_STORAGE_KEY);
         if (saved) {
-          const parsed = JSON.parse(saved);
+          const parsed = JSON.parse(saved) as Record<string, unknown>;
           return {
             name: typeof parsed.name === 'string' ? parsed.name : '',
-            type: typeof parsed.type === 'string' ? parsed.type : 'Siap Santap (Hangat)',
-            area: typeof parsed.area === 'string' ? parsed.area : '',
+            type: typeof parsed.type === 'string' ? parsed.type : emptyForm.type,
+            provinceId: typeof parsed.provinceId === 'string' ? parsed.provinceId : '',
+            regencyId: typeof parsed.regencyId === 'string' ? parsed.regencyId : '',
+            districtId: typeof parsed.districtId === 'string' ? parsed.districtId : '',
+            villageId: typeof parsed.villageId === 'string' ? parsed.villageId : '',
+            postalCode: typeof parsed.postalCode === 'string' ? parsed.postalCode : '',
+            addressDetail: typeof parsed.addressDetail === 'string' ? parsed.addressDetail : '',
+            manualRegion: typeof parsed.manualRegion === 'string' ? parsed.manualRegion : '',
+            legacyArea: typeof parsed.legacyArea === 'string' ? parsed.legacyArea : typeof parsed.area === 'string' ? parsed.area : '',
             notes: typeof parsed.notes === 'string' ? parsed.notes : ''
           };
         }
       }
     } catch {
-      // ignore
+      // Corrupt or inaccessible saved data is ignored safely.
     }
-    return {
-      name: '',
-      type: 'Siap Santap (Hangat)',
-      area: '',
-      notes: ''
-    };
+    return emptyForm;
   });
 
   const [copied, setCopied] = useState(false);
   const [guestCount, setGuestCount] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+
+  const provinces = useIndonesiaRegionOptions('/provinces.json', isOpen);
+  const regencies = useIndonesiaRegionOptions(form.provinceId ? `/regencies/${form.provinceId}.json` : null, isOpen);
+  const districts = useIndonesiaRegionOptions(form.regencyId ? `/districts/${form.regencyId}.json` : null, isOpen);
+  const villages = useIndonesiaRegionOptions(form.districtId ? `/villages/${form.districtId}.json` : null, isOpen);
+  const regionLookupUnavailable = Boolean(provinces.error || regencies.error || districts.error || villages.error);
+  const selectedProvince = provinces.data.find((item) => item.id === form.provinceId);
+  const selectedRegency = regencies.data.find((item) => item.id === form.regencyId);
+  const selectedDistrict = districts.data.find((item) => item.id === form.districtId);
+  const selectedVillage = villages.data.find((item) => item.id === form.villageId);
 
   // Simpan data form ke localStorage setiap kali diubah agar repeat order tidak perlu ketik ulang
   useEffect(() => {
@@ -70,31 +88,57 @@ export const CartModal: React.FC<CartModalProps> = ({
   const knownPieces = calculateKnownPieces(cart, GYOZEN_PRODUCTS);
   const piecesPerGuest = calculatePiecesPerGuest(knownPieces, Number(guestCount));
 
+  const buildCurrentOrderMessage = () => {
+    const deliveryAddress = buildDeliveryAddressLine({
+      province: regionLookupUnavailable ? '' : selectedProvince?.name,
+      regency: regionLookupUnavailable ? '' : selectedRegency?.name,
+      district: regionLookupUnavailable ? '' : selectedDistrict?.name,
+      village: regionLookupUnavailable ? '' : selectedVillage?.name,
+      administrativeArea: regionLookupUnavailable ? form.manualRegion : '',
+      postalCode: form.postalCode,
+      detail: form.addressDetail
+    });
+    const extraNote = normalizeSingleLine(form.notes);
+    return buildWhatsAppOrderMessage({
+      cart, customerName: form.name, servingType: form.type, deliveryAddress
+    }) + (extraNote ? `\n*Catatan Khusus:* ${extraNote}` : '');
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (cart.length === 0) {
       onShowToast('<strong>Keranjang kosong!</strong> Tambahkan minimal 1 menu Gyozen terlebih dahulu.');
       return;
     }
+    const name = normalizeSingleLine(form.name);
+    const detail = normalizeSingleLine(form.addressDetail);
+    const manualRegion = normalizeSingleLine(form.manualRegion);
+    const postalCode = normalizeSingleLine(form.postalCode);
 
-    let extraNote = '';
-    if (form.notes && form.notes.trim()) {
-      extraNote = `\n*Catatan Khusus:* ${form.notes.trim()}`;
+    if (!isValidCustomerName(name)) {
+      onShowToast('Nama harus 2–80 karakter dan hanya berisi huruf, spasi, titik, apostrof, atau tanda hubung.');
+      return;
+    }
+    if (regionLookupUnavailable) {
+      if (manualRegion.length < 5 || manualRegion.length > 250) {
+        onShowToast('Isi wilayah administratif secara lengkap: provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan.');
+        return;
+      }
+    } else if (!selectedProvince || !selectedRegency || !selectedDistrict || !selectedVillage) {
+      onShowToast('Pilih provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan terlebih dahulu.');
+      return;
+    }
+    if (postalCode && !/^\d{5}$/.test(postalCode)) {
+      onShowToast('Kode pos harus terdiri dari 5 angka. Kode pos boleh dikosongkan bila belum tersedia.');
+      return;
+    }
+    if (!isValidAddressDetail(detail)) {
+      onShowToast('Detail alamat harus 5–250 karakter. Tambahkan nama jalan, nomor rumah, RT/RW, atau patokan.');
+      return;
     }
 
-    const message =
-      buildWhatsAppOrderMessage({
-        cart,
-        customerName: form.name,
-        servingType: form.type,
-        deliveryArea: form.area
-      }) + extraNote;
-
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
-      '_blank',
-      'noopener,noreferrer'
-    );
+    const message = buildCurrentOrderMessage();
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     onShowToast('Membuka WhatsApp resmi <strong>Dimsum Gyozen (0898-1230-703)</strong>...');
   };
 
@@ -103,34 +147,27 @@ export const CartModal: React.FC<CartModalProps> = ({
       onShowToast('Keranjang pesanan masih kosong.');
       return;
     }
-
-    let extraNote = '';
-    if (form.notes && form.notes.trim()) {
-      extraNote = `\n*Catatan Khusus:* ${form.notes.trim()}`;
-    }
-
-    const text =
-      buildWhatsAppOrderMessage({
-        cart,
-        customerName: form.name,
-        servingType: form.type,
-        deliveryArea: form.area
-      }) + extraNote;
-
+    const text = buildCurrentOrderMessage();
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-          onShowToast('<strong>Berhasil!</strong> Rincian pesanan disalin ke clipboard.');
-        })
-        .catch(() => {
-          fallbackCopy(text);
-        });
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        onShowToast('<strong>Berhasil!</strong> Rincian pesanan disalin ke clipboard.');
+      }).catch(() => fallbackCopy(text));
     } else {
       fallbackCopy(text);
     }
+  };
+
+  const handleClearSavedDetails = () => {
+    const emptyForm: OrderFormState = {
+      name: '', type: 'Siap Santap (Hangat)', provinceId: '', regencyId: '',
+      districtId: '', villageId: '', postalCode: '', addressDetail: '',
+      manualRegion: '', legacyArea: '', notes: ''
+    };
+    setForm(emptyForm);
+    try { window.localStorage.removeItem(FORM_STORAGE_KEY); } catch { /* storage unavailable */ }
+    onShowToast('Data nama dan alamat lama telah dikosongkan dari formulir.');
   };
 
   const fallbackCopy = (text: string) => {
@@ -297,88 +334,146 @@ export const CartModal: React.FC<CartModalProps> = ({
           </span>
         </div>
 
-        {/* Customer Details Form */}
+        {/* Secure customer and delivery form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div>
-            <label className="text-xs font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custName">
-              <User className="w-3.5 h-3.5 text-[var(--red)]" />
-              <span>Nama Pemesan *</span>
+            <label className="text-sm font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custName">
+              <User className="w-4 h-4 text-[var(--red)]" /> <span>Nama Pemesan *</span>
             </label>
-            <input
-              className="input-shadcn"
-              id="custName"
-              type="text"
-              required
-              placeholder="Contoh: Kak Rina / Mas Adi"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custType">
-                <Utensils className="w-3.5 h-3.5 text-amber-700" />
-                <span>Pilihan Sajian</span>
-              </label>
-              <select
-                className="input-shadcn cursor-pointer"
-                id="custType"
-                value={form.type}
-                onChange={(e) => setForm({ ...form, type: e.target.value })}
-              >
-                <option value="Siap Santap (Hangat)">Siap Santap (Hangat)</option>
-                <option value="Ready Frozen (Beku)">Ready Frozen (Beku)</option>
-                <option value="Campur (Hangat & Frozen)">Campur (Hangat & Frozen)</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="text-xs font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custArea">
-                <MapPin className="w-3.5 h-3.5 text-rose-600" />
-                <span>Alamat / Kecamatan *</span>
-              </label>
-              <input
-                className="input-shadcn"
-                id="custArea"
-                type="text"
-                required
-                placeholder="Contoh: Sidoarjo Kota / Waru"
-                value={form.area}
-                onChange={(e) => setForm({ ...form, area: e.target.value })}
-              />
-            </div>
+            <input className="input-shadcn" id="custName" name="customerName" type="text" autoComplete="name"
+              required minLength={2} maxLength={80} placeholder="Contoh: Rina Putri" value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })} aria-describedby="customer-name-help" />
+            <p className="field-help" id="customer-name-help">2–80 karakter; tanda baca nama yang umum tetap diperbolehkan.</p>
           </div>
 
           <div>
-            <label className="text-xs font-bold text-[var(--ink)] mb-1 block" htmlFor="custNotes">
-              Catatan Tambahan (Opsional)
+            <label className="text-sm font-bold text-[var(--ink)] mb-1 flex items-center gap-1" htmlFor="custType">
+              <Utensils className="w-4 h-4 text-amber-700" /> <span>Pilihan Sajian</span>
             </label>
-            <input
-              className="input-shadcn"
-              id="custNotes"
-              type="text"
-              placeholder="Contoh: Sambal dipisah / kirim jam 12 siang"
-              value={form.notes || ''}
-              onChange={(e) => setForm({ ...form, notes: e.target.value })}
-            />
+            <select className="input-shadcn cursor-pointer" id="custType" value={form.type}
+              onChange={(e) => setForm({ ...form, type: e.target.value })}>
+              <option value="Siap Santap (Hangat)">Siap Santap (Hangat)</option>
+              <option value="Ready Frozen (Beku)">Ready Frozen (Beku)</option>
+              <option value="Campur (Hangat & Frozen)">Campur (Hangat & Frozen)</option>
+            </select>
           </div>
 
-          <button className="btn btn-primary btn-shimmer w-full h-12 text-base mt-2 shadow-md active:scale-[0.98] transition-transform" type="submit">
-            <MessageCircle className="w-5 h-5 text-amber-200" />
-            <span>Kirim Pesanan ke WhatsApp Gyozen</span>
-          </button>
+          <section className="address-section" aria-labelledby="delivery-address-title">
+            <div>
+              <h4 className="address-section-title" id="delivery-address-title"><MapPin className="w-4 h-4 text-rose-600" /> Alamat Pengiriman</h4>
+              <p className="field-help">Pilih wilayah berurutan. Kode pos terisi otomatis dari desa/kelurahan dan masih bisa kamu koreksi.</p>
+            </div>
 
-          <div className="flex justify-between items-center text-xs text-[var(--muted)] pt-1">
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="inline-flex items-center gap-1 text-[var(--red)] font-bold hover:underline cursor-pointer bg-transparent border-none p-0"
-            >
+            {form.legacyArea && (
+              <div className="legacy-address-note">
+                <span>Alamat lama yang tersimpan: <strong>{form.legacyArea}</strong>. Pilih wilayah resmi di bawah dan lengkapi alamat detail agar pesanan lebih akurat.</span>
+                <button type="button" onClick={() => setForm({ ...form, legacyArea: '' })} aria-label="Tutup catatan alamat lama">×</button>
+              </div>
+            )}
+
+            {!regionLookupUnavailable ? (
+              <div className="address-select-grid">
+                <div className="address-field">
+                  <label htmlFor="custProvince">Provinsi *</label>
+                  <select className="input-shadcn" id="custProvince" required value={form.provinceId}
+                    disabled={provinces.isLoading || provinces.data.length === 0}
+                    onChange={(e) => setForm({ ...form, provinceId: e.target.value, regencyId: '', districtId: '', villageId: '', postalCode: '', legacyArea: '' })}>
+                    <option value="">{provinces.isLoading ? 'Memuat provinsi…' : 'Pilih provinsi'}</option>
+                    {provinces.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+                  </select>
+                </div>
+                <div className="address-field">
+                  <label htmlFor="custRegency">Kabupaten / Kota *</label>
+                  <select className="input-shadcn" id="custRegency" required value={form.regencyId}
+                    disabled={!form.provinceId || regencies.isLoading || regencies.data.length === 0}
+                    onChange={(e) => setForm({ ...form, regencyId: e.target.value, districtId: '', villageId: '', postalCode: '', legacyArea: '' })}>
+                    <option value="">{regencies.isLoading ? 'Memuat kabupaten/kota…' : 'Pilih kabupaten/kota'}</option>
+                    {regencies.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+                  </select>
+                </div>
+                <div className="address-field">
+                  <label htmlFor="custDistrict">Kecamatan / Distrik *</label>
+                  <select className="input-shadcn" id="custDistrict" required value={form.districtId}
+                    disabled={!form.regencyId || districts.isLoading || districts.data.length === 0}
+                    onChange={(e) => setForm({ ...form, districtId: e.target.value, villageId: '', postalCode: '', legacyArea: '' })}>
+                    <option value="">{districts.isLoading ? 'Memuat kecamatan…' : 'Pilih kecamatan'}</option>
+                    {districts.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+                  </select>
+                </div>
+                <div className="address-field">
+                  <label htmlFor="custVillage">Desa / Kelurahan *</label>
+                  <select className="input-shadcn" id="custVillage" required value={form.villageId}
+                    disabled={!form.districtId || villages.isLoading || villages.data.length === 0}
+                    onChange={(e) => {
+                      const village = villages.data.find((item) => item.id === e.target.value);
+                      setForm({ ...form, villageId: e.target.value, postalCode: village?.postal_code || '', legacyArea: '' });
+                    }}>
+                    <option value="">{villages.isLoading ? 'Memuat desa/kelurahan…' : 'Pilih desa/kelurahan'}</option>
+                    {villages.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+                  </select>
+                </div>
+              </div>
+            ) : (
+              <div className="address-fallback">
+                <p role="alert">{provinces.error || regencies.error || districts.error || villages.error} Kamu tetap bisa mengirim pesanan dengan mengisi wilayah berikut secara manual.</p>
+                <label className="address-field" htmlFor="custManualRegion">
+                  Provinsi, kabupaten/kota, kecamatan, desa/kelurahan *
+                  <textarea className="input-shadcn address-fallback-input" id="custManualRegion" required
+                    minLength={5} maxLength={250} rows={2}
+                    placeholder="Contoh: Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa Tambak Oso"
+                    value={form.manualRegion} onChange={(e) => setForm({ ...form, manualRegion: e.target.value })} />
+                </label>
+                <button className="address-retry" type="button" onClick={() => {
+                  provinces.retry(); regencies.retry(); districts.retry(); villages.retry();
+                }}><RefreshCw className="w-3.5 h-3.5" /> Coba muat ulang data wilayah</button>
+              </div>
+            )}
+
+            <div className="address-detail-grid">
+              <div className="address-field">
+                <label htmlFor="custPostalCode">Kode Pos <span>(otomatis, bisa diedit)</span></label>
+                <input className="input-shadcn" id="custPostalCode" type="text" inputMode="numeric" autoComplete="postal-code"
+                  maxLength={5} pattern="[0-9]{5}" placeholder="5 digit" value={form.postalCode}
+                  onChange={(e) => setForm({ ...form, postalCode: e.target.value.replace(/\D/g, '').slice(0, 5) })} />
+              </div>
+              <div className="address-field address-detail-field">
+                <label htmlFor="custAddressDetail">Alamat Detail *</label>
+                <textarea className="input-shadcn address-detail-input" id="custAddressDetail" name="street-address"
+                  autoComplete="street-address" required minLength={5} maxLength={250} rows={2}
+                  placeholder="Nama jalan, nomor rumah, RT/RW, blok, atau patokan" value={form.addressDetail}
+                  onChange={(e) => setForm({ ...form, addressDetail: e.target.value })} aria-describedby="address-detail-help" />
+                <p className="field-help" id="address-detail-help">5–250 karakter. Contoh: Jl. Raya Tambak Oso No. 10, RT 02/RW 03.</p>
+              </div>
+            </div>
+            <p className="address-source-note">Referensi wilayah dan kode pos EMSIFA (pembaruan data 3 September 2026). Jangkauan pengantaran tetap dikonfirmasi admin.</p>
+          </section>
+
+          <div>
+            <label className="text-sm font-bold text-[var(--ink)] mb-1 block" htmlFor="custNotes">Catatan Tambahan (Opsional)</label>
+            <input className="input-shadcn" id="custNotes" type="text" maxLength={250}
+              placeholder="Contoh: Sambal dipisah / kirim jam 12 siang" value={form.notes}
+              onChange={(e) => setForm({ ...form, notes: e.target.value })} />
+            <p className="field-help">Maksimal 250 karakter.</p>
+          </div>
+
+          <div className="order-confirmation-note">
+            <ShieldCheck className="w-4 h-4 flex-shrink-0" />
+            <p>Pesanan belum otomatis terkonfirmasi saat WhatsApp terbuka. Admin akan mengecek stok, ongkir, dan detail pembayaran terlebih dahulu.</p>
+          </div>
+          <button className="btn btn-primary btn-shimmer w-full h-12 text-base mt-1 shadow-md active:scale-[0.98] transition-transform"
+            type="submit" disabled={cart.length === 0}>
+            <MessageCircle className="w-5 h-5 text-amber-200" /> <span>Kirim Rincian Pesanan ke WhatsApp</span>
+          </button>
+          <div className="flex flex-wrap justify-between items-center gap-3 text-xs text-[var(--muted)] pt-1">
+            <button type="button" onClick={handleCopy} className="inline-flex items-center gap-1 text-[var(--red)] font-bold hover:underline cursor-pointer bg-transparent border-none p-0" disabled={cart.length === 0}>
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Tersalin ke Clipboard!' : 'Salin Teks Pesanan'}</span>
             </button>
-            <span className="text-[11px]">Terhubung ke WA resmi GYOZEN</span>
+            <span className="text-[11px]">WhatsApp resmi Gyozen</span>
+          </div>
+          <div className="saved-data-row">
+            <span>Data nama dan alamat tersimpan di browser ini untuk repeat order.</span>
+            <button type="button" onClick={handleClearSavedDetails}>Hapus data tersimpan</button>
           </div>
         </form>
       </div>
