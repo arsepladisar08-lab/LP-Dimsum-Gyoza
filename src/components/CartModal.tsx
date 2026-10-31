@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CartItem, OrderFormState } from '../types';
-import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage, calculateKnownPieces, calculatePiecesPerGuest, buildDeliveryAddressLine, normalizeSingleLine, isValidCustomerName, isValidAddressDetail } from '../utils/order';
+import { formatRupiah, calculateTotal, buildWhatsAppOrderMessage, calculateKnownPieces, calculatePiecesPerGuest, buildDeliveryAddressLine, normalizeSingleLine, isValidCustomerName, isValidAddressDetail, formatVillageRegionLabel } from '../utils/order';
 import { useIndonesiaRegionOptions } from '../hooks/useIndonesiaAddress';
 import { WHATSAPP_NUMBER, GYOZEN_PRODUCTS } from '../data/products';
 import { X, Plus, Minus, MessageCircle, Copy, Check, ShoppingBag, MapPin, User, Utensils, Trash2, ShieldCheck, RefreshCw } from 'lucide-react';
@@ -101,7 +101,7 @@ export const CartModal: React.FC<CartModalProps> = ({
       province: regionLookupUnavailable ? '' : selectedProvince?.name,
       regency: regionLookupUnavailable ? '' : selectedRegency?.name,
       district: regionLookupUnavailable ? '' : selectedDistrict ? `Kecamatan ${selectedDistrict.name}` : '',
-      village: regionLookupUnavailable ? '' : selectedVillage ? `Desa/Kelurahan ${selectedVillage.name}` : '',
+      village: regionLookupUnavailable ? '' : selectedVillage ? formatVillageRegionLabel(selectedVillage.id, selectedVillage.name) : '',
       administrativeArea: regionLookupUnavailable ? form.manualRegion : '',
       postalCode: form.postalCode,
       detail: form.addressDetail
