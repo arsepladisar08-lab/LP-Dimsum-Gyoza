@@ -120,7 +120,7 @@ export default function App() {
       const idx = prev.findIndex((item) => item.id === bundleId);
       if (idx >= 0) {
         const next = [...prev];
-        next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
+        next[idx] = { ...next[idx], qty: Math.min(99, next[idx].qty + 1) };
         return next;
       }
       return [
