@@ -76,7 +76,7 @@ test('buildWhatsAppOrderMessage keeps the complete address on one line', () => {
   assert.ok(msg.includes('*Sajian:* Siap Santap (Hangat)'));
   assert.ok(msg.includes('*Alamat:* Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa/Kelurahan Tambak Oso, 61256 — Jl. Raya Tambak Oso No. 10, RT 02/RW 03'));
   assert.ok(msg.includes('1. Dimsum Mentai Lumer (2x) = Rp50.000'));
-  assert.ok(msg.includes('*Total Estimasi:* *Rp50.000*'));
+  assert.ok(msg.includes('*Total Estimasi Menu (belum termasuk ongkir):* *Rp50.000*'));
 });
 
 test('address formatting allows unknown postcodes without inventing values', () => {
