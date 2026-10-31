@@ -10,7 +10,7 @@ If the external lookup cannot be reached, the form offers a manual administrativ
 
 ## Validation and storage
 - Customer name: 2–80 characters, Unicode letters with common name punctuation.
-- Street-level address: 5–250 characters; newlines and control characters are normalized before message generation.
+- Street-level address: 6–250 characters; newlines and control characters are normalized before message generation.
 - Postal code: optional, but if supplied it must contain five digits.
 - Notes: maximum 250 characters.
 - Legacy `area` values from `gyozen_customer_form_v1` are retained as a visible migration note; they are not misrepresented as a selected administrative region.
