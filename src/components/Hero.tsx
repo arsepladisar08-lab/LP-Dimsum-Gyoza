@@ -72,10 +72,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
               );
             })}
           </div>
-          <figcaption className="hero-image-caption">
-            <span>Jelajahi menu favorit Gyozen</span>
-            <strong>Mulai Rp15.000</strong>
-          </figcaption>
         </figure>
       </div>
     </section>

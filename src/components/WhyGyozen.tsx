@@ -18,11 +18,9 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => (
     <div className="container-custom">
       <div className="section-heading story-heading">
         <div>
-          <p className="section-kicker"><Sparkles size={14}/> THE GYOZEN MOOD</p>
           <h2 id="why-title">Dari ngemil sendiri<br/><em>sampai berbagi ramai-ramai.</em></h2>
           <p className="section-intro">Ada pilihan untuk setiap suasana: menu hangat, paket sharing, sampai stok frozen yang praktis disiapkan di rumah.</p>
         </div>
-        <span className="story-stamp">GOOD<br/>FOOD<br/><b>✳</b> GOOD MOOD</span>
       </div>
 
       <div className="story-layout">

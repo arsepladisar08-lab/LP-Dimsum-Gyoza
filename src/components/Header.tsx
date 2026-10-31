@@ -40,12 +40,22 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
             className="brand-logo-image"
             src="/images/brand/gyozen-logo.webp"
             alt="Gyozen"
-            width="192"
-            height="199"
+            width="50"
+            height="50"
+            style={{ width: '50px', height: '50px' }}
           />
         </a>
 
-        <nav className="header-nav" aria-label="Navigasi utama">
+        <nav
+          className="header-nav"
+          aria-label="Navigasi utama"
+          style={{
+            lineHeight: '26px',
+            fontSize: '25px',
+            height: '45px',
+            width: '250px'
+          }}
+        >
           {visibleLinks.map(([label, href]) => (
             <a key={href} className="nav-link" href={href}>{label}</a>
           ))}

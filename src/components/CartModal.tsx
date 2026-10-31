@@ -171,9 +171,6 @@ export const CartModal: React.FC<CartModalProps> = ({
         {/* Header */}
         <div className="flex items-start justify-between pb-4 border-b border-[var(--line)]">
           <div>
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--red)] block">
-              ORDER LANGSUNG KE WA 0898-1230-703
-            </span>
             <div className="flex items-center gap-3 mt-0.5">
               <h3 id="modalTitle" className="text-xl sm:text-2xl font-black text-[var(--ink)] tracking-tight">
                 Keranjang Pesanan Gyozen
@@ -300,37 +297,6 @@ export const CartModal: React.FC<CartModalProps> = ({
           </span>
         </div>
 
-        {/* Portion estimate: count only products with an explicit piece quantity */}
-        {knownPieces > 0 && (
-          <div className="mt-3 mb-4 p-3.5 rounded-xl bg-amber-50/70 border border-amber-900/10">
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-sm font-bold text-[var(--ink)]">Estimasi porsi acara</p>
-                <p className="text-xs text-[var(--muted)] mt-1">Terhitung {knownPieces} pcs dari menu dengan jumlah isi yang tercantum jelas.</p>
-              </div>
-              <div className="w-28 shrink-0">
-                <label htmlFor="guestCount" className="block text-[11px] font-bold text-[var(--ink)] mb-1">Jumlah orang</label>
-                <input
-                  id="guestCount"
-                  className="input-shadcn"
-                  type="number"
-                  min="1"
-                  step="1"
-                  inputMode="numeric"
-                  placeholder="Contoh: 5"
-                  value={guestCount}
-                  onChange={(e) => setGuestCount(e.target.value)}
-                />
-              </div>
-            </div>
-            {piecesPerGuest !== null && (
-              <p className="text-sm font-bold text-[var(--red)] mt-2">
-                Rata-rata {piecesPerGuest.toFixed(1)} pcs per orang.
-              </p>
-            )}
-          </div>
-        )}
-
         {/* Customer Details Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div>
@@ -412,7 +378,7 @@ export const CartModal: React.FC<CartModalProps> = ({
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Tersalin ke Clipboard!' : 'Salin Teks Pesanan'}</span>
             </button>
-            <span className="text-[11px]">Terhubung ke WA resmi 0898-1230-703</span>
+            <span className="text-[11px]">Terhubung ke WA resmi GYOZEN</span>
           </div>
         </form>
       </div>

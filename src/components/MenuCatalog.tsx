@@ -20,7 +20,6 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, currentCateg
       <div className="container-custom">
         <div className="section-heading menu-heading">
           <div>
-            <p className="section-kicker"><Sparkles size={14}/> THE MENU</p>
             <h2 id="menu-title">Temukan mood,<br/><em>pilih dimsum-nya.</em></h2>
             <p className="section-intro">Dari satu porsi untuk diri sendiri sampai paket berbagi. Pilih menu favoritmu dan lihat detailnya.</p>
           </div>

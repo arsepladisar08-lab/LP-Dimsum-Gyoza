@@ -8,7 +8,6 @@ export const ClosingCTA: React.FC<ClosingCTAProps> = ({ onOpenCart }) => (
   <section className="closing-section" aria-labelledby="closing-title">
     <div className="closing-deco closing-deco-one" aria-hidden="true"/><div className="closing-deco closing-deco-two" aria-hidden="true"/>
     <div className="container-custom closing-content">
-      <p className="closing-kicker"><Sparkles size={14}/> YOUR NEXT COMFORT BITE</p>
       <h2 id="closing-title">Hari ini waktunya<br/><em>Gyozen.</em></h2>
       <p>Pilih menu yang kamu suka. Biar satu gigitan kecil bikin harimu terasa lebih menyenangkan.</p>
       <div className="closing-actions">

@@ -3,6 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      /* Safeguard against browser extensions attempting to assign window.fetch when getter-only */
+      try {
+        let _activeFetch = window.fetch;
+        Object.defineProperty(window, 'fetch', {
+          get() {
+            return _activeFetch;
+          },
+          set(fn) {
+            _activeFetch = fn;
+          },
+          configurable: true,
+          enumerable: true
+        });
+      } catch (_err) {
+        // Ignore if restricted
+      }
+    </script>
     <meta name="theme-color" content="#84171a" />
     <meta name="description" content="Temukan pilihan Dimsum Gyozen: gyoza, dimsum original, goreng keju, mentai, platter, party box, ready frozen, dan Ebi Chili Oil. Pilih menu dan pesan melalui WhatsApp." />
     <meta property="og:title" content="Dimsum Gyozen — Satu Gigitan, Bikin Hari Makin Zen" />
