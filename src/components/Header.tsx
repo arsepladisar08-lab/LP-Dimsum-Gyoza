@@ -36,14 +36,13 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
     <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
       <div className="container-custom header-inner">
         <a className="brand" href="#top" aria-label="Gyozen, kembali ke atas" onClick={closeMenu}>
-          <span className="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <path d="M7 29c0-11 7-19 17-19s17 8 17 19" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
-              <path d="M7 30h34M12 36h24" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
-              <path d="m19 12-2-5m14 5 2-5" stroke="#FFC055" strokeWidth="3" strokeLinecap="round"/>
-            </svg>
-          </span>
-          <span className="brand-wordmark">GYOZEN<small>DIMSUM · GYOZA · FROZEN</small></span>
+          <img
+            className="brand-logo-image"
+            src="/images/brand/gyozen-logo.webp"
+            alt="Gyozen"
+            width="192"
+            height="199"
+          />
         </a>
 
         <nav className="header-nav" aria-label="Navigasi utama">
@@ -53,16 +52,18 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
         </nav>
 
         <div className="header-actions">
-          <button
-            className="btn btn-primary header-cart"
-            type="button"
-            onClick={onOpenCart}
-            aria-label={`Buka keranjang, ${cartCount} item`}
-          >
-            <ShoppingBag size={17}/>
-            <span className="header-cart-label">Keranjang</span>
-            <span className="cart-pill-count">{cartCount}</span>
-          </button>
+          {cartCount > 0 && (
+            <button
+              className="btn btn-primary header-cart header-cart-enter"
+              type="button"
+              onClick={onOpenCart}
+              aria-label={`Buka keranjang, ${cartCount} item`}
+            >
+              <ShoppingBag size={17}/>
+              <span className="header-cart-label">Keranjang</span>
+              <span className="cart-pill-count">{cartCount}</span>
+            </button>
+          )}
           <button
             className="btn btn-secondary mobile-menu-btn"
             type="button"
@@ -83,13 +84,15 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
               {label}<ChevronRight size={16}/>
             </a>
           ))}
-          <button
-            className="btn btn-primary w-full"
-            type="button"
-            onClick={() => { closeMenu(); onOpenCart(); }}
-          >
-            <ShoppingBag size={17}/> Lihat keranjang ({cartCount})
-          </button>
+          {cartCount > 0 && (
+            <button
+              className="btn btn-primary w-full"
+              type="button"
+              onClick={() => { closeMenu(); onOpenCart(); }}
+            >
+              <ShoppingBag size={17}/> Lihat keranjang ({cartCount})
+            </button>
+          )}
           <a
             className="btn btn-secondary w-full"
             href={`https://wa.me/${WHATSAPP_NUMBER}`}

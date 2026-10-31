@@ -1,24 +1,32 @@
 import React from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { GYOZEN_PRODUCTS } from '../data/products';
+import { Product } from '../types';
 
 interface HeroProps {
   onOpenCart: () => void;
+  onPreviewProduct: (product: Product) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
+const featuredProducts = [
+  { id: 'gyoza-fresh', className: 'hero-product-card--gyoza' },
+  { id: 'mentai-lumer', className: 'hero-product-card--mentai' },
+  { id: 'dimsum-goreng-keju', className: 'hero-product-card--keju' }
+] as const;
+
+export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="container-custom hero-grid">
         <div className="hero-copy">
-          <p className="hero-location">Dimsum & Gyoza · Sidoarjo</p>
+          <p className="hero-location">Dimsum &amp; Gyoza · Sidoarjo</p>
+          <p className="hero-kicker">GOOD FOOD. GOOD MOOD.</p>
           <h1 id="hero-title">
-            Dimsum &amp; Gyoza
-            <br />
-            Gyozen Sidoarjo
+            Satu gigitan, bikin hari makin <em>zen.</em>
           </h1>
           <p className="hero-subtitle">
-            Gyoza juicy, mentai lumer, dan pilihan frozen untuk stok di rumah.
-            Mulai Rp15.000. Pilih menu favoritmu, lalu lanjutkan pesanan lewat WhatsApp.
+            Camilan hangat, gurih, dan penuh rasa untuk nemenin setiap momen.
+            Temukan dimsum favorit, gyoza juicy, mentai lumer, hingga pilihan frozen untuk stok di rumah.
           </p>
 
           <div className="hero-actions">
@@ -26,30 +34,47 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart }) => {
               Pesan sekarang <ArrowUpRight size={18}/>
             </button>
             <a className="hero-menu-link" href="#menu">
-              Lihat menu <ArrowDown size={17}/>
+              Jelajahi menu <ArrowDown size={17}/>
             </a>
           </div>
+          <p className="hero-footnote">Dibuat untuk momen kecil yang terasa spesial.</p>
         </div>
 
         <figure className="hero-visual">
-          <picture className="hero-food-picture">
-            <source
-              media="(max-width: 640px)"
-              srcSet="/images/menu/dimsum-platter-480.webp"
-            />
-            <img
-              src="/images/menu/dimsum-platter-960.webp"
-              alt="Dimsum Platter Komplit Gyozen dengan pilihan dimsum dan gyoza"
-              width="960"
-              height="960"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
+          <div className="hero-gallery" aria-label="Menu favorit Gyozen">
+            {featuredProducts.map(({ id, className }) => {
+              const product = GYOZEN_PRODUCTS.find((item) => item.id === id);
+              if (!product) return null;
+
+              const image480 = product.imageUrl.replace('-960.webp', '-480.webp');
+              return (
+                <button
+                  key={id}
+                  className={`hero-product-card ${className}`}
+                  type="button"
+                  onClick={() => onPreviewProduct(product)}
+                  aria-label={`Lihat detail ${product.name}`}
+                  title={`Lihat detail ${product.name}`}
+                >
+                  <img
+                    src={product.imageUrl}
+                    srcSet={`${image480} 480w, ${product.imageUrl} 960w`}
+                    sizes="(max-width: 767px) 44vw, 320px"
+                    alt=""
+                    width="960"
+                    height="960"
+                    loading={id === 'mentai-lumer' ? 'eager' : 'lazy'}
+                    fetchPriority={id === 'mentai-lumer' ? 'high' : 'auto'}
+                    decoding="async"
+                  />
+                  <span className="hero-product-label">{product.name}</span>
+                </button>
+              );
+            })}
+          </div>
           <figcaption className="hero-image-caption">
-            <span>Dimsum Platter Komplit</span>
-            <strong>Rp45.000</strong>
+            <span>Jelajahi menu favorit Gyozen</span>
+            <strong>Mulai Rp15.000</strong>
           </figcaption>
         </figure>
       </div>

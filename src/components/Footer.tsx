@@ -9,7 +9,16 @@ export const Footer: React.FC = () => {
       <div className="container-custom">
         <div className="footer-grid">
           <div className="footer-brand-column">
-            <a className="footer-brand" href="#top" aria-label="Gyozen, kembali ke atas"><span className="footer-brand-mark">G.</span><span>GYOZEN<small>DIMSUM • GYOZA • GOOD MOOD</small></span></a>
+            <a className="footer-brand" href="#top" aria-label="Gyozen, kembali ke atas">
+              <img
+                className="footer-brand-image"
+                src="/images/brand/gyozen-logo.webp"
+                alt="Gyozen"
+                width="192"
+                height="199"
+              />
+              <span className="footer-brand-tagline">DIMSUM • GYOZA • GOOD MOOD</span>
+            </a>
             <p>Teman ngemil untuk momen santai, kumpul bersama, dan stok praktis di rumah.</p>
             <span className="footer-location"><MapPin size={15}/> Sidoarjo, Jawa Timur</span>
           </div>
