@@ -47,14 +47,14 @@ test('buildWhatsAppOrderMessage keeps the complete address on one line', () => {
   const cart: CartItem[] = [{ id: 'mentai', name: 'Dimsum Mentai Lumer', price: 25000, qty: 2 }];
   const address = buildDeliveryAddressLine({
     province: 'Jawa Timur', regency: 'Kabupaten Sidoarjo', district: 'Kecamatan Waru',
-    village: 'Desa Tambak Oso', postalCode: '61256', detail: 'Jl. Raya Tambak Oso No. 10, RT 02/RW 03'
+    village: 'Desa/Kelurahan Tambak Oso', postalCode: '61256', detail: 'Jl. Raya Tambak Oso No. 10, RT 02/RW 03'
   });
   const msg = buildWhatsAppOrderMessage({
     cart, customerName: 'Kak Rina', servingType: 'Siap Santap (Hangat)', deliveryAddress: address
   });
   assert.ok(msg.includes('*Nama:* Kak Rina'));
   assert.ok(msg.includes('*Sajian:* Siap Santap (Hangat)'));
-  assert.ok(msg.includes('*Alamat:* Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa Tambak Oso, 61256 — Jl. Raya Tambak Oso No. 10, RT 02/RW 03'));
+  assert.ok(msg.includes('*Alamat:* Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa/Kelurahan Tambak Oso, 61256 — Jl. Raya Tambak Oso No. 10, RT 02/RW 03'));
   assert.ok(msg.includes('1. Dimsum Mentai Lumer (2x) = Rp50.000'));
   assert.ok(msg.includes('*Total Estimasi:* *Rp50.000*'));
 });
@@ -77,6 +77,7 @@ test('customer name and address validation are length-aware and Unicode friendly
   assert.equal(isValidCustomerName('Rina / Adi'), false);
   assert.equal(isValidAddressDetail('Jl. Raya Tambak Oso No. 10'), true);
   assert.equal(isValidAddressDetail('RT 02'), false);
+  assert.equal(isValidAddressDetail('RT 02/RW 03'), true);
   assert.equal(isValidAddressDetail('x'.repeat(251)), false);
 });
 
