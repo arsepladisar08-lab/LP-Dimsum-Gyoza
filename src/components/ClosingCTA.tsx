@@ -8,7 +8,12 @@ export const ClosingCTA: React.FC<ClosingCTAProps> = ({ onOpenCart }) => (
   <section className="closing-section" aria-labelledby="closing-title">
     <div className="closing-deco closing-deco-one" aria-hidden="true"/><div className="closing-deco closing-deco-two" aria-hidden="true"/>
     <div className="container-custom closing-content">
-      <h2 id="closing-title">Hari ini waktunya<br/><em>Gyozen.</em></h2>
+      <h2 id="closing-title" className="stagger-heading stagger-h2">
+        <span className="stagger-item" style={{ animationDelay: '140ms' }}>Hari ini waktunya</span>
+        <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
+          <em>Gyozen.</em>
+        </span>
+      </h2>
       <p>Pilih menu yang kamu suka. Biar satu gigitan kecil bikin harimu terasa lebih menyenangkan.</p>
       <div className="closing-actions">
         <button className="btn btn-accent btn-large" type="button" onClick={onOpenCart}><ShoppingBag size={17}/> Pesan sekarang</button>

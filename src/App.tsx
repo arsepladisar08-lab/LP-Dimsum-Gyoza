@@ -13,6 +13,7 @@ import { CartModal } from './components/CartModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { Toast } from './components/Toast';
 import { MobileBottomBar } from './components/MobileBottomBar';
+import { ScrollEffects } from './components/ScrollEffects';
 import { GYOZEN_PRODUCTS } from './data/products';
 import { CartItem, Product, MenuCategory } from './types';
 import { calculateTotalCount, calculateTotal } from './utils/order';
@@ -154,6 +155,7 @@ export default function App() {
 
   return (
     <div className="min-h-[100svh] flex flex-col bg-[var(--background)] text-[var(--ink)] antialiased">
+      <ScrollEffects />
       <Header cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
 
       <main className={cart.length > 0 ? 'pb-20 md:pb-0' : ''}>

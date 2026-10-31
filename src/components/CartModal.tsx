@@ -265,7 +265,7 @@ export const CartModal: React.FC<CartModalProps> = ({
 
                 <div className="inline-flex items-center gap-1.5 flex-shrink-0 bg-neutral-100 p-1 rounded-lg border border-neutral-200">
                   <button
-                    className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 flex items-center justify-center text-xs font-bold transition-colors"
+                    className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 active:scale-90 flex items-center justify-center text-xs font-bold transition-all duration-150"
                     type="button"
                     onClick={() => onUpdateQty(item.id, -1)}
                     aria-label={`Kurangi jumlah ${item.name}`}
@@ -276,7 +276,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                     {item.qty}
                   </span>
                   <button
-                    className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 flex items-center justify-center text-xs font-bold transition-colors"
+                    className="w-7 h-7 rounded-md bg-white hover:bg-amber-100 active:scale-90 flex items-center justify-center text-xs font-bold transition-all duration-150"
                     type="button"
                     onClick={() => onUpdateQty(item.id, 1)}
                     aria-label={`Tambah jumlah ${item.name}`}
@@ -364,7 +364,7 @@ export const CartModal: React.FC<CartModalProps> = ({
             />
           </div>
 
-          <button className="btn btn-primary w-full h-12 text-base mt-2 shadow-md" type="submit">
+          <button className="btn btn-primary btn-shimmer w-full h-12 text-base mt-2 shadow-md active:scale-[0.98] transition-transform" type="submit">
             <MessageCircle className="w-5 h-5 text-amber-200" />
             <span>Kirim Pesanan ke WhatsApp Gyozen</span>
           </button>

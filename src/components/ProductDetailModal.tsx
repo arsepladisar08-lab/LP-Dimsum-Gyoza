@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
 import { formatRupiah, buildWhatsAppInquiryUrl, isActivePromo } from '../utils/order';
 import { WHATSAPP_NUMBER } from '../data/products';
-import { X, Star, Plus, Minus, ShoppingBag, MessageCircle, Flame, Utensils, Clock } from 'lucide-react';
+import { X, Star, Plus, Minus, ShoppingBag, MessageCircle, Flame, Utensils, Clock, Check } from 'lucide-react';
 import { ProductImage } from './ProductImage';
 
 interface ProductDetailModalProps {
@@ -17,9 +17,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onAddToCart
 }) => {
   const [qty, setQty] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {
     setQty(1);
+    setIsAdded(false);
   }, [product]);
 
   useEffect(() => {
@@ -33,8 +35,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   if (!product) return null;
 
   const handleAdd = () => {
-    onAddToCart(product, qty);
-    onClose();
+    setIsAdded(true);
+    setTimeout(() => {
+      onAddToCart(product, qty);
+      setIsAdded(false);
+      onClose();
+    }, 450);
   };
 
   return (
@@ -178,7 +184,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div className="inline-flex items-center gap-1.5 bg-neutral-100 p-1 rounded-xl border border-neutral-200">
                     <button
                       type="button"
-                      className="w-7 h-7 rounded-lg bg-white hover:bg-amber-100 flex items-center justify-center text-sm font-bold transition-colors"
+                      className="w-7 h-7 rounded-lg bg-white hover:bg-amber-100 active:scale-90 flex items-center justify-center text-sm font-bold transition-all duration-150"
                       onClick={() => setQty((prev) => Math.max(1, prev - 1))}
                       aria-label="Kurangi jumlah"
                     >
@@ -189,7 +195,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     </span>
                     <button
                       type="button"
-                      className="w-7 h-7 rounded-lg bg-white hover:bg-amber-100 flex items-center justify-center text-sm font-bold transition-colors"
+                      className="w-7 h-7 rounded-lg bg-white hover:bg-amber-100 active:scale-90 flex items-center justify-center text-sm font-bold transition-all duration-150"
                       onClick={() => setQty((prev) => prev + 1)}
                       aria-label="Tambah jumlah"
                     >
@@ -209,11 +215,24 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="btn btn-primary flex-1 h-11 text-sm shadow-md"
+                  className={`btn flex-1 h-11 text-sm shadow-md transition-all duration-200 ${
+                    isAdded
+                      ? 'bg-emerald-700 text-white border-emerald-800 scale-[1.02]'
+                      : 'btn-primary active:scale-95'
+                  }`}
                   onClick={handleAdd}
                 >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>Tambah ke Keranjang</span>
+                  {isAdded ? (
+                    <>
+                      <Check className="w-4 h-4 animate-in zoom-in-50 duration-200" />
+                      <span>Ditambahkan!</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-4 h-4" />
+                      <span>Tambah ke Keranjang</span>
+                    </>
+                  )}
                 </button>
 
                 <a
@@ -223,7 +242,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-secondary h-11 px-3"
+                  className="btn btn-secondary h-11 px-3 active:scale-95 transition-transform"
                   title="Tanya ketersediaan via WA"
                   aria-label="Tanya ketersediaan via WA"
                 >

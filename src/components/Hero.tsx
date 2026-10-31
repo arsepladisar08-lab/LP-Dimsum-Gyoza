@@ -21,8 +21,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
         <div className="hero-copy">
           <p className="hero-location">Dimsum &amp; Gyoza · Sidoarjo</p>
           <p className="hero-kicker">GOOD FOOD. GOOD MOOD.</p>
-          <h1 id="hero-title">
-            Satu gigitan, bikin hari makin <em>zen.</em>
+          <h1 id="hero-title" className="stagger-heading stagger-h1">
+            <span className="stagger-item" style={{ animationDelay: '100ms' }}>Satu gigitan,</span>{' '}
+            <span className="stagger-item" style={{ animationDelay: '240ms' }}>bikin hari makin</span>{' '}
+            <span className="stagger-item stagger-item-em" style={{ animationDelay: '380ms' }}>
+              <em>zen.</em>
+            </span>
           </h1>
           <p className="hero-subtitle">
             Camilan hangat, gurih, dan penuh rasa untuk nemenin setiap momen.
@@ -30,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
           </p>
 
           <div className="hero-actions">
-            <button className="btn btn-primary btn-large" type="button" onClick={onOpenCart}>
+            <button className="btn btn-primary btn-large btn-shimmer" type="button" onClick={onOpenCart}>
               Pesan sekarang <ArrowUpRight size={18}/>
             </button>
             <a className="hero-menu-link" href="#menu">

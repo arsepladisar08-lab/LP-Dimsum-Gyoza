@@ -18,6 +18,7 @@ const links = [
 export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [cartBouncing, setCartBouncing] = useState(false);
 
   useEffect(() => {
     const updateScrolledState = () => setIsScrolled(window.scrollY > 28);
@@ -26,6 +27,14 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
     window.addEventListener('scroll', updateScrolledState, { passive: true });
     return () => window.removeEventListener('scroll', updateScrolledState);
   }, []);
+
+  useEffect(() => {
+    if (cartCount > 0) {
+      setCartBouncing(true);
+      const timer = setTimeout(() => setCartBouncing(false), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [cartCount]);
 
   const closeMenu = () => setMobileMenuOpen(false);
   const visibleLinks = links.filter(
@@ -49,12 +58,6 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
         <nav
           className="header-nav"
           aria-label="Navigasi utama"
-          style={{
-            lineHeight: '26px',
-            fontSize: '25px',
-            height: '45px',
-            width: '250px'
-          }}
         >
           {visibleLinks.map(([label, href]) => (
             <a key={href} className="nav-link" href={href}>{label}</a>
@@ -64,14 +67,14 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onOpenCart }) => {
         <div className="header-actions">
           {cartCount > 0 && (
             <button
-              className="btn btn-primary header-cart header-cart-enter"
+              className="btn btn-primary header-cart header-cart-enter active:scale-95 transition-transform"
               type="button"
               onClick={onOpenCart}
               aria-label={`Buka keranjang, ${cartCount} item`}
             >
-              <ShoppingBag size={17}/>
+              <ShoppingBag size={18}/>
               <span className="header-cart-label">Keranjang</span>
-              <span className="cart-pill-count">{cartCount}</span>
+              <span className={`cart-pill-count ${cartBouncing ? 'cart-pill-bounce' : ''}`}>{cartCount}</span>
             </button>
           )}
           <button

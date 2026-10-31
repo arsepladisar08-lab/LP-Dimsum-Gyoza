@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 import { formatRupiah } from '../utils/order';
 
@@ -13,17 +13,27 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
   totalPrice,
   onOpenCart
 }) => {
+  const [bouncing, setBouncing] = useState(false);
+
+  useEffect(() => {
+    if (cartCount > 0) {
+      setBouncing(true);
+      const timer = setTimeout(() => setBouncing(false), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [cartCount]);
+
   if (cartCount === 0) return null;
 
   return (
     <aside
       aria-label="Keranjang belanja melayang"
-      className="mobile-bottom-bar cart-safe-area md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3"
+      className="mobile-bottom-bar cart-safe-area md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-[var(--line)] shadow-lg flex items-center justify-between gap-3 transition-transform duration-300"
     >
       <div className="flex items-center gap-2.5 min-w-0">
-        <div className="relative grid place-items-center w-10 h-10 rounded-xl border-2 border-[var(--brown)] bg-[var(--yellow)] shadow-[2px_2px_0_var(--brown)] shrink-0">
+        <div className="relative grid place-items-center w-10 h-10 rounded-xl border-2 border-[var(--brown)] bg-[var(--yellow)] shadow-[2px_2px_0_var(--brown)] shrink-0 transition-transform active:scale-95">
           <ShoppingBag className="w-5 h-5 text-[var(--ink)]" />
-          <span className="absolute -top-1.5 -right-1.5 grid place-items-center min-w-5 h-5 px-1 rounded-full bg-[var(--red)] text-[var(--paper)] text-[10px] font-black border border-[var(--brown)]">
+          <span className={`absolute -top-1.5 -right-1.5 grid place-items-center min-w-5 h-5 px-1 rounded-full bg-[var(--red)] text-[var(--paper)] text-[10px] font-black border border-[var(--brown)] transition-transform ${bouncing ? 'cart-pill-bounce' : ''}`}>
             {cartCount}
           </span>
         </div>
