@@ -1272,3 +1272,6 @@ section.bg-gradient-to-br { background:linear-gradient(130deg,var(--red),var(--r
   .faq-item > button strong { font-size: 13px; }
   .faq-item .overflow-hidden p { font-size: 12px; }
 }
+
+.bundle-price-group { display: grid; justify-items: start; gap: 2px; }
+.bundle-price-group .bundle-saving { color: #567044; font-size: 10px; font-weight: 800; }
