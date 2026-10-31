@@ -1,8 +1,10 @@
-name: Taste Skill v2 incremental checks
+name: Gyozen quality checks
 
 on:
   push:
     branches:
+      - main
+      - "secure-order-form/**"
       - "taste-skill-v2/**"
   pull_request:
     branches:
