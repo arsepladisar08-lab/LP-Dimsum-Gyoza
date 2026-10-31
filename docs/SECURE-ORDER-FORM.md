@@ -1,7 +1,7 @@
 # Secure Order Form — Gyozen
 
 ## Address flow
-The order form uses the hierarchical Indonesia region reference at `https://www.emsifa.com/api-wilayah-indonesia/v2`: province → regency/city → district → village/kelurahan. Child lists load only after the parent is selected and successful responses are cached in memory for the active page session. Village records include `postal_code`; customers can correct the five-digit value.
+The order form uses the hierarchical Indonesia region reference at `https://www.emsifa.com/api-wilayah-indonesia/v2`: province → regency/city → district → village/kelurahan. Child lists load only after the parent is selected and successful responses are cached in memory for the active page session. Village records include `postal_code`; customers can correct the five-digit value. Village/kelurahan labels are inferred from the last administrative-code segment (`1001` pattern for a kelurahan, `2001` pattern for a village) and fall back to the combined label if the code does not match either pattern.
 
 The referenced API documentation lists 38 provinces, 514 regencies/cities, 7,285 districts, and 83,762 villages. Its region dataset is marked as updated on 3 September 2026. The API aggregates public reference datasets; if a record differs, its documentation points users back to Kepmendagri and BIG as the underlying references. It is a convenience lookup, not an official postal validation service.
 
