@@ -29,12 +29,19 @@ function isValidCartItem(item: unknown): item is CartItem {
   return (
     typeof candidate.id === 'string' &&
     candidate.id.length > 0 &&
+    candidate.id.length <= 120 &&
     typeof candidate.name === 'string' &&
+    candidate.name.trim().length > 0 &&
+    candidate.name.length <= 120 &&
     typeof candidate.price === 'number' &&
-    !isNaN(candidate.price) &&
+    Number.isFinite(candidate.price) &&
+    candidate.price >= 0 &&
+    candidate.price <= 1000000 &&
     typeof candidate.qty === 'number' &&
-    !isNaN(candidate.qty) &&
-    candidate.qty > 0
+    Number.isInteger(candidate.qty) &&
+    candidate.qty > 0 &&
+    candidate.qty <= 99 &&
+    (candidate.imageUrl === undefined || (typeof candidate.imageUrl === 'string' && candidate.imageUrl.length <= 500))
   );
 }
 
@@ -48,7 +55,7 @@ export default function App() {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed)) {
             const validated = parsed.filter(isValidCartItem);
-            return validated;
+            return validated.slice(0, 100);
           }
         }
       }
@@ -85,11 +92,12 @@ export default function App() {
   };
 
   const handleAddToCart = (product: Product, quantity = 1) => {
+    const safeQuantity = Math.min(99, Math.max(1, Math.floor(quantity)));
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.id === product.id);
       if (idx >= 0) {
         const next = [...prev];
-        next[idx] = { ...next[idx], qty: next[idx].qty + quantity };
+        next[idx] = { ...next[idx], qty: Math.min(99, next[idx].qty + safeQuantity) };
         return next;
       }
       return [
@@ -98,7 +106,7 @@ export default function App() {
           id: product.id,
           name: product.name,
           price: product.price,
-          qty: quantity,
+          qty: safeQuantity,
           imageUrl: product.imageUrl
         }
       ];
@@ -112,7 +120,7 @@ export default function App() {
       const idx = prev.findIndex((item) => item.id === bundleId);
       if (idx >= 0) {
         const next = [...prev];
-        next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
+        next[idx] = { ...next[idx], qty: Math.min(99, next[idx].qty + 1) };
         return next;
       }
       return [
@@ -141,13 +149,22 @@ export default function App() {
         next.splice(idx, 1);
         return next;
       }
-      next[idx] = { ...next[idx], qty: newQty };
+      next[idx] = { ...next[idx], qty: Math.min(99, newQty) };
       return next;
     });
   };
 
   const handleClearCart = () => {
     setCart([]);
+  };
+
+  const handleOrderAction = () => {
+    if (cart.length > 0) {
+      setIsCartOpen(true);
+      return;
+    }
+    document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Pilih menu favoritmu terlebih dahulu. Keranjang akan siap setelah ada produk ditambahkan.');
   };
 
   const totalCartCount = calculateTotalCount(cart);
@@ -159,7 +176,7 @@ export default function App() {
       <Header cartCount={totalCartCount} onOpenCart={() => setIsCartOpen(true)} />
 
       <main className={cart.length > 0 ? 'pb-20 md:pb-0' : ''}>
-        <Hero onOpenCart={() => setIsCartOpen(true)} onPreviewProduct={setSelectedProduct} />
+        <Hero onPrimaryOrder={handleOrderAction} cartCount={totalCartCount} onPreviewProduct={setSelectedProduct} />
         <HighlightsBand />
         <MenuCatalog
           products={GYOZEN_PRODUCTS}
@@ -172,7 +189,7 @@ export default function App() {
         <Testimonials />
         <Steps />
         <FAQ />
-        <ClosingCTA onOpenCart={() => setIsCartOpen(true)} />
+        <ClosingCTA onPrimaryOrder={handleOrderAction} cartCount={totalCartCount} />
       </main>
 
       <Footer />

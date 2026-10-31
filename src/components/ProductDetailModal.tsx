@@ -104,7 +104,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {/* Category & Rating */}
               <div className="flex items-center justify-between text-xs text-[var(--muted)] mb-1.5">
                 <span className="font-mono text-amber-800 font-bold uppercase tracking-wider text-[11px]">
-                  {product.category === 'hangat' ? 'Siap Santap Hangat' : 'Ready Frozen'}
+                  {product.category === 'hangat' ? 'Siap Santap Hangat' : product.category === 'frozen' ? 'Ready Frozen' : 'Pelengkap'}
                 </span>
                 {product.rating && product.ratingSource && (
                   <div className="inline-flex items-center gap-1 text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-900/10">

@@ -4,7 +4,8 @@ import { GYOZEN_PRODUCTS } from '../data/products';
 import { Product } from '../types';
 
 interface HeroProps {
-  onOpenCart: () => void;
+  onPrimaryOrder: () => void;
+  cartCount: number;
   onPreviewProduct: (product: Product) => void;
 }
 
@@ -14,7 +15,7 @@ const featuredProducts = [
   { id: 'dimsum-goreng-keju', className: 'hero-product-card--keju' }
 ] as const;
 
-export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
+export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreviewProduct }) => {
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="container-custom hero-grid">
@@ -33,8 +34,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
           </p>
 
           <div className="hero-actions">
-            <button className="btn btn-primary btn-large btn-shimmer" type="button" onClick={onOpenCart}>
-              Pesan sekarang <ArrowUpRight size={18}/>
+            <button className="btn btn-primary btn-large btn-shimmer" type="button" onClick={onPrimaryOrder}>
+              {cartCount > 0 ? 'Lihat keranjang' : 'Pilih menu dulu'} <ArrowUpRight size={18}/>
             </button>
             <a className="hero-menu-link" href="#menu">
               Jelajahi menu <ArrowDown size={17}/>

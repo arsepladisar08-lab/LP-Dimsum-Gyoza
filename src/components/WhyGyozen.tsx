@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Sparkles, Flame, Snowflake, Plus, CheckCircle2, Check } from 'lucide-react';
 import { ProductImage } from './ProductImage';
+import { GYOZEN_PRODUCTS } from '../data/products';
+import { GYOZEN_BUNDLES } from '../data/bundles';
+import { formatRupiah } from '../utils/order';
 
 interface WhyGyozenProps {
   onAddBundle: (name: string, price: number, imageUrl?: string) => void;
@@ -15,6 +18,16 @@ const benefits = [
 
 export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
   const [addedBundle, setAddedBundle] = useState<string | null>(null);
+
+  const getRegularPrice = (productIds: readonly string[]) => {
+    const includedProducts = productIds.map((id) => GYOZEN_PRODUCTS.find((product) => product.id === id));
+    if (includedProducts.some((product) => !product)) return null;
+    return includedProducts.reduce((sum, product) => sum + (product?.price || 0), 0);
+  };
+  const platter = GYOZEN_BUNDLES.platter;
+  const frozen = GYOZEN_BUNDLES.frozen;
+  const platterRegularPrice = getRegularPrice(platter.productIds);
+  const frozenRegularPrice = getRegularPrice(frozen.productIds);
 
   const handleBundle = (name: string, price: number, img?: string) => {
     onAddBundle(name, price, img);
@@ -50,7 +63,13 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                 <p className="bundle-overline">COMBO 3-IN-1</p>
                 <h3>Dimsum Platter Komplit</h3>
                 <p>Mentai Lumer + Gyoza Juicy + Dimsum Goreng Keju, lengkap dengan 2 saus.</p>
-                <div className="bundle-bottom"><div><strong>Rp45.000</strong></div>
+                <div className="bundle-bottom"><div className="bundle-price-group">
+                  {platterRegularPrice !== null && platterRegularPrice > platter.price && <>
+                    <del>{formatRupiah(platterRegularPrice)}</del>
+                    <span className="bundle-saving">Hemat {formatRupiah(platterRegularPrice - platter.price)}</span>
+                  </>}
+                  <strong>{formatRupiah(platter.price)}</strong>
+                </div>
                   <button
                     className={`btn btn-sm transition-all duration-200 ${
                       addedBundle === 'platter'
@@ -58,7 +77,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                         : 'btn-primary active:scale-95'
                     }`}
                     type="button"
-                    onClick={() => handleBundle('Dimsum Platter Komplit (3-in-1)', 45000, '/images/menu/dimsum-platter-960.webp')}
+                    onClick={() => handleBundle(platter.name, platter.price, platter.imageUrl)}
                   >
                     {addedBundle === 'platter' ? <><Check size={15}/> Masuk!</> : <><Plus size={15}/> Tambah paket</>}
                   </button>
@@ -72,7 +91,13 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                 <p className="bundle-overline">FREEZER STOCK</p>
                 <h3>Paket Stok Kulkas Komplit</h3>
                 <p>3 pack frozen + Ebi Chili Oil 150ml.</p>
-                <div className="bundle-bottom"><div><strong>Rp125.000</strong></div>
+                <div className="bundle-bottom"><div className="bundle-price-group">
+                  {frozenRegularPrice !== null && frozenRegularPrice > frozen.price && <>
+                    <del>{formatRupiah(frozenRegularPrice)}</del>
+                    <span className="bundle-saving">Hemat {formatRupiah(frozenRegularPrice - frozen.price)}</span>
+                  </>}
+                  <strong>{formatRupiah(frozen.price)}</strong>
+                </div>
                   <button
                     className={`btn btn-sm transition-all duration-200 ${
                       addedBundle === 'frozen'
@@ -80,7 +105,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                         : 'btn-accent active:scale-95'
                     }`}
                     type="button"
-                    onClick={() => handleBundle('Paket Stok Kulkas (3 Pack Frozen + Ebi Chili Oil 150ml)', 125000, '/images/menu/frozen-pack-dimsum-mix-960.webp')}
+                    onClick={() => handleBundle(frozen.name, frozen.price, frozen.imageUrl)}
                   >
                     {addedBundle === 'frozen' ? <><Check size={15}/> Masuk!</> : <><Plus size={15}/> Ambil paket</>}
                   </button>

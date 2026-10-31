@@ -1,11 +1,12 @@
 import React from 'react';
 
 export const HighlightsBand: React.FC = () => {
+  const message = 'Pesan mudah lewat WhatsApp · Stok dikonfirmasi admin · Ongkir mengikuti area · Pilihan hangat & ready frozen · ';
   return (
-    <div className="ticker" aria-label="Dimsum untuk berbagai momen">
+    <div className="ticker" aria-label="Informasi pemesanan Gyozen">
       <div className="ticker-track" aria-hidden="true">
-        <span>Dimsum time <b>✳</b> Good food, good mood <b>✳</b> Teman santai <b>✳</b> Momen kumpul <b>✳</b> Dimsum time <b>✳</b> Good food, good mood <b>✳</b> Teman santai <b>✳</b> Momen kumpul <b>✳</b></span>
-        <span>Dimsum time <b>✳</b> Good food, good mood <b>✳</b> Teman santai <b>✳</b> Momen kumpul <b>✳</b> Dimsum time <b>✳</b> Good food, good mood <b>✳</b> Teman santai <b>✳</b> Momen kumpul <b>✳</b></span>
+        <span>{message}<b>✳</b> {message}<b>✳</b></span>
+        <span>{message}<b>✳</b> {message}<b>✳</b></span>
       </div>
     </div>
   );

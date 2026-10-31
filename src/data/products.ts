@@ -180,7 +180,7 @@ export const GYOZEN_PRODUCTS: Product[] = [
     id: 'ebi-chili-oil',
     index: '10 / condiment jar',
     name: 'Gyozen Ebi Chili Oil 150ml',
-    category: 'frozen',
+    category: 'pelengkap',
     tag: 'Kemasan Jar 150ml',
     tagStyle: 'spicy',
     bg: '#f5d4b9',

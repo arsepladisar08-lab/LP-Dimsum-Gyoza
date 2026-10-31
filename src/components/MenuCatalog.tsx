@@ -41,7 +41,8 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, currentCateg
             {([
               ['all', 'Semua'],
               ['hangat', 'Siap santap'],
-              ['frozen', 'Ready frozen']
+              ['frozen', 'Ready frozen'],
+              ['pelengkap', 'Pelengkap']
             ] as [MenuCategory, string][]).map(([value, label]) => (
               <button key={value} type="button" role="tab" aria-selected={currentCategory === value} className={`filter-pill ${currentCategory === value ? 'active' : ''}`} onClick={() => onSelectCategory(value)}>
                 {label}

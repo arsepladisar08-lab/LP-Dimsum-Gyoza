@@ -1,10 +1,10 @@
-export type MenuCategory = 'all' | 'hangat' | 'frozen';
+export type MenuCategory = 'all' | 'hangat' | 'frozen' | 'pelengkap';
 
 export interface Product {
   id: string;
   index: string;
   name: string;
-  category: 'hangat' | 'frozen';
+  category: 'hangat' | 'frozen' | 'pelengkap';
   tag: string;
   tagStyle?: 'spicy' | 'frozen' | 'best' | '';
   bg: string;
@@ -36,6 +36,13 @@ export interface CartItem {
 export interface OrderFormState {
   name: string;
   type: string;
-  area: string;
-  notes?: string;
+  provinceId: string;
+  regencyId: string;
+  districtId: string;
+  villageId: string;
+  postalCode: string;
+  addressDetail: string;
+  manualRegion: string;
+  legacyArea: string;
+  notes: string;
 }
