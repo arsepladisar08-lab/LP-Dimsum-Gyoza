@@ -4,7 +4,8 @@ import {
   formatRupiah, calculateTotal, calculateTotalCount, isActivePromo,
   calculateKnownPieces, calculatePiecesPerGuest, filterProducts,
   buildWhatsAppOrderMessage, buildWhatsAppInquiryUrl, buildDeliveryAddressLine,
-  normalizeSingleLine, isValidCustomerName, isValidAddressDetail, formatVillageRegionLabel
+  normalizeSingleLine, isValidCustomerName, isValidAddressDetail, formatVillageRegionLabel,
+  reconcileCartItems
 } from './order';
 import { Product, CartItem } from '../types';
 
@@ -43,6 +44,25 @@ test('filterProducts returns only matching category or all', () => {
   assert.equal(filterProducts(sampleProducts, 'pelengkap')[0].id, 'p3');
 });
 
+test('reconcileCartItems uses catalogue prices and removes unknown cart entries', () => {
+  const catalog = [
+    { id: 'gyoza-fresh', name: 'Gyoza Fresh & Juicy', price: 15000, imageUrl: '/images/menu/gyoza-fresh-960.webp' },
+    { id: 'bundle-platter', name: 'Dimsum Platter Komplit', price: 45000, imageUrl: '/images/menu/dimsum-platter-960.webp' }
+  ];
+  const restored = reconcileCartItems([
+    { id: 'gyoza-fresh', name: 'Tampered Name', price: 1, qty: 2, imageUrl: '/fake.png' },
+    { id: 'bundle-platter', name: 'Old bundle name', price: 999999, qty: 1 },
+    { id: 'unknown-product', name: 'Unknown', price: 30000, qty: 1 },
+    { id: 'gyoza-fresh', name: 'Duplicate', price: 15000, qty: 98 },
+    { id: 'gyoza-fresh', name: 'Invalid quantity', price: 15000, qty: 1.5 }
+  ], catalog);
+
+  assert.deepEqual(restored, [
+    { id: 'gyoza-fresh', name: 'Gyoza Fresh & Juicy', price: 15000, qty: 99, imageUrl: '/images/menu/gyoza-fresh-960.webp' },
+    { id: 'bundle-platter', name: 'Dimsum Platter Komplit', price: 45000, qty: 1, imageUrl: '/images/menu/dimsum-platter-960.webp' }
+  ]);
+});
+
 test('buildWhatsAppOrderMessage keeps the complete address on one line', () => {
   const cart: CartItem[] = [{ id: 'mentai', name: 'Dimsum Mentai Lumer', price: 25000, qty: 2 }];
   const address = buildDeliveryAddressLine({
@@ -56,7 +76,7 @@ test('buildWhatsAppOrderMessage keeps the complete address on one line', () => {
   assert.ok(msg.includes('*Sajian:* Siap Santap (Hangat)'));
   assert.ok(msg.includes('*Alamat:* Jawa Timur, Kabupaten Sidoarjo, Kecamatan Waru, Desa/Kelurahan Tambak Oso, 61256 — Jl. Raya Tambak Oso No. 10, RT 02/RW 03'));
   assert.ok(msg.includes('1. Dimsum Mentai Lumer (2x) = Rp50.000'));
-  assert.ok(msg.includes('*Total Estimasi:* *Rp50.000*'));
+  assert.ok(msg.includes('*Total Estimasi Menu (belum termasuk ongkir):* *Rp50.000*'));
 });
 
 test('address formatting allows unknown postcodes without inventing values', () => {

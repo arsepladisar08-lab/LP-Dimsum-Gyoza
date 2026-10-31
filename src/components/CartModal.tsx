@@ -60,6 +60,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [guestCount, setGuestCount] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [rememberCustomerDetails, setRememberCustomerDetails] = useState(false);
 
   const provinces = useIndonesiaRegionOptions('/provinces.json', isOpen);
   const regencies = useIndonesiaRegionOptions(form.provinceId ? `/regencies/${form.provinceId}.json` : null, isOpen);
@@ -71,7 +72,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   const selectedDistrict = districts.data.find((item) => item.id === form.districtId);
   const selectedVillage = villages.data.find((item) => item.id === form.villageId);
 
-  // Simpan data form ke localStorage setiap kali diubah agar repeat order tidak perlu ketik ulang
+  // Simpan hanya ketika pelanggan secara eksplisit memilih opsi ingat data.
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
@@ -79,16 +80,16 @@ export const CartModal: React.FC<CartModalProps> = ({
           form.name, form.provinceId, form.regencyId, form.districtId, form.villageId,
           form.postalCode, form.addressDetail, form.manualRegion, form.legacyArea, form.notes
         ].some((value) => value.trim().length > 0);
-        if (hasPrivateDetails) {
-          localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
+        if (rememberCustomerDetails && hasPrivateDetails) {
+          window.localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
         } else {
-          localStorage.removeItem(FORM_STORAGE_KEY);
+          window.localStorage.removeItem(FORM_STORAGE_KEY);
         }
       }
     } catch {
-      // ignore
+      // Storage may be blocked by the browser; checkout remains usable.
     }
-  }, [form]);
+  }, [form, rememberCustomerDetails]);
 
   if (!isOpen) return null;
 
@@ -174,8 +175,9 @@ export const CartModal: React.FC<CartModalProps> = ({
       manualRegion: '', legacyArea: '', notes: ''
     };
     setForm(emptyForm);
+    setRememberCustomerDetails(false);
     try { window.localStorage.removeItem(FORM_STORAGE_KEY); } catch { /* storage unavailable */ }
-    onShowToast('Data nama dan alamat lama telah dikosongkan dari formulir.');
+    onShowToast('Data nama dan alamat tersimpan telah dihapus dari browser ini.');
   };
 
   const fallbackCopy = (text: string) => {
@@ -334,12 +336,17 @@ export const CartModal: React.FC<CartModalProps> = ({
           )}
         </div>
 
-        {/* Summary Box */}
-        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-900/15 mb-4 flex items-center justify-between">
-          <span className="text-xs sm:text-sm font-bold text-amber-950">Total Estimasi Pesanan</span>
-          <span className="text-xl sm:text-2xl font-black text-[var(--red)] tabular-nums tracking-tight">
-            {formatRupiah(total)}
-          </span>
+        {/* Summary: menu subtotal only; delivery is confirmed separately by the admin. */}
+        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-900/15 mb-4">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs sm:text-sm font-bold text-amber-950">Total Estimasi Menu</span>
+            <span className="text-xl sm:text-2xl font-black text-[var(--red)] tabular-nums tracking-tight">
+              {formatRupiah(total)}
+            </span>
+          </div>
+          <p className="mt-1.5 text-[10px] sm:text-xs text-amber-900/75 leading-relaxed">
+            Belum termasuk ongkos kirim. Admin akan mengonfirmasi ongkir dan total akhir sebelum pesanan diproses.
+          </p>
         </div>
 
         {/* Secure customer and delivery form */}
@@ -479,9 +486,18 @@ export const CartModal: React.FC<CartModalProps> = ({
             </button>
             <span className="text-[11px]">WhatsApp resmi Gyozen</span>
           </div>
-          <div className="saved-data-row">
-            <span>Data nama dan alamat tersimpan lokal di browser ini. Hindari menyimpannya pada perangkat umum.</span>
-            <button type="button" onClick={handleClearSavedDetails}>Hapus data tersimpan</button>
+          <div className="customer-data-preference">
+            <label className="customer-data-toggle" htmlFor="rememberCustomerDetails">
+              <input
+                id="rememberCustomerDetails"
+                type="checkbox"
+                checked={rememberCustomerDetails}
+                onChange={(e) => setRememberCustomerDetails(e.target.checked)}
+              />
+              <span>Simpan nama dan alamat di browser ini untuk pesanan berikutnya</span>
+            </label>
+            <p>Opsional. Data hanya disimpan di browser perangkat ini, bukan ke database Gyozen. Jangan aktifkan pada perangkat umum. Kamu bisa mematikannya atau menghapus data kapan saja.</p>
+            <button type="button" onClick={handleClearSavedDetails}>Hapus data pelanggan tersimpan</button>
           </div>
         </form>
       </div>

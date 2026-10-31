@@ -36,6 +36,44 @@ export function filterProducts(products: Product[], category: MenuCategory): Pro
   return products.filter((product) => product.category === category);
 }
 
+export interface CartCatalogEntry {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl?: string;
+}
+
+/**
+ * Rebuild persisted cart items against the current product/bundle catalogue.
+ * Stored names and prices are never trusted; unknown IDs are discarded.
+ */
+export function reconcileCartItems(raw: unknown, catalog: CartCatalogEntry[]): CartItem[] {
+  if (!Array.isArray(raw)) return [];
+  const catalogById = new Map(catalog.map((item) => [item.id, item]));
+  const reconciled = new Map<string, CartItem>();
+
+  for (const value of raw) {
+    if (!value || typeof value !== 'object') continue;
+    const candidate = value as Partial<CartItem>;
+    if (typeof candidate.id !== 'string' || !Number.isInteger(candidate.qty) || (candidate.qty as number) <= 0) continue;
+    const canonical = catalogById.get(candidate.id);
+    if (!canonical) continue;
+
+    const safeQuantity = Math.min(99, candidate.qty as number);
+    const existing = reconciled.get(canonical.id);
+    reconciled.set(canonical.id, {
+      id: canonical.id,
+      name: canonical.name,
+      price: canonical.price,
+      qty: Math.min(99, (existing?.qty || 0) + safeQuantity),
+      ...(canonical.imageUrl ? { imageUrl: canonical.imageUrl } : {})
+    });
+    if (reconciled.size >= 100) break;
+  }
+
+  return [...reconciled.values()];
+}
+
 /** Normalize user-entered values to one printable line without control characters. */
 export function normalizeSingleLine(value: unknown): string {
   if (typeof value !== 'string') return '';
@@ -107,7 +145,7 @@ export function buildWhatsAppOrderMessage({
     `${index + 1}. ${normalizeSingleLine(item.name)} (${item.qty}x) = ${formatRupiah(item.price * item.qty)}`
   ).join('\n');
 
-  return `Halo Admin *Dimsum Gyozen (@gyozen.sda)*!\nSaya ingin memesan menu Gyozen:\n\n*Nama:* ${name}\n*Sajian:* ${safeServingType}\n*Alamat:* ${address}\n\n*Rincian Pesanan:*\n${lines}\n\n*Total Estimasi:* *${formatRupiah(total)}*\n\nMohon konfirmasi ketersediaan menu, total ongkir, dan metode pembayarannya sebelum pesanan dinyatakan terkonfirmasi. Terima kasih!`;
+  return `Halo Admin *Dimsum Gyozen (@gyozen.sda)*!\nSaya ingin memesan menu Gyozen:\n\n*Nama:* ${name}\n*Sajian:* ${safeServingType}\n*Alamat:* ${address}\n\n*Rincian Pesanan:*\n${lines}\n\n*Total Estimasi Menu (belum termasuk ongkir):* *${formatRupiah(total)}*\n\nMohon konfirmasi ketersediaan menu, total ongkir, dan metode pembayarannya sebelum pesanan dinyatakan terkonfirmasi. Terima kasih!`;
 }
 
 export function buildWhatsAppInquiryUrl(number: string, topic: string): string {
