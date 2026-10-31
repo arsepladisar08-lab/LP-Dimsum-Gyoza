@@ -20,7 +20,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCart, onPreviewProduct }) => {
       <div className="container-custom hero-grid">
         <div className="hero-copy">
           <p className="hero-location">Dimsum &amp; Gyoza · Sidoarjo</p>
-          <p className="hero-kicker">GOOD FOOD. GOOD MOOD.</p>
           <h1 id="hero-title" className="stagger-heading stagger-h1">
             <span className="stagger-item" style={{ animationDelay: '100ms' }}>Satu gigitan,</span>{' '}
             <span className="stagger-item" style={{ animationDelay: '240ms' }}>bikin hari makin</span>{' '}
