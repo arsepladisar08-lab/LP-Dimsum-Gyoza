@@ -15,35 +15,22 @@ import { Toast } from './components/Toast';
 import { MobileBottomBar } from './components/MobileBottomBar';
 import { ScrollEffects } from './components/ScrollEffects';
 import { GYOZEN_PRODUCTS } from './data/products';
+import { GYOZEN_BUNDLES } from './data/bundles';
 import { CartItem, Product, MenuCategory } from './types';
-import { calculateTotalCount, calculateTotal } from './utils/order';
+import { calculateTotalCount, calculateTotal, reconcileCartItems, CartCatalogEntry } from './utils/order';
 
 const CART_STORAGE_KEY = 'gyozen_cart_v1';
 
-/**
- * Validasi runtime agar data keranjang dari localStorage aman dan tidak menyebabkan crash
- */
-function isValidCartItem(item: unknown): item is CartItem {
-  if (!item || typeof item !== 'object') return false;
-  const candidate = item as Partial<CartItem>;
-  return (
-    typeof candidate.id === 'string' &&
-    candidate.id.length > 0 &&
-    candidate.id.length <= 120 &&
-    typeof candidate.name === 'string' &&
-    candidate.name.trim().length > 0 &&
-    candidate.name.length <= 120 &&
-    typeof candidate.price === 'number' &&
-    Number.isFinite(candidate.price) &&
-    candidate.price >= 0 &&
-    candidate.price <= 1000000 &&
-    typeof candidate.qty === 'number' &&
-    Number.isInteger(candidate.qty) &&
-    candidate.qty > 0 &&
-    candidate.qty <= 99 &&
-    (candidate.imageUrl === undefined || (typeof candidate.imageUrl === 'string' && candidate.imageUrl.length <= 500))
-  );
-}
+const createBundleCartId = (name: string) => 'bundle-' + name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+const BUNDLE_CART_CATALOG: CartCatalogEntry[] = Object.values(GYOZEN_BUNDLES).map((bundle) => ({
+  id: createBundleCartId(bundle.name),
+  name: bundle.name,
+  price: bundle.price,
+  imageUrl: bundle.imageUrl
+}));
+
+const CART_CATALOG: CartCatalogEntry[] = [...GYOZEN_PRODUCTS, ...BUNDLE_CART_CATALOG];
 
 export default function App() {
   // Keranjang awal kosong secara default, dimuat dari localStorage bila ada data valid
@@ -54,8 +41,7 @@ export default function App() {
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed)) {
-            const validated = parsed.filter(isValidCartItem);
-            return validated.slice(0, 100);
+            return reconcileCartItems(parsed, CART_CATALOG);
           }
         }
       }
@@ -92,7 +78,9 @@ export default function App() {
   };
 
   const handleAddToCart = (product: Product, quantity = 1) => {
-    const safeQuantity = Math.min(99, Math.max(1, Math.floor(quantity)));
+    const canonical = CART_CATALOG.find((item) => item.id === product.id);
+    if (!canonical) return;
+    const safeQuantity = Number.isFinite(quantity) ? Math.min(99, Math.max(1, Math.floor(quantity))) : 1;
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.id === product.id);
       if (idx >= 0) {
@@ -103,19 +91,21 @@ export default function App() {
       return [
         ...prev,
         {
-          id: product.id,
-          name: product.name,
-          price: product.price,
+          id: canonical.id,
+          name: canonical.name,
+          price: canonical.price,
           qty: safeQuantity,
-          imageUrl: product.imageUrl
+          imageUrl: canonical.imageUrl
         }
       ];
     });
-    showToast(`<strong>${product.name}</strong> (${quantity}x) ditambahkan ke keranjang.`);
+    showToast(`<strong>${canonical.name}</strong> (${safeQuantity}x) ditambahkan ke keranjang.`);
   };
 
-  const handleAddBundle = (bundleName: string, bundlePrice: number, imageUrl?: string) => {
-    const bundleId = 'bundle-' + bundleName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  const handleAddBundle = (bundleName: string, _bundlePrice: number, _imageUrl?: string) => {
+    const canonical = BUNDLE_CART_CATALOG.find((bundle) => bundle.name === bundleName);
+    if (!canonical) return;
+    const bundleId = canonical.id;
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.id === bundleId);
       if (idx >= 0) {
@@ -127,19 +117,20 @@ export default function App() {
         ...prev,
         {
           id: bundleId,
-          name: bundleName,
-          price: bundlePrice,
+          name: canonical.name,
+          price: canonical.price,
           qty: 1,
-          imageUrl: imageUrl || '/images/menu/dimsum-platter-960.webp'
+          imageUrl: canonical.imageUrl
         }
       ];
     });
     setIsCartOpen(true);
-    showToast(`Paket <strong>${bundleName}</strong> siap dipesan!`);
+    showToast(`Paket <strong>${canonical.name}</strong> siap dipesan!`);
   };
 
   // Mengubah kuantitas item berdasarkan ID produk (bukan index array)
   const handleUpdateQty = (productId: string, delta: number) => {
+    if (!Number.isInteger(delta) || Math.abs(delta) > 99) return;
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.id === productId);
       if (idx === -1) return prev;
