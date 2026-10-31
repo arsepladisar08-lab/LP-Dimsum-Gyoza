@@ -145,7 +145,7 @@ export function buildWhatsAppOrderMessage({
     `${index + 1}. ${normalizeSingleLine(item.name)} (${item.qty}x) = ${formatRupiah(item.price * item.qty)}`
   ).join('\n');
 
-  return `Halo Admin *Dimsum Gyozen (@gyozen.sda)*!\nSaya ingin memesan menu Gyozen:\n\n*Nama:* ${name}\n*Sajian:* ${safeServingType}\n*Alamat:* ${address}\n\n*Rincian Pesanan:*\n${lines}\n\n*Total Estimasi:* *${formatRupiah(total)}*\n\nMohon konfirmasi ketersediaan menu, total ongkir, dan metode pembayarannya sebelum pesanan dinyatakan terkonfirmasi. Terima kasih!`;
+  return `Halo Admin *Dimsum Gyozen (@gyozen.sda)*!\nSaya ingin memesan menu Gyozen:\n\n*Nama:* ${name}\n*Sajian:* ${safeServingType}\n*Alamat:* ${address}\n\n*Rincian Pesanan:*\n${lines}\n\n*Total Estimasi Menu (belum termasuk ongkir):* *${formatRupiah(total)}*\n\nMohon konfirmasi ketersediaan menu, total ongkir, dan metode pembayarannya sebelum pesanan dinyatakan terkonfirmasi. Terima kasih!`;
 }
 
 export function buildWhatsAppInquiryUrl(number: string, topic: string): string {
