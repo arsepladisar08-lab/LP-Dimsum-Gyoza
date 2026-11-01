@@ -5,7 +5,7 @@ export interface Product {
   index: string;
   name: string;
   category: 'hangat' | 'frozen' | 'pelengkap';
-  tag: string;
+  tag?: string;
   tagStyle?: 'spicy' | 'frozen' | 'best' | '';
   bg: string;
   art: 'gyoza' | 'dimsum' | 'keju' | 'mentai' | 'platter' | 'frozen' | 'chili';

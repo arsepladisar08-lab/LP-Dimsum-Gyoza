@@ -26,7 +26,7 @@ export const Testimonials: React.FC = () => {
           <article className="testimonial-card" key={item.name + '-' + index}>
             <div className="testimonial-top"><span className="testimonial-number">0{index+1}</span><span className="testimonial-stars" aria-label={'Rating ' + item.rating + ' dari 5'}>{Array.from({length:Math.min(5,Math.max(0,item.rating))}).map((_,i)=><Star key={i} size={13} fill="currentColor"/>)}</span></div>
             <p className="testimonial-quote">“{item.text}”</p>
-            <div className="testimonial-person"><div><strong>{item.name}</strong><span>{item.city}</span></div><span className="testimonial-tag">{item.tag}</span></div>
+            <div className="testimonial-person"><div><strong>{item.name}</strong><span>{item.city}</span></div>{item.tag && <span className="testimonial-tag">{item.tag}</span>}</div>
           </article>
         ))}
       </div>

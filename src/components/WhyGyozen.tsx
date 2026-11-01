@@ -19,8 +19,11 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
   };
   const platter = GYOZEN_BUNDLES.platter;
   const frozen = GYOZEN_BUNDLES.frozen;
-  const platterRegularPrice = getRegularPrice(platter.productIds);
+  const platterProduct = GYOZEN_PRODUCTS.find((product) => product.id === 'dimsum-platter');
+  const platterPrice = platterProduct?.price ?? platter.price;
   const frozenRegularPrice = getRegularPrice(frozen.productIds);
+  const frozenPrice = frozenRegularPrice ?? frozen.price;
+  const platterRegularPrice = getRegularPrice(platter.productIds);
 
   const handleBundle = (name: string, price: number, img?: string) => {
     onAddBundle(name, price, img);
@@ -55,13 +58,13 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
               <div className="bundle-content">
                 <p className="bundle-overline">COMBO 3-IN-1</p>
                 <h3>Dimsum Platter Komplit</h3>
-                <p>Mentai Lumer + Gyoza Juicy + Dimsum Goreng Keju, lengkap dengan 2 saus.</p>
+                <p>Mentai Lumer + Gyoza Juicy + Dimsum Goreng Keju, lengkap dengan 2 cup Chili Oil.</p>
                 <div className="bundle-bottom"><div className="bundle-price-group">
-                  {platterRegularPrice !== null && platterRegularPrice > platter.price && <>
+                  {platterRegularPrice !== null && platterRegularPrice > platterPrice && <>
                     <del>{formatRupiah(platterRegularPrice)}</del>
-                    <span className="bundle-saving">Hemat {formatRupiah(platterRegularPrice - platter.price)}</span>
+                    <span className="bundle-saving">Hemat {formatRupiah(platterRegularPrice - platterPrice)}</span>
                   </>}
-                  <strong>{formatRupiah(platter.price)}</strong>
+                  <strong>{formatRupiah(platterPrice)}</strong>
                 </div>
                   <button
                     className={`btn btn-sm transition-all duration-200 ${
@@ -70,7 +73,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                         : 'btn-primary active:scale-95'
                     }`}
                     type="button"
-                    onClick={() => handleBundle(platter.name, platter.price, platter.imageUrl)}
+                    onClick={() => handleBundle(platter.name, platterPrice, platter.imageUrl)}
                   >
                     {addedBundle === 'platter' ? <><Check size={15}/> Masuk!</> : <><Plus size={15}/> Tambah paket</>}
                   </button>
@@ -85,11 +88,11 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                 <h3>Paket Stok Kulkas Komplit</h3>
                 <p>3 pack frozen + Ebi Chili Oil 150ml.</p>
                 <div className="bundle-bottom"><div className="bundle-price-group">
-                  {frozenRegularPrice !== null && frozenRegularPrice > frozen.price && <>
+                  {frozenRegularPrice !== null && frozenRegularPrice > frozenPrice && <>
                     <del>{formatRupiah(frozenRegularPrice)}</del>
-                    <span className="bundle-saving">Hemat {formatRupiah(frozenRegularPrice - frozen.price)}</span>
+                    <span className="bundle-saving">Hemat {formatRupiah(frozenRegularPrice - frozenPrice)}</span>
                   </>}
-                  <strong>{formatRupiah(frozen.price)}</strong>
+                  <strong>{formatRupiah(frozenPrice)}</strong>
                 </div>
                   <button
                     className={`btn btn-sm transition-all duration-200 ${
@@ -98,7 +101,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
                         : 'btn-accent active:scale-95'
                     }`}
                     type="button"
-                    onClick={() => handleBundle(frozen.name, frozen.price, frozen.imageUrl)}
+                    onClick={() => handleBundle(frozen.name, frozenPrice, frozen.imageUrl)}
                   >
                     {addedBundle === 'frozen' ? <><Check size={15}/> Masuk!</> : <><Plus size={15}/> Ambil paket</>}
                   </button>
