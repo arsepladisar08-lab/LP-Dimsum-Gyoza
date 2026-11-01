@@ -378,13 +378,35 @@ button { cursor: pointer; }
 }
 
 .stagger-item-em {
+  display: inline-block;
   margin-top: 2px;
+  perspective: 600px;
+}
+
+/* Repeating rotating word animation in hero title */
+@keyframes word-rotate-flip {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) rotateX(-32deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+.hero-rotating-word {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation: word-rotate-flip 0.48s cubic-bezier(0.16, 1, 0.3, 1) both, text-shimmer-warm 4s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .stagger-heading .stagger-item,
   .stagger-h1 .stagger-item,
-  .stagger-h2 .stagger-item {
+  .stagger-h2 .stagger-item,
+  .hero-rotating-word {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

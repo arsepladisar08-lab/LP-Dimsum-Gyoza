@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { GYOZEN_PRODUCTS } from '../data/products';
 import { Product } from '../types';
@@ -15,9 +15,19 @@ const featuredProducts = [
   { id: 'dimsum-goreng-keju', className: 'hero-product-card--keju' }
 ] as const;
 
+const ROTATING_WORDS = ['zen.', 'nagih.', 'happy.', 'seru.', 'hangat.'] as const;
+
 export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreviewProduct }) => {
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
   const lastTapRef = useRef<{ id: string; time: number } | null>(null);
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleCardClick = (product: Product) => {
     onPreviewProduct(product);
@@ -33,7 +43,9 @@ export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreview
             <span className="stagger-item" style={{ animationDelay: '100ms' }}>Satu gigitan,</span>{' '}
             <span className="stagger-item" style={{ animationDelay: '240ms' }}>bikin hari makin</span>{' '}
             <span className="stagger-item stagger-item-em" style={{ animationDelay: '380ms' }}>
-              <em>zen.</em>
+              <em key={ROTATING_WORDS[wordIndex]} className="hero-rotating-word">
+                {ROTATING_WORDS[wordIndex]}
+              </em>
             </span>
           </h1>
           <p className="hero-subtitle">
