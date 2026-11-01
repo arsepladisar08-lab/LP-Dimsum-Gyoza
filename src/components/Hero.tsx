@@ -99,10 +99,6 @@ export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreview
                     fetchPriority={id === 'mentai-lumer' ? 'high' : 'auto'}
                     decoding="async"
                   />
-                  <span className="hero-product-label">
-                    <span>{product.name}</span>
-                    {isFront && <span className="hero-product-action-hint">• Klik 2x detail</span>}
-                  </span>
                 </button>
               );
             })}

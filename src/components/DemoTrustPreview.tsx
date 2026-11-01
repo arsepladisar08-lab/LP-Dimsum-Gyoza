@@ -72,22 +72,30 @@ export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) =
           ))}
         </div>
 
-        <div className="demo-operational-heading">
-          <h3>Informasi Operasional & Pemesanan</h3>
-          <p>Detail seputar jam layanan, area jangkauan kurir, kemasan higienis, dan kemudahan pembayaran resmi Dimsum Gyozen.</p>
-        </div>
-        <div className="demo-operational-grid">
-          {DEMO_OPERATIONAL_CLAIMS.map((item, index) => {
-            const Icon = operationalIcons[index % operationalIcons.length] || MapPin;
-            return (
-              <article className="demo-operational-card" key={item.title}>
-                <span className="demo-operational-icon"><Icon size={18} /></span>
-                <h4>{item.title}</h4>
-                <strong>{item.value}</strong>
-                <p>{item.note}</p>
-              </article>
-            );
-          })}
+        {/* Minimalist Unified Operational Panel */}
+        <div className="operational-unified-card">
+          <div className="operational-unified-header">
+            <div className="operational-unified-title-wrap">
+              <span className="operational-badge">LAYANAN RESMI</span>
+              <h3>Informasi Operasional &amp; Pemesanan</h3>
+            </div>
+            <p>Ringkasan jam layanan, jangkauan pengiriman, kualitas kemasan, dan metode pembayaran resmi Dimsum Gyozen.</p>
+          </div>
+          <div className="operational-unified-grid">
+            {DEMO_OPERATIONAL_CLAIMS.map((item, index) => {
+              const Icon = operationalIcons[index % operationalIcons.length] || MapPin;
+              return (
+                <article className="operational-unified-item" key={item.title}>
+                  <span className="operational-item-icon"><Icon size={17} /></span>
+                  <div className="operational-item-body">
+                    <span className="operational-item-title">{item.title}</span>
+                    <strong className="operational-item-value">{item.value}</strong>
+                    <p className="operational-item-note">{item.note}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

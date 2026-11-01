@@ -61,6 +61,8 @@ export const CartModal: React.FC<CartModalProps> = ({
   const [guestCount, setGuestCount] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [rememberCustomerDetails, setRememberCustomerDetails] = useState(false);
+  const [activeRegionStep, setActiveRegionStep] = useState<1 | 2 | 3 | 4>(1);
+  const [isEditingRegion, setIsEditingRegion] = useState(false);
 
   const provinces = useIndonesiaRegionOptions('/provinces.json', isOpen);
   const regencies = useIndonesiaRegionOptions(form.provinceId ? `/regencies/${form.provinceId}.json` : null, isOpen);
@@ -71,6 +73,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   const selectedRegency = regencies.data.find((item) => item.id === form.regencyId);
   const selectedDistrict = districts.data.find((item) => item.id === form.districtId);
   const selectedVillage = villages.data.find((item) => item.id === form.villageId);
+  const isRegionComplete = Boolean(form.provinceId && form.regencyId && form.districtId && form.villageId);
 
   // Simpan hanya ketika pelanggan secara eksplisit memilih opsi ingat data.
   useEffect(() => {
@@ -134,6 +137,11 @@ export const CartModal: React.FC<CartModalProps> = ({
         return;
       }
     } else if (!selectedProvince || !selectedRegency || !selectedDistrict || !selectedVillage) {
+      if (!selectedProvince) setActiveRegionStep(1);
+      else if (!selectedRegency) setActiveRegionStep(2);
+      else if (!selectedDistrict) setActiveRegionStep(3);
+      else setActiveRegionStep(4);
+      setIsEditingRegion(true);
       onShowToast('Pilih provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan terlebih dahulu.');
       return;
     }
@@ -175,6 +183,8 @@ export const CartModal: React.FC<CartModalProps> = ({
       manualRegion: '', legacyArea: '', notes: ''
     };
     setForm(emptyForm);
+    setActiveRegionStep(1);
+    setIsEditingRegion(false);
     setRememberCustomerDetails(false);
     try { window.localStorage.removeItem(FORM_STORAGE_KEY); } catch { /* storage unavailable */ }
     onShowToast('Data nama dan alamat tersimpan telah dihapus dari browser ini.');
@@ -387,46 +397,274 @@ export const CartModal: React.FC<CartModalProps> = ({
             )}
 
             {!regionLookupUnavailable ? (
-              <div className="address-select-grid">
-                <div className="address-field">
-                  <label htmlFor="custProvince">Provinsi *</label>
-                  <select className="input-shadcn" id="custProvince" required value={form.provinceId}
-                    disabled={provinces.isLoading || provinces.data.length === 0}
-                    onChange={(e) => setForm({ ...form, provinceId: e.target.value, regencyId: '', districtId: '', villageId: '', postalCode: '', legacyArea: '' })}>
-                    <option value="">{provinces.isLoading ? 'Memuat provinsi…' : 'Pilih provinsi'}</option>
-                    {provinces.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
-                  </select>
+              <div className="space-y-2">
+                {/* Visual Step Tracker */}
+                <div className="region-stepper-tracker" role="tablist" aria-label="Alur pemilihan wilayah bertahap">
+                  {[
+                    { step: 1 as const, label: 'Provinsi', val: selectedProvince?.name, available: true },
+                    { step: 2 as const, label: 'Kab/Kota', val: selectedRegency?.name, available: Boolean(form.provinceId) },
+                    { step: 3 as const, label: 'Kecamatan', val: selectedDistrict?.name, available: Boolean(form.regencyId) },
+                    { step: 4 as const, label: 'Kelurahan', val: selectedVillage?.name, available: Boolean(form.districtId) }
+                  ].map((s, idx) => {
+                    const isCurrent = (isEditingRegion || !isRegionComplete) && activeRegionStep === s.step;
+                    const isDone = Boolean(s.val);
+                    return (
+                      <React.Fragment key={s.step}>
+                        {idx > 0 && <span className="stepper-arrow" aria-hidden="true">›</span>}
+                        <button
+                          type="button"
+                          className={`stepper-chip ${isCurrent ? 'active' : ''} ${isDone ? 'done' : ''}`}
+                          disabled={!s.available}
+                          onClick={() => {
+                            setActiveRegionStep(s.step);
+                            setIsEditingRegion(true);
+                          }}
+                          title={s.val ? `${s.label}: ${s.val}` : s.label}
+                        >
+                          <span className="stepper-num">{isDone && !isCurrent ? '✓' : s.step}</span>
+                          <span>{s.label}</span>
+                        </button>
+                      </React.Fragment>
+                    );
+                  })}
                 </div>
-                <div className="address-field">
-                  <label htmlFor="custRegency">Kabupaten / Kota *</label>
-                  <select className="input-shadcn" id="custRegency" required value={form.regencyId}
-                    disabled={!form.provinceId || regencies.isLoading || regencies.data.length === 0}
-                    onChange={(e) => setForm({ ...form, regencyId: e.target.value, districtId: '', villageId: '', postalCode: '', legacyArea: '' })}>
-                    <option value="">{regencies.isLoading ? 'Memuat kabupaten/kota…' : 'Pilih kabupaten/kota'}</option>
-                    {regencies.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
-                  </select>
-                </div>
-                <div className="address-field">
-                  <label htmlFor="custDistrict">Kecamatan / Distrik *</label>
-                  <select className="input-shadcn" id="custDistrict" required value={form.districtId}
-                    disabled={!form.regencyId || districts.isLoading || districts.data.length === 0}
-                    onChange={(e) => setForm({ ...form, districtId: e.target.value, villageId: '', postalCode: '', legacyArea: '' })}>
-                    <option value="">{districts.isLoading ? 'Memuat kecamatan…' : 'Pilih kecamatan'}</option>
-                    {districts.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
-                  </select>
-                </div>
-                <div className="address-field">
-                  <label htmlFor="custVillage">Desa / Kelurahan *</label>
-                  <select className="input-shadcn" id="custVillage" required value={form.villageId}
-                    disabled={!form.districtId || villages.isLoading || villages.data.length === 0}
-                    onChange={(e) => {
-                      const village = villages.data.find((item) => item.id === e.target.value);
-                      setForm({ ...form, villageId: e.target.value, postalCode: village?.postal_code || '', legacyArea: '' });
-                    }}>
-                    <option value="">{villages.isLoading ? 'Memuat desa/kelurahan…' : 'Pilih desa/kelurahan'}</option>
-                    {villages.data.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
-                  </select>
-                </div>
+
+                {/* If all 4 are selected and user is not actively changing, display clean summary */}
+                {isRegionComplete && !isEditingRegion ? (
+                  <div className="region-summary-panel">
+                    <div className="region-summary-header">
+                      <span className="region-summary-tag">
+                        <Check className="w-3 h-3" /> Wilayah Lengkap
+                      </span>
+                      <button
+                        type="button"
+                        className="region-edit-btn"
+                        onClick={() => {
+                          setIsEditingRegion(true);
+                          setActiveRegionStep(4);
+                        }}
+                      >
+                        Ubah Wilayah
+                      </button>
+                    </div>
+                    <div className="region-summary-breadcrumbs">
+                      <button
+                        type="button"
+                        className="crumb-btn"
+                        onClick={() => {
+                          setActiveRegionStep(1);
+                          setIsEditingRegion(true);
+                        }}
+                      >
+                        {selectedProvince?.name}
+                      </button>
+                      <span className="crumb-arrow">›</span>
+                      <button
+                        type="button"
+                        className="crumb-btn"
+                        onClick={() => {
+                          setActiveRegionStep(2);
+                          setIsEditingRegion(true);
+                        }}
+                      >
+                        {selectedRegency?.name}
+                      </button>
+                      <span className="crumb-arrow">›</span>
+                      <button
+                        type="button"
+                        className="crumb-btn"
+                        onClick={() => {
+                          setActiveRegionStep(3);
+                          setIsEditingRegion(true);
+                        }}
+                      >
+                        {selectedDistrict?.name}
+                      </button>
+                      <span className="crumb-arrow">›</span>
+                      <span className="crumb-final">{selectedVillage?.name}</span>
+                    </div>
+                  </div>
+                ) : (
+                  /* Progressive single-field step container */
+                  <div className="region-step-active">
+                    {activeRegionStep === 1 && (
+                      <div className="address-field">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <label htmlFor="custProvince">1. Pilih Provinsi *</label>
+                          {form.provinceId && (
+                            <button
+                              type="button"
+                              className="text-[11px] font-semibold text-[#84171a] hover:underline"
+                              onClick={() => {
+                                if (form.regencyId) setActiveRegionStep(2);
+                                else if (isRegionComplete) setIsEditingRegion(false);
+                              }}
+                            >
+                              Lanjut ke Kab/Kota ›
+                            </button>
+                          )}
+                        </div>
+                        <select
+                          className="input-shadcn w-full"
+                          id="custProvince"
+                          required
+                          value={form.provinceId}
+                          disabled={provinces.isLoading || provinces.data.length === 0}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setForm({
+                              ...form,
+                              provinceId: val,
+                              regencyId: '',
+                              districtId: '',
+                              villageId: '',
+                              postalCode: '',
+                              legacyArea: ''
+                            });
+                            if (val) setActiveRegionStep(2);
+                          }}
+                        >
+                          <option value="">{provinces.isLoading ? 'Memuat provinsi…' : '— Pilih Provinsi —'}</option>
+                          {provinces.data.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
+                          ))}
+                        </select>
+                        <p className="field-help">Pilih provinsi tujuan pengiriman.</p>
+                      </div>
+                    )}
+
+                    {activeRegionStep === 2 && (
+                      <div className="address-field">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <label htmlFor="custRegency">2. Pilih Kabupaten / Kota *</label>
+                          <button
+                            type="button"
+                            className="text-[11px] font-semibold text-[#84171a] hover:underline"
+                            onClick={() => setActiveRegionStep(1)}
+                          >
+                            ‹ Ganti Provinsi ({selectedProvince?.name || ''})
+                          </button>
+                        </div>
+                        <select
+                          className="input-shadcn w-full"
+                          id="custRegency"
+                          required
+                          value={form.regencyId}
+                          disabled={!form.provinceId || regencies.isLoading || regencies.data.length === 0}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setForm({
+                              ...form,
+                              regencyId: val,
+                              districtId: '',
+                              villageId: '',
+                              postalCode: '',
+                              legacyArea: ''
+                            });
+                            if (val) setActiveRegionStep(3);
+                          }}
+                        >
+                          <option value="">{regencies.isLoading ? 'Memuat kabupaten/kota…' : `— Pilih Kab/Kota di ${selectedProvince?.name || 'Provinsi'} —`}</option>
+                          {regencies.data.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
+                          ))}
+                        </select>
+                        <p className="field-help">Provinsi: <strong>{selectedProvince?.name}</strong></p>
+                      </div>
+                    )}
+
+                    {activeRegionStep === 3 && (
+                      <div className="address-field">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <label htmlFor="custDistrict">3. Pilih Kecamatan / Distrik *</label>
+                          <button
+                            type="button"
+                            className="text-[11px] font-semibold text-[#84171a] hover:underline"
+                            onClick={() => setActiveRegionStep(2)}
+                          >
+                            ‹ Ganti Kab/Kota ({selectedRegency?.name || ''})
+                          </button>
+                        </div>
+                        <select
+                          className="input-shadcn w-full"
+                          id="custDistrict"
+                          required
+                          value={form.districtId}
+                          disabled={!form.regencyId || districts.isLoading || districts.data.length === 0}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setForm({
+                              ...form,
+                              districtId: val,
+                              villageId: '',
+                              postalCode: '',
+                              legacyArea: ''
+                            });
+                            if (val) setActiveRegionStep(4);
+                          }}
+                        >
+                          <option value="">{districts.isLoading ? 'Memuat kecamatan…' : `— Pilih Kecamatan di ${selectedRegency?.name || 'Kab/Kota'} —`}</option>
+                          {districts.data.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
+                          ))}
+                        </select>
+                        <p className="field-help">Kabupaten/Kota: <strong>{selectedRegency?.name}</strong></p>
+                      </div>
+                    )}
+
+                    {activeRegionStep === 4 && (
+                      <div className="address-field">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <label htmlFor="custVillage">4. Pilih Desa / Kelurahan *</label>
+                          <button
+                            type="button"
+                            className="text-[11px] font-semibold text-[#84171a] hover:underline"
+                            onClick={() => setActiveRegionStep(3)}
+                          >
+                            ‹ Ganti Kecamatan ({selectedDistrict?.name || ''})
+                          </button>
+                        </div>
+                        <select
+                          className="input-shadcn w-full"
+                          id="custVillage"
+                          required
+                          value={form.villageId}
+                          disabled={!form.districtId || villages.isLoading || villages.data.length === 0}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const village = villages.data.find((item) => item.id === val);
+                            setForm({
+                              ...form,
+                              villageId: val,
+                              postalCode: village?.postal_code || form.postalCode || '',
+                              legacyArea: ''
+                            });
+                            if (val) {
+                              setIsEditingRegion(false);
+                            }
+                          }}
+                        >
+                          <option value="">{villages.isLoading ? 'Memuat desa/kelurahan…' : `— Pilih Desa/Kelurahan di Kec. ${selectedDistrict?.name || ''} —`}</option>
+                          {villages.data.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
+                          ))}
+                        </select>
+                        <div className="flex items-center justify-between mt-1">
+                          <p className="field-help mb-0">Kecamatan: <strong>{selectedDistrict?.name}</strong></p>
+                          {form.villageId && (
+                            <button
+                              type="button"
+                              className="text-[11px] font-bold text-[#2b611e] hover:underline"
+                              onClick={() => setIsEditingRegion(false)}
+                            >
+                              ✓ Selesai Memilih Wilayah
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="address-fallback">
