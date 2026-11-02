@@ -39,9 +39,9 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
         <div className="section-heading story-heading mb-6 md:mb-8">
           <div>
             <h2 id="why-title" className="stagger-heading stagger-h2 mb-0">
-              <span className="stagger-item" style={{ animationDelay: '140ms' }}>Dari ngemil sendiri</span>
+              <span className="stagger-item" style={{ animationDelay: '140ms', lineHeight: '50px' }}>Dari ngemil sendiri</span>
               <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
-                <em>sampai berbagi ramai-ramai.</em>
+                <em style={{ lineHeight: '50px' }}>sampai berbagi ramai-ramai.</em>
               </span>
             </h2>
           </div>
@@ -52,8 +52,7 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
             <article className="bundle-card bundle-featured">
               <div className="bundle-image">
                 <ProductImage src="/images/menu/dimsum-platter-960.webp" alt="Dimsum Platter Komplit" bgColor="#f6e7ad" width={720} height={480} sizes="(min-width: 900px) 42vw, 100vw" loading="lazy" className="w-full h-full object-cover"/>
-                <span className="bundle-ribbon">COMBO FAVORIT</span>
-              </div>
+                </div>
               <div className="bundle-content">
                 <p className="bundle-overline">COMBO 3-IN-1</p>
                 <h3>Dimsum Platter Komplit</h3>

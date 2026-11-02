@@ -14,9 +14,9 @@ export const Steps: React.FC = () => (
         <div>
           <p className="section-kicker"><ArrowUpRight size={14}/> EASY ORDER</p>
           <h2 id="steps-title" className="stagger-heading stagger-h2 mb-0">
-            <span className="stagger-item" style={{ animationDelay: '140ms' }}>Dari pilih menu</span>
+            <span className="stagger-item" style={{ animationDelay: '140ms', lineHeight: '50px' }}>Dari pilih menu</span>
             <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
-              <em>sampai siap dinikmati.</em>
+              <em style={{ lineHeight: '50px' }}>sampai siap dinikmati.</em>
             </span>
           </h2>
         </div>

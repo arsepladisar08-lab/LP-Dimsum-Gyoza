@@ -24,11 +24,11 @@ export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) =
       <div className="container-custom">
         <div className="demo-trust-heading items-end">
           <div>
-            <p className="section-kicker">INFORMASI & LAYANAN GYOZEN</p>
+            <p className="section-kicker" style={{ fontSize: '11px', lineHeight: '20px' }}>INFORMASI & LAYANAN GYOZEN</p>
             <h2 id="demo-trust-title" className="stagger-heading stagger-h2 mb-0">
-              <span className="stagger-item" style={{ animationDelay: '140ms' }}>Kualitas terjamin,</span>
+              <span className="stagger-item" style={{ animationDelay: '140ms', fontSize: '48px', lineHeight: '50px' }}>Kualitas terjamin,</span>
               <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
-                <em>layanan terpercaya.</em>
+                <em style={{ fontSize: '48px', lineHeight: '50px' }}>layanan terpercaya.</em>
               </span>
             </h2>
           </div>
