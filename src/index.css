@@ -1902,3 +1902,472 @@ section.bg-gradient-to-br { background:linear-gradient(130deg,var(--red),var(--r
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   Desktop Comfortable Proportions (Permanent Default 75% Zoom Equivalent)
+   Provides compact, balanced, and proportionate layout on desktop viewports (>= 1024px).
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+  :root {
+    --container: 1040px;
+  }
+
+  /* Header compact proportions */
+  .header-inner {
+    min-height: 60px;
+    gap: 18px;
+  }
+  .brand-logo-image {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  .header-nav {
+    min-height: 38px;
+    gap: 20px;
+  }
+  .nav-link {
+    font-size: 13.5px;
+    padding: 6px 0;
+  }
+  .header-cart {
+    font-size: 13px;
+    min-height: 38px;
+    padding: 7px 13px;
+  }
+  .site-header.is-scrolled {
+    top: 8px;
+    width: min(940px, calc(100% - 32px));
+  }
+  .site-header.is-scrolled .header-inner {
+    min-height: 52px;
+  }
+  .site-header.is-scrolled .brand-logo-image {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* Hero section compact proportions */
+  .hero {
+    padding: 40px 0 46px;
+  }
+  .hero-grid {
+    gap: 32px;
+  }
+  .hero-location {
+    font-size: 11.5px;
+    margin-bottom: 10px;
+  }
+  .hero-kicker {
+    font-size: 9.5px;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 3.1vw, 45px);
+    line-height: 1.04;
+    letter-spacing: -.05em;
+  }
+  .hero h1 em {
+    font-size: 1.08em;
+  }
+  .hero-subtitle {
+    font-size: 13.5px;
+    line-height: 1.62;
+    max-width: 460px;
+    margin-top: 14px;
+  }
+  .hero-actions {
+    margin-top: 18px;
+    gap: 14px;
+  }
+  .hero-actions .btn-large {
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+  .hero-visual {
+    max-width: 480px;
+    padding: 6px 0 10px;
+  }
+  .hero-gallery {
+    min-height: 300px;
+    aspect-ratio: 1.15 / 1;
+  }
+  .hero-product-card {
+    padding: 6px;
+    border-radius: 19px;
+  }
+  .hero-product-card img {
+    border-radius: 14px;
+  }
+  .hero-product-label {
+    font-size: 9px;
+    padding: 5px 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+  }
+  .hero-image-caption {
+    min-height: 46px;
+    padding: 8px 14px;
+    margin: 4px 14px 0;
+    border-radius: 12px;
+  }
+  .hero-image-caption span {
+    font-size: 11px;
+  }
+  .hero-image-caption strong {
+    font-size: 15px;
+  }
+
+  /* Highlights band */
+  .highlights-band {
+    padding: 14px 0;
+  }
+  .highlight-num {
+    font-size: 20px;
+  }
+  .highlight-desc {
+    font-size: 10.5px;
+  }
+
+  /* Shared section system */
+  section.section {
+    padding: 50px 0;
+  }
+  .section-heading {
+    margin-bottom: 22px;
+    gap: 20px;
+  }
+  .section-kicker {
+    font-size: 9.5px;
+    margin-bottom: 8px;
+  }
+  .section-heading h2,
+  .section-title {
+    font-size: clamp(26px, 2.4vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -.05em;
+  }
+  .section-intro {
+    font-size: 12px;
+    margin-top: 8px;
+    line-height: 1.65;
+    max-width: 440px;
+  }
+
+  /* Menu catalog */
+  .menu-grid {
+    gap: 16px;
+  }
+  .product-card {
+    border-radius: 18px;
+  }
+  .product-card-body {
+    padding: 14px;
+  }
+  .product-card h3 {
+    font-size: 14.5px;
+    margin-top: 5px;
+  }
+  .product-portion {
+    font-size: 9.5px;
+    min-height: 26px;
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+  .product-card-footer {
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .product-price strong {
+    font-size: 17px;
+  }
+  .filter-pill {
+    padding: 7px 12px;
+    font-size: 10.5px;
+  }
+  .btn-sm {
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  /* Why Gyozen, Bundles & Bulk Order */
+  .story-layout {
+    gap: 16px;
+  }
+  .bundle-card {
+    border-radius: 20px;
+  }
+  .bundle-image {
+    height: 160px;
+  }
+  .bundle-content {
+    padding: 15px;
+  }
+  .bundle-content h3 {
+    font-size: 15px;
+  }
+  .bundle-content p:not(.bundle-overline) {
+    font-size: 10.5px;
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .bundle-bottom {
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .bundle-bottom strong {
+    font-size: 17px;
+  }
+  .bundle-horizontal {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+  .bundle-horizontal .bundle-thumb {
+    width: 100px;
+    min-height: 135px;
+  }
+  .bundle-horizontal .bundle-content {
+    padding: 13px;
+  }
+  .bundle-horizontal .bundle-content h3 {
+    font-size: 14px;
+  }
+  .benefit-grid {
+    gap: 10px;
+  }
+  .benefit-card {
+    min-height: 145px;
+    padding: 15px;
+    border-radius: 18px;
+  }
+  .benefit-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 10px;
+    border-radius: 11px;
+  }
+  .benefit-card h3 {
+    font-size: 13.5px;
+    margin: 4px 0 3px;
+  }
+  .benefit-card p {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .bulk-order-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .bulk-order-badge {
+    padding: 4px 9px;
+    font-size: 9px;
+    margin-bottom: 8px;
+  }
+  .bulk-order-header h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .bulk-order-intro {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .bulk-event-tags {
+    margin: 10px 0;
+    gap: 6px;
+  }
+  .bulk-event-tag {
+    padding: 4px 8px;
+    font-size: 9.5px;
+    border-radius: 8px;
+  }
+  .bulk-features-list {
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+  .bulk-feature-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+  }
+  .bulk-feature-item strong {
+    font-size: 11.5px;
+  }
+  .bulk-feature-item p {
+    font-size: 9.5px;
+  }
+  .bulk-order-footer {
+    padding-top: 14px;
+  }
+  .bulk-order-hint {
+    font-size: 10px;
+    margin-top: 7px;
+  }
+
+  /* Operational Unified Card (Trust & Info) */
+  .operational-unified-card {
+    padding: 18px 22px;
+    border-radius: 18px;
+    margin-top: 16px;
+  }
+  .operational-unified-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+  }
+  .operational-unified-header h3 {
+    font-size: 16px;
+  }
+  .operational-unified-header p {
+    font-size: 11px;
+    max-width: 380px;
+  }
+  .operational-unified-grid {
+    gap: 10px 16px;
+  }
+  .operational-unified-item {
+    padding: 7px 9px;
+    border-radius: 11px;
+  }
+  .operational-item-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+  .operational-item-title {
+    font-size: 10px;
+  }
+  .operational-item-value {
+    font-size: 12px;
+  }
+  .operational-item-note {
+    font-size: 9.5px;
+  }
+
+  /* Testimonials */
+  .testimonial-grid {
+    gap: 14px;
+  }
+  .testimonial-card {
+    min-height: 175px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+  .testimonial-quote {
+    font-size: 15px;
+    margin: 14px 0;
+    line-height: 1.38;
+  }
+  .testimonial-person strong {
+    font-size: 10.5px;
+  }
+  .testimonial-person div span {
+    font-size: 8.5px;
+  }
+
+  /* Steps */
+  .steps-grid {
+    gap: 13px;
+  }
+  .step-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+  .step-card-top span {
+    font-size: 26px;
+  }
+  .step-line {
+    margin: 14px 0;
+    height: 2.5px;
+  }
+  .step-card h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .step-card p {
+    font-size: 10px;
+    line-height: 1.65;
+  }
+
+  /* FAQ */
+  .faq-layout {
+    gap: clamp(24px, 4vw, 56px);
+  }
+  .faq-intro h2 {
+    font-size: clamp(26px, 2.4vw, 36px);
+  }
+  .faq-item {
+    padding: 0 15px;
+    border-radius: 14px;
+  }
+  .faq-item summary {
+    min-height: 50px;
+    font-size: 12px;
+    gap: 10px;
+  }
+  .faq-item summary strong {
+    font-size: 11.5px;
+  }
+  .faq-item > p {
+    font-size: 10.5px;
+    padding: 0 0 14px 22px;
+    line-height: 1.7;
+  }
+
+  /* Closing Section */
+  .closing-section {
+    padding: 62px 0;
+  }
+  .closing-content h2 {
+    font-size: clamp(32px, 3.6vw, 48px);
+    letter-spacing: -.06em;
+  }
+  .closing-content > p:not(.closing-kicker) {
+    font-size: 12px;
+    margin-top: 14px;
+    max-width: 440px;
+  }
+  .closing-actions {
+    margin-top: 20px;
+    gap: 9px;
+  }
+
+  /* Footer */
+  .footer-pro {
+    padding: 42px 0 18px;
+  }
+  .footer-grid {
+    gap: 34px;
+    padding-bottom: 28px;
+  }
+  .footer-brand-image {
+    width: 56px;
+    height: 60px;
+  }
+  .footer-brand-column > p {
+    font-size: 10.5px;
+    margin: 14px 0 10px;
+    max-width: 280px;
+  }
+  .footer-links-list {
+    gap: 9px;
+    font-size: 10.5px;
+  }
+  .footer-links-list a {
+    gap: 6px;
+  }
+  .footer-bottom {
+    padding-top: 16px;
+    font-size: 8.5px;
+  }
+
+  /* Modals */
+  .modal-dialog {
+    padding: 22px;
+    border-radius: 20px;
+  }
+  .modal-dialog.modal-dialog-lg {
+    width: min(720px, calc(100% - 32px));
+  }
+}
+

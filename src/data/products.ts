@@ -3,7 +3,7 @@ import { Product } from '../types';
 export const WHATSAPP_NUMBER = '628981230703';
 
 /**
- * Data 10 Menu Resmi Dimsum Gyozen
+ * Data 14 Menu Resmi Dimsum Gyozen
  * Menggunakan aset gambar WebP teroptimasi (480w & 960w).
  */
 export const GYOZEN_PRODUCTS: Product[] = [
@@ -12,7 +12,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
     index: '01 / fresh & juicy',
     name: 'Gyoza Fresh & Juicy',
     category: 'hangat',
-    bg: '#f8e6c9',
     art: 'gyoza',
     price: 15000,
     info: 'Siap santap hangat',
@@ -29,7 +28,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
     index: '02 / classic steam',
     name: 'Dimsum Original Mix',
     category: 'hangat',
-    bg: '#f6e2c3',
     art: 'dimsum',
     price: 15000,
     info: 'Dimsum kukus hangat + Chili Oil',
@@ -46,7 +44,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
     index: '03 / crispy melted',
     name: 'Dimsum Goreng Keju',
     category: 'hangat',
-    bg: '#f7ddb8',
     art: 'keju',
     price: 22000,
     info: 'Renyah di luar, lumer di dalam',
@@ -63,7 +60,6 @@ export const GYOZEN_PRODUCTS: Product[] = [
     index: '04 / signature torch',
     name: 'Dimsum Mentai Lumer',
     category: 'hangat',
-    bg: '#f5d4b9',
     art: 'mentai',
     price: 30000,
     info: 'Kemasan aluminium tray',
@@ -76,11 +72,58 @@ export const GYOZEN_PRODUCTS: Product[] = [
     storageTip: 'Simpan di kulkas chiller jika belum langsung dikonsumsi.'
   },
   {
+    id: 'gyoza-mentai',
+    index: '05 / signature torch',
+    name: 'Gyoza Mentai',
+    category: 'hangat',
+    art: 'mentai',
+    price: 23000,
+    info: 'Porsi 7 pcs + Saus Mentai Torch',
+    desc: 'Gyoza lembut isi ayam juicy isi 7 pcs dibalut limpahan saus mentai creamy khas Jepang, di-torch wangi dengan taburan nori & tobiko gurih.',
+    imageUrl: '/images/menu/gyoza-mentai-960.webp',
+    portion: 'Porsi 7 pcs Saus Mentai Torch + Nori & Tobiko',
+    pcs: 7,
+    composition: 'Daging ayam segar, udang, daun bawang, saus mentai spesial bakar, nori panggang, tobiko crunchy, kulit gyoza tipis kenyal.',
+    servingTip: 'Nikmati segera selagi aroma torch smokey saus mentai masih harum menggoda.',
+    storageTip: 'Paling nikmat dikonsumsi langsung setelah penyajian hangat.'
+  },
+  {
+    id: 'dimsum-kuah-seblak',
+    index: '06 / kuah seblak',
+    name: 'Dimsum Kuah Seblak',
+    category: 'hangat',
+    art: 'dimsum',
+    price: 17000,
+    info: 'Porsi 4 pcs + Kuah Seblak (Foto Dummy)',
+    desc: 'Dimsum kukus padat daging berpadu kuah seblak merah pedas gurih beraroma kencur segar dan racikan rempah nusantara. (*Visual foto sajian menggunakan dummy preview sementara).',
+    imageUrl: '/images/menu/dimsum-kuah-seblak-960.webp',
+    portion: 'Porsi 4 pcs + Kuah Seblak Pedas Gurih',
+    pcs: 4,
+    composition: 'Daging ayam segar, udang pilihan, kuah seblak rempah khas (kencur, bawang putih, cabai rawit merah, minyak rempah), kulit dimsum kenyal.',
+    servingTip: 'Tuang kuah seblak panas ke mangkuk dimsum, nikmati selagi hangat membara.',
+    storageTip: 'Disajikan fresh siap santap selagi panas.'
+  },
+  {
+    id: 'gyoza-kuah-seblak',
+    index: '07 / kuah seblak',
+    name: 'Gyoza Kuah Seblak',
+    category: 'hangat',
+    art: 'gyoza',
+    price: 17000,
+    info: 'Porsi 6 pcs + Kuah Seblak (Foto Dummy)',
+    desc: 'Gyoza lembut isi ayam udang juicy isi 6 pcs berpadu kuah seblak khas rempah yang nendang dan segar berkuah pedas gurih. (*Visual foto sajian menggunakan dummy preview sementara).',
+    imageUrl: '/images/menu/gyoza-kuah-seblak-960.webp',
+    portion: 'Porsi 6 pcs + Kuah Seblak Pedas Gurih',
+    pcs: 6,
+    composition: 'Daging ayam, udang, daun bawang, racikan bumbu seblak segar (kencur, cabai, kaldu gurih), kulit gyoza khas.',
+    servingTip: 'Sajikan gyoza dengan kuah seblak panas mengepul untuk kehangatan maksimal.',
+    storageTip: 'Konsumsi langsung selagi kuah masih hangat.'
+  },
+  {
     id: 'dimsum-platter',
-    index: '05 / 3-in-1 combo',
+    index: '08 / 3-in-1 combo',
     name: 'Dimsum Platter Komplit',
     category: 'hangat',
-    bg: '#f6e7ad',
     art: 'platter',
     price: 70000,
     info: 'Mentai + Gyoza + Goreng Keju',
@@ -93,10 +136,9 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'party-box',
-    index: '06 / family tray',
+    index: '09 / family tray',
     name: 'Party Box Gyozen',
     category: 'hangat',
-    bg: '#f5d9c5',
     art: 'platter',
     price: 65000,
     info: 'Cocok untuk acara & kumpul',
@@ -108,11 +150,26 @@ export const GYOZEN_PRODUCTS: Product[] = [
     storageTip: 'Pesan h-1 untuk pemesanan di atas 5 boks katering.'
   },
   {
+    id: 'party-box-mentai',
+    index: '10 / mentai party tray',
+    name: 'Dimsum Party Box Mentai',
+    category: 'hangat',
+    art: 'mentai',
+    price: 70000,
+    info: 'Tray pesta 16 pcs Full Mentai Torch',
+    desc: 'Tray boks pesta ukuran besar berisi 16 pcs dimsum padat daging yang seluruhnya dilapisi saus mentai bakar wangi, nori, dan tobiko melimpah.',
+    imageUrl: '/images/menu/party-box-mentai-960.webp',
+    portion: 'Tray Pesta 16 pcs Full Saus Mentai Torch',
+    pcs: 16,
+    composition: '16 pcs dimsum ayam udang premium, saus mentai panggang penuh, nori renyah, tobiko gurih.',
+    servingTip: 'Pilihan sempurna untuk traktiran ulang tahun, arisan, syukuran, atau meeting kantor.',
+    storageTip: 'Pemesanan dalam jumlah banyak untuk acara disarankan konfirmasi terlebih dahulu.'
+  },
+  {
     id: 'frozen-dimsum-mix',
-    index: '07 / ready frozen',
+    index: '11 / ready frozen',
     name: 'Frozen Pack: Dimsum Mix',
     category: 'frozen',
-    bg: '#e2ecf5',
     art: 'frozen',
     price: 42000,
     info: 'Ready Frozen',
@@ -126,10 +183,9 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'frozen-goreng-keju',
-    index: '08 / ready frozen',
+    index: '12 / ready frozen',
     name: 'Frozen Pack: Goreng Keju',
     category: 'frozen',
-    bg: '#e2ecf5',
     art: 'frozen',
     price: 32000,
     info: 'Ready Frozen',
@@ -143,10 +199,9 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'frozen-gyoza',
-    index: '09 / ready frozen',
+    index: '13 / ready frozen',
     name: 'Frozen Pack: Gyoza Juicy',
     category: 'frozen',
-    bg: '#e2ecf5',
     art: 'frozen',
     price: 30000,
     info: 'Ready Frozen',
@@ -160,10 +215,9 @@ export const GYOZEN_PRODUCTS: Product[] = [
   },
   {
     id: 'ebi-chili-oil',
-    index: '10 / condiment jar',
+    index: '14 / condiment jar',
     name: 'Gyozen Ebi Chili Oil 150ml',
     category: 'pelengkap',
-    bg: '#f5d4b9',
     art: 'chili',
     price: 22000,
     info: 'Isi bersih 150ml',

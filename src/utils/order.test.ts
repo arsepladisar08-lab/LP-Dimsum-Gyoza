@@ -139,3 +139,32 @@ test('calculateKnownPieces excludes products without exact pcs data', () => {
   assert.equal(calculatePiecesPerGuest(8, 0), null);
   assert.equal(calculatePiecesPerGuest(8, 1.5), null);
 });
+
+test('GYOZEN_PRODUCTS includes the 4 new menu variants with requested price and pcs', async () => {
+  const { GYOZEN_PRODUCTS } = await import('../data/products');
+  
+  const dimsumSeblak = GYOZEN_PRODUCTS.find((p) => p.id === 'dimsum-kuah-seblak');
+  assert.ok(dimsumSeblak, 'Dimsum Kuah Seblak must exist');
+  assert.equal(dimsumSeblak.price, 17000);
+  assert.equal(dimsumSeblak.pcs, 4);
+  assert.equal(dimsumSeblak.category, 'hangat');
+
+  const gyozaSeblak = GYOZEN_PRODUCTS.find((p) => p.id === 'gyoza-kuah-seblak');
+  assert.ok(gyozaSeblak, 'Gyoza Kuah Seblak must exist');
+  assert.equal(gyozaSeblak.price, 17000);
+  assert.equal(gyozaSeblak.pcs, 6);
+  assert.equal(gyozaSeblak.category, 'hangat');
+
+  const gyozaMentai = GYOZEN_PRODUCTS.find((p) => p.id === 'gyoza-mentai');
+  assert.ok(gyozaMentai, 'Gyoza Mentai must exist');
+  assert.equal(gyozaMentai.price, 23000);
+  assert.equal(gyozaMentai.pcs, 7);
+  assert.equal(gyozaMentai.category, 'hangat');
+
+  const partyMentai = GYOZEN_PRODUCTS.find((p) => p.id === 'party-box-mentai');
+  assert.ok(partyMentai, 'Dimsum Party Box Mentai must exist');
+  assert.equal(partyMentai.price, 70000);
+  assert.equal(partyMentai.pcs, 16);
+  assert.equal(partyMentai.category, 'hangat');
+});
+
