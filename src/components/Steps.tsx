@@ -13,13 +13,12 @@ export const Steps: React.FC = () => (
       <div className="section-heading">
         <div>
           <p className="section-kicker"><ArrowUpRight size={14}/> EASY ORDER</p>
-          <h2 id="steps-title" className="stagger-heading stagger-h2">
+          <h2 id="steps-title" className="stagger-heading stagger-h2 mb-0">
             <span className="stagger-item" style={{ animationDelay: '140ms' }}>Dari pilih menu</span>
             <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
               <em>sampai siap dinikmati.</em>
             </span>
           </h2>
-          <p className="section-intro">Pesan tanpa perlu membuat akun. Data alamat disusun rapi untuk WhatsApp; stok, ongkir, dan pembayaran tetap dikonfirmasi admin.</p>
         </div>
       </div>
       <div className="steps-grid">

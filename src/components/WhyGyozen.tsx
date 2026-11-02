@@ -36,15 +36,14 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
   return (
     <section className="section story-section" id="paket" aria-labelledby="why-title">
       <div className="container-custom">
-        <div className="section-heading story-heading">
+        <div className="section-heading story-heading mb-6 md:mb-8">
           <div>
-            <h2 id="why-title" className="stagger-heading stagger-h2">
+            <h2 id="why-title" className="stagger-heading stagger-h2 mb-0">
               <span className="stagger-item" style={{ animationDelay: '140ms' }}>Dari ngemil sendiri</span>
               <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
                 <em>sampai berbagi ramai-ramai.</em>
               </span>
             </h2>
-            <p className="section-intro">Ada pilihan untuk setiap suasana: menu hangat, paket sharing hemat, hingga pesanan jumlah banyak untuk acaramu.</p>
           </div>
         </div>
 

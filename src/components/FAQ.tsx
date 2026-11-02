@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { buildWhatsAppInquiryUrl } from '../utils/order';
-import { WHATSAPP_NUMBER } from '../data/products';
-import { MessageCircle, HelpCircle, Plus } from 'lucide-react';
+import { HelpCircle, Plus } from 'lucide-react';
 
 const questions = [
   { q: 'Apa saja pilihan menu yang tersedia?', a: 'Gyozen menyediakan gyoza, dimsum original, dimsum goreng keju, mentai, platter, party box, pilihan ready frozen, dan Ebi Chili Oil sebagai pelengkap. Detail porsi dan harga dapat dilihat pada katalog.' },
@@ -22,18 +20,12 @@ export const FAQ: React.FC = () => {
   return (
     <section className="section faq-section" id="faq" aria-labelledby="faq-title">
       <div className="container-custom faq-layout">
-        <div className="faq-intro">
+        <div className="faq-intro lg:sticky lg:top-28">
           <p className="section-kicker"><HelpCircle size={14}/> GOOD TO KNOW</p>
-          <h2 id="faq-title" className="stagger-heading stagger-h2">
+          <h2 id="faq-title" className="stagger-heading stagger-h2 mb-0">
             <span className="stagger-item" style={{ animationDelay: '140ms' }}>Ada yang ingin</span>
             <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}><em>kamu tanyakan?</em></span>
           </h2>
-          <p className="section-intro">Temukan jawaban singkat sebelum memilih menu. Untuk informasi stok, ongkir, dan area pengiriman terbaru, admin siap membantu.</p>
-          <a className="btn btn-primary active:scale-95 transition-transform"
-            href={buildWhatsAppInquiryUrl(WHATSAPP_NUMBER, 'Pertanyaan seputar menu, stok, dan pemesanan Gyozen')}
-            target="_blank" rel="noopener noreferrer">
-            <MessageCircle size={16}/> Tanya admin Gyozen
-          </a>
         </div>
         <div className="faq-list">
           {questions.map(({ q, a }, index) => {

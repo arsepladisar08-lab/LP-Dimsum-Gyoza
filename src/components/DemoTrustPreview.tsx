@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock3, CreditCard, MapPin, Star, Truck, ShieldCheck, Sparkles, MessageCircle } from 'lucide-react';
+import { Clock3, Star, Truck, ShieldCheck, MessageCircle } from 'lucide-react';
 import {
   DEMO_OPERATIONAL_CLAIMS,
   DEMO_RATING,
@@ -17,21 +17,20 @@ interface DemoTrustPreviewProps {
 export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) => {
   if (!enabled) return null;
 
-  const operationalIcons = [Clock3, MapPin, Truck, ShieldCheck, CreditCard, Sparkles];
+  const operationalIcons = [Clock3, Truck, ShieldCheck];
 
   return (
     <section className="demo-trust-section" id="layanan-gyozen" aria-labelledby="demo-trust-title">
       <div className="container-custom">
-        <div className="demo-trust-heading">
+        <div className="demo-trust-heading items-end">
           <div>
             <p className="section-kicker">INFORMASI & LAYANAN GYOZEN</p>
-            <h2 id="demo-trust-title" className="stagger-heading stagger-h2">
+            <h2 id="demo-trust-title" className="stagger-heading stagger-h2 mb-0">
               <span className="stagger-item" style={{ animationDelay: '140ms' }}>Kualitas terjamin,</span>
               <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
                 <em>layanan terpercaya.</em>
               </span>
             </h2>
-            <p>Pilihan dimsum & gyoza favorit di Sidoarjo. Dibuat fresh setiap hari dengan bahan berkualitas tinggi dan siap dikirim hangat maupun stok frozen.</p>
           </div>
           <a
             className="btn btn-primary active:scale-95 transition-transform"
@@ -54,7 +53,6 @@ export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) =
               <small>{DEMO_RATING.reviewCount} ulasan pelanggan · Sidoarjo & Surabaya</small>
             </div>
           </div>
-          <p>Kepuasan rasa dan kemudahan pemesanan adalah komitmen utama kami dalam setiap porsi yang disajikan.</p>
         </div>
 
         <div className="demo-testimonial-grid">
@@ -77,20 +75,18 @@ export const DemoTrustPreview: React.FC<DemoTrustPreviewProps> = ({ enabled }) =
           <div className="operational-unified-header">
             <div className="operational-unified-title-wrap">
               <span className="operational-badge">LAYANAN RESMI</span>
-              <h3>Informasi Operasional &amp; Pemesanan</h3>
+              <h3 className="mb-0">Informasi Operasional &amp; Pemesanan</h3>
             </div>
-            <p>Ringkasan jam layanan, jangkauan pengiriman, kualitas kemasan, dan metode pembayaran resmi Dimsum Gyozen.</p>
           </div>
           <div className="operational-unified-grid">
             {DEMO_OPERATIONAL_CLAIMS.map((item, index) => {
-              const Icon = operationalIcons[index % operationalIcons.length] || MapPin;
+              const Icon = operationalIcons[index % operationalIcons.length] || Clock3;
               return (
                 <article className="operational-unified-item" key={item.title}>
                   <span className="operational-item-icon"><Icon size={17} /></span>
                   <div className="operational-item-body">
                     <span className="operational-item-title">{item.title}</span>
                     <strong className="operational-item-value">{item.value}</strong>
-                    <p className="operational-item-note">{item.note}</p>
                   </div>
                 </article>
               );

@@ -7,7 +7,7 @@ export interface Product {
   category: 'hangat' | 'frozen' | 'pelengkap';
   tag?: string;
   tagStyle?: 'spicy' | 'frozen' | 'best' | '';
-  bg: string;
+  bg?: string;
   art: 'gyoza' | 'dimsum' | 'keju' | 'mentai' | 'platter' | 'frozen' | 'chili';
   price: number;
   oldPrice?: number;

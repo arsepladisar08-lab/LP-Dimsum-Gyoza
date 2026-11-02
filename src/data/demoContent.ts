@@ -46,38 +46,20 @@ export const DEMO_TESTIMONIALS: DemoTestimonial[] = [
 export interface DemoOperationalClaim {
   title: string;
   value: string;
-  note: string;
+  note?: string;
 }
 
 export const DEMO_OPERATIONAL_CLAIMS: DemoOperationalClaim[] = [
   {
     title: 'Jam Layanan & Respons',
-    value: 'Setiap Hari · 09.00–20.00 WIB',
-    note: 'Admin WhatsApp siap melayani pesanan hangat maupun stok frozen.'
-  },
-  {
-    title: 'Area Pengiriman',
-    value: 'Sidoarjo, Surabaya & Sekitarnya',
-    note: 'Dikirim langsung dari Sidoarjo ke alamatmu dengan aman dan cepat.'
+    value: 'Setiap Hari · 09.00–20.00 WIB'
   },
   {
     title: 'Pilihan Pengiriman',
-    value: 'Kurir Instan & Same-Day',
-    note: 'Tersedia melalui GrabExpress, GoSend, atau kurir lokal agar menu tetap fresh.'
+    value: 'Kurir Instan & Same-Day'
   },
   {
     title: 'Kualitas & Higienitas',
-    value: '100% Halal & Tanpa Pengawet',
-    note: 'Bahan daging ayam dan udang pilihan dengan kemasan vacuum seal rapat.'
-  },
-  {
-    title: 'Metode Pembayaran',
-    value: 'QRIS & Transfer Bank',
-    note: 'Menerima BCA, Mandiri, BRI, dan scan QRIS dari semua aplikasi e-wallet.'
-  },
-  {
-    title: 'Pesanan Acara Khusus',
-    value: 'Party Box & Dimsum Platter',
-    note: 'Siap untuk arisan, meeting kantor, atau syukuran. Disarankan pesan H-1.'
+    value: '100% Halal & Tanpa Pengawet'
   }
 ];
