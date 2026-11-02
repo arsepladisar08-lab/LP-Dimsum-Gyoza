@@ -40,10 +40,10 @@ export const Hero: React.FC<HeroProps> = ({ onPrimaryOrder, cartCount, onPreview
         <div className="hero-copy">
           <p className="hero-location">Dimsum &amp; Gyoza · Sidoarjo</p>
           <h1 id="hero-title" className="stagger-heading stagger-h1">
-            <span className="stagger-item" style={{ animationDelay: '100ms' }}>Satu gigitan,</span>{' '}
-            <span className="stagger-item" style={{ animationDelay: '240ms' }}>bikin hari makin</span>{' '}
+            <span className="stagger-item" style={{ animationDelay: '100ms', fontSize: '58px', width: '400px' }}>Satu gigitan,</span>{' '}
+            <span className="stagger-item" style={{ animationDelay: '240ms', fontSize: '58px' }}>bikin hari makin</span>{' '}
             <span className="stagger-item stagger-item-em" style={{ animationDelay: '380ms' }}>
-              <em key={ROTATING_WORDS[wordIndex]} className="hero-rotating-word">
+              <em key={ROTATING_WORDS[wordIndex]} className="hero-rotating-word" style={{ fontSize: '58px' }}>
                 {ROTATING_WORDS[wordIndex]}
               </em>
             </span>

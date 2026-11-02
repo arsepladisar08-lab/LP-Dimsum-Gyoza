@@ -9,9 +9,9 @@ export const ClosingCTA: React.FC<ClosingCTAProps> = ({ onPrimaryOrder, cartCoun
     <div className="closing-deco closing-deco-one" aria-hidden="true"/><div className="closing-deco closing-deco-two" aria-hidden="true"/>
     <div className="container-custom closing-content">
       <h2 id="closing-title" className="stagger-heading stagger-h2">
-        <span className="stagger-item" style={{ animationDelay: '140ms' }}>Hari ini waktunya</span>
+        <span className="stagger-item" style={{ animationDelay: '140ms', fontSize: '58px' }}>Hari ini waktunya</span>
         <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
-          <em>Gyozen.</em>
+          <em style={{ fontSize: '58px' }}>Gyozen.</em>
         </span>
       </h2>
       <p>Pilih menu yang kamu suka. Biar satu gigitan kecil bikin harimu terasa lebih menyenangkan.</p>

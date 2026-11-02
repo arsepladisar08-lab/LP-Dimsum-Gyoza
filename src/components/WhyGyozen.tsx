@@ -39,9 +39,9 @@ export const WhyGyozen: React.FC<WhyGyozenProps> = ({ onAddBundle }) => {
         <div className="section-heading story-heading mb-6 md:mb-8">
           <div>
             <h2 id="why-title" className="stagger-heading stagger-h2 mb-0">
-              <span className="stagger-item" style={{ animationDelay: '140ms', lineHeight: '50px' }}>Dari ngemil sendiri</span>
+              <span className="stagger-item" style={{ animationDelay: '140ms', fontSize: '48px', lineHeight: '50px' }}>Dari ngemil sendiri</span>
               <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
-                <em style={{ lineHeight: '50px' }}>sampai berbagi ramai-ramai.</em>
+                <em style={{ fontSize: '48px', lineHeight: '50px' }}>sampai berbagi ramai-ramai.</em>
               </span>
             </h2>
           </div>

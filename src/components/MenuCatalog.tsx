@@ -30,9 +30,9 @@ export const MenuCatalog: React.FC<MenuCatalogProps> = ({ products, currentCateg
         <div className="section-heading menu-heading items-end">
           <div>
             <h2 id="menu-title" className="stagger-heading stagger-h2 mb-0">
-              <span className="stagger-item" style={{ animationDelay: '140ms' }}>Temukan mood,</span>
+              <span className="stagger-item" style={{ animationDelay: '140ms', fontSize: '48px', width: '400px' }}>Temukan mood,</span>
               <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}>
-                <em>pilih dimsum-nya.</em>
+                <em style={{ fontSize: '48px' }}>pilih dimsum-nya.</em>
               </span>
             </h2>
           </div>

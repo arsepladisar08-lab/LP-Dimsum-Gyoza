@@ -23,7 +23,7 @@ export const FAQ: React.FC = () => {
         <div className="faq-intro lg:sticky lg:top-28">
           <p className="section-kicker" style={{ lineHeight: '18px' }}><HelpCircle size={14}/> GOOD TO KNOW</p>
           <h2 id="faq-title" className="stagger-heading stagger-h2 mb-0">
-            <span className="stagger-item" style={{ animationDelay: '140ms', fontSize: '48px', lineHeight: '50px', width: '220px' }}>Ada yang ingin</span>
+            <span className="stagger-item" style={{ animationDelay: '140ms', fontSize: '48px', lineHeight: '50px', width: '350px' }}>Ada yang ingin</span>
             <span className="stagger-item stagger-item-em" style={{ animationDelay: '280ms' }}><em style={{ fontSize: '48px', lineHeight: '50px' }}>kamu tanyakan?</em></span>
           </h2>
         </div>
